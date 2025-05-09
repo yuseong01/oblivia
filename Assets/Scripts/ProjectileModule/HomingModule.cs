@@ -7,7 +7,7 @@ public class HomingModule : MonoBehaviour, IProjectileModule
 {
     private Transform _target;
     private HomingData _homingData;
-
+    public IProjectileModule Clone() => new HomingModule(_homingData);
     public HomingModule(HomingData data)
     {
         _homingData = data;

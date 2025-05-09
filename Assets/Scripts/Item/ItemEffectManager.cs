@@ -31,8 +31,10 @@ public class ItemEffectManager : MonoBehaviour
 
     public List<IProjectileModule> GetProjModules()
     {
-        return new List<IProjectileModule>(activeModules);
+        var clones = new List<IProjectileModule>();
+        foreach (var module in activeModules)
+            clones.Add(module.Clone());
+        return clones;
     }
-
     public List<IFireModule> GetFireModules() => fireModules;
 }

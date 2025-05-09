@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: SpreadShot
-  m_EditorClassIdentifier: Assembly-CSharp::SpreadShotData
-  Angle: 30
-  ProjCount: 4
+  m_Name: AttackCount
+  m_EditorClassIdentifier: Assembly-CSharp::AttackCountModuleData
+  Count: 1

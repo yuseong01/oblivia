@@ -43,4 +43,32 @@ public class PlayerStatHandler : MonoBehaviour
         get => _attackRange;
         set => _attackRange += value;
     }
+    //공격 갯수
+    [SerializeField] private int _attackCount = 1;
+    public int AttackCount
+    {
+        get => _attackCount;
+        set => _attackCount += value;
+    }
+    //공격 각도
+    [SerializeField] private float _attackAngle = 10.0f;
+    public float AttackAngle
+    {
+        get => _attackAngle;
+        set => _attackAngle += value;
+    }
+    //넉백 파워
+    [SerializeField] private float _knockbackForce = 10.0f;
+    public float KnockbackPower
+    {
+        get => _knockbackForce;
+        set => _knockbackForce += value;
+    }
+    //공격 유지 시간
+    [SerializeField] private float _attackDuration = 3.0f;
+    public float AttackDuration
+    {
+        get => _attackDuration;
+        set => _attackDuration += value;
+    }
 }

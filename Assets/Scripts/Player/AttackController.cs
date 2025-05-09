@@ -49,22 +49,47 @@ public class AttackController : MonoBehaviour
         }
         else
         {
-            GameObject go = Instantiate(ProjectilePrefab, AttackPivot.transform.position, AttackPivot.transform.rotation);
-            var projectile = go.GetComponent<Projectile>();
-
-            Vector2 dir = (enemyTransform.position - transform.position).normalized;
-            go.transform.up = dir;
-
-            projectile.Init(
-            statHandler: StatHandler,
-            modules: ItemEffectManager.GetProjModules(),
-            enemyTransform: enemyTransform
-        );
+            OnFire(this, enemyTransform);
         }
 
       
     }
+    public void OnFire(AttackController attack, Transform enemy)
+    {
+        Vector2 dir = (enemy.position - attack.AttackPivot.transform.position).normalized;
+        float baseAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
 
+        for (int i = 0; i < StatHandler.AttackCount; i++)
+        {
+            float offset;
+
+            if (StatHandler.AttackCount % 2 == 1)
+            {
+                // 홀수: 가운데 탄환은 정확히 타겟 향함
+                int middle = StatHandler.AttackCount / 2;
+                offset = (i - middle) * StatHandler.AttackAngle;
+            }
+            else
+            {
+                // 짝수: 정확히 가운데는 피해서 발사 (빗겨감)
+                offset = (i - (StatHandler.AttackCount - 1) / 2f) * StatHandler.AttackAngle;
+
+                if (Mathf.Approximately(offset, 0f))
+                    offset += StatHandler.AttackAngle / 2f;
+            }
+
+            Quaternion rotation = Quaternion.Euler(0, 0, baseAngle + offset);
+
+            GameObject go = GameObject.Instantiate(
+                attack.ProjectilePrefab,
+                attack.AttackPivot.transform.position,
+                rotation
+            );
+
+            var proj = go.GetComponent<Projectile>();
+            proj.Init(attack.StatHandler, enemy, attack.ItemEffectManager.GetProjModules());
+        }
+    }
 
     // 기즈모를 통한 범위 체크
     private void OnDrawGizmos()

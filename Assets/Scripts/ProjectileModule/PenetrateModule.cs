@@ -6,6 +6,7 @@ public class PenetrateModule : MonoBehaviour, IProjectileModule
 {
     private PenetrateData _penetrateData;
 
+    public IProjectileModule Clone() => new PenetrateModule(_penetrateData);
     public PenetrateModule(PenetrateData data)
     {
         _penetrateData = data;

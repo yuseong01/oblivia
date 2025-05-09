@@ -25,3 +25,13 @@ public class PenetrateData : ProjectileModuleData
         return new PenetrateModule(this);
     }
 }
+
+// 관통 탄환 모듈
+[CreateAssetMenu(menuName = "Projectile/boomerangModule")]
+public class BoomerangData : ProjectileModuleData
+{
+    public override IProjectileModule CreateInstance()
+    {
+        return new BoomerangModule(this);
+    }
+}
