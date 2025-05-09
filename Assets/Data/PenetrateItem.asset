@@ -15,5 +15,6 @@ MonoBehaviour:
   ItemName: Penetrate
   Icon: {fileID: 21300000, guid: 554342b2364b0064b93f6413fec2b73b, type: 3}
   ProjectileModules:
-  - {fileID: 11400000, guid: 99b8fd103bdfee54ea9ecad76dd7be4e, type: 2}
+  - {fileID: 11400000, guid: c6231cac982e50841899d41693a1455c, type: 2}
   FireModules: []
+  StatModules: []

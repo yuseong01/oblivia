@@ -6,6 +6,13 @@ using UnityEngine;
 public class HomingModule : MonoBehaviour, IProjectileModule
 {
     private Transform _target;
+    private HomingData _homingData;
+
+    public HomingModule(HomingData data)
+    {
+        _homingData = data;
+    }
+
     public void OnFire(Projectile projectile)
     {
         _target = projectile.Target;

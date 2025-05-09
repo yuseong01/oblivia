@@ -17,4 +17,4 @@ MonoBehaviour:
   ProjectileModules: []
   FireModules: []
   StatModules:
-  - {fileID: 11400000, guid: 3f85fdb5bc7d95042871fb73e28c9809, type: 2}
+  - {fileID: 11400000, guid: bd239a1ab3923364e97cd42270425266, type: 2}

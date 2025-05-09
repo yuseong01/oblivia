@@ -17,9 +17,7 @@ public class ItemEffectManager : MonoBehaviour
     {
         foreach(var projModuleData in item.ProjectileModules)
         {
-            GameObject go = Instantiate(projModuleData.ModulePrefab);
-            IProjectileModule module = go.GetComponent<IProjectileModule>();
-            activeModules.Add(module);
+            activeModules.Add(projModuleData.CreateInstance());
         }
         foreach(var fireData in item.FireModules)
         {
