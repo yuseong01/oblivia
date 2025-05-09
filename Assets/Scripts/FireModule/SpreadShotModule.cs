@@ -31,7 +31,7 @@ public class SpreadShotModule : MonoBehaviour, IFireModule
             );
 
             var proj = go.GetComponent<Projectile>();
-            proj.Init(10f, attack.ProjSpeed, enemy, attack.ItemEffectManager.GetProjModules());
+            proj.Init(attack.StatHandler, enemy, attack.ItemEffectManager.GetProjModules());
         }
     }
 

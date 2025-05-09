@@ -10,5 +10,6 @@ public class ItemData : ScriptableObject
 
     public List<ProjectileModuleData> ProjectileModules;
     public List<FireModuleData> FireModules;
+    public List<StatModuleData> StatModules;
     
 }

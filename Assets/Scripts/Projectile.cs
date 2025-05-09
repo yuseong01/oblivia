@@ -15,10 +15,10 @@ public class Projectile : MonoBehaviour
 
     private Dictionary<Collider2D, float> _lastHitTime = new Dictionary<Collider2D, float>();
 
-    public void Init(float damage, float speed, Transform enemyTransform, List<IProjectileModule> modules)
+    public void Init(PlayerStatHandler statHandler, Transform enemyTransform, List<IProjectileModule> modules)
     {
-        _damage = damage;
-        Speed = speed;
+        _damage = statHandler.Damage;
+        Speed = statHandler.AttackSpeed;
         _modules = modules;
         Target = enemyTransform;
 
@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
             if (Time.time - lastTime >= HitCooldown)
             {
                 // collision.GetComponent<Enemy>()?.TakeDamage(_damage);
-                Debug.Log("적 공격");
+                Debug.Log($"적 공격{_damage}");
                 _lastHitTime[collision] = Time.time;
 
                 if (!CanPenetrate)

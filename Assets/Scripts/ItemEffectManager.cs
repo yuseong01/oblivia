@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class ItemEffectManager : MonoBehaviour
 {
+    private PlayerStatHandler _statHandler;
     private List<IProjectileModule> activeModules = new List<IProjectileModule>();
     private List<IFireModule> fireModules = new List<IFireModule>();
+
+    private void Awake()
+    {
+        _statHandler = GetComponent<PlayerStatHandler>();
+    }
 
     public void AddItem(ItemData item)
     {
@@ -18,6 +24,10 @@ public class ItemEffectManager : MonoBehaviour
         foreach(var fireData in item.FireModules)
         {
             fireModules.Add(fireData.CreateInstance());
+        }
+        foreach(var statData in item.StatModules)
+        {
+          statData.CreateInstance().SetStat(_statHandler);
         }
     }
 

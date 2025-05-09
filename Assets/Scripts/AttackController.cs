@@ -4,34 +4,33 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-     public ItemEffectManager ItemEffectManager;
+    public ItemEffectManager ItemEffectManager;
+    public PlayerStatHandler StatHandler;
 
     // 공격 프리팹
     public GameObject ProjectilePrefab;
     public GameObject AttackPivot;
 
-    // 공격 주기 관련
-    [SerializeField] private float _attackRate = 0.3f;
-    public float ProjSpeed = 5f;
+    // 공격 주기를 위한 변수
     [SerializeField] private float _nextAttackTime = 0f;
-
-    // 공격 범위
-    [SerializeField] private float _attackRange = 1.0f;
+    // 공격 범위 색
     private Color _gizmoColor = Color.red;
 
     private void Awake()
     {
         ItemEffectManager = GetComponent<ItemEffectManager>();
+        if(StatHandler == null)
+             StatHandler = GetComponent<PlayerStatHandler>();
     }
 
     private void Update()
     {
         if (Time.time >= _nextAttackTime)
         {
-            _nextAttackTime = Time.time + _attackRate;
+            _nextAttackTime = Time.time + StatHandler.AttackRate;
 
             int enemyLayerMask = LayerMask.GetMask("Enemy");
-            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(AttackPivot.transform.position, _attackRange, enemyLayerMask);
+            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(AttackPivot.transform.position, StatHandler.AttackRange, enemyLayerMask);
 
             if (enemiesInRange.Length > 0)
                 FireProjectile(enemiesInRange[0].transform);
@@ -57,8 +56,7 @@ public class AttackController : MonoBehaviour
             go.transform.up = dir;
 
             projectile.Init(
-            damage: 10f,
-            speed: ProjSpeed,
+            statHandler: StatHandler,
             modules: ItemEffectManager.GetProjModules(),
             enemyTransform: enemyTransform
         );
@@ -72,6 +70,6 @@ public class AttackController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = _gizmoColor;
-        Gizmos.DrawWireSphere(AttackPivot.transform.position, _attackRange);
+        Gizmos.DrawWireSphere(AttackPivot.transform.position, StatHandler.AttackRange);
     }
 }
