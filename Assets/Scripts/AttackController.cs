@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
+     public ItemEffectManager ItemEffectManager;
+
     // 공격 프리팹
-    [SerializeField] private GameObject _projectilePrefab;
+    public GameObject ProjectilePrefab;
+    public GameObject AttackPivot;
 
     // 공격 주기 관련
     [SerializeField] private float _attackRate = 0.3f;
+    public float ProjSpeed = 5f;
     [SerializeField] private float _nextAttackTime = 0f;
 
     // 공격 범위
     [SerializeField] private float _attackRange = 1.0f;
     private Color _gizmoColor = Color.red;
+
+    private void Awake()
+    {
+        ItemEffectManager = GetComponent<ItemEffectManager>();
+    }
 
     private void Update()
     {
@@ -22,7 +31,7 @@ public class AttackController : MonoBehaviour
             _nextAttackTime = Time.time + _attackRate;
 
             int enemyLayerMask = LayerMask.GetMask("Enemy");
-            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, _attackRange, enemyLayerMask);
+            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(AttackPivot.transform.position, _attackRange, enemyLayerMask);
 
             if (enemiesInRange.Length > 0)
                 FireProjectile(enemiesInRange[0].transform);
@@ -31,20 +40,31 @@ public class AttackController : MonoBehaviour
 
     private void FireProjectile(Transform enemyTransform)
     {
-        GameObject go = Instantiate(_projectilePrefab, transform.position, transform.rotation);
-        var projectile = go.GetComponent<Projectile>();
 
-        //List<IProjectileModule> modules = itemEffectManager.GetModules();
-        List<IProjectileModule> modules = new List<IProjectileModule>();
+        var fireMods = ItemEffectManager.GetFireModules();
 
-        Vector2 dir = (enemyTransform.position - transform.position).normalized;
+        if(fireMods.Count > 0)
+        {
+            foreach (var mod in fireMods)
+                mod.OnFire(this, enemyTransform);
+        }
+        else
+        {
+            GameObject go = Instantiate(ProjectilePrefab, AttackPivot.transform.position, AttackPivot.transform.rotation);
+            var projectile = go.GetComponent<Projectile>();
 
-        projectile.Init(
-        damage: 10f,
-        speed: 10f,
-        modules: modules,
-        direction : dir
-    );
+            Vector2 dir = (enemyTransform.position - transform.position).normalized;
+            go.transform.up = dir;
+
+            projectile.Init(
+            damage: 10f,
+            speed: ProjSpeed,
+            modules: ItemEffectManager.GetProjModules(),
+            enemyTransform: enemyTransform
+        );
+        }
+
+      
     }
 
 
@@ -52,6 +72,6 @@ public class AttackController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = _gizmoColor;
-        Gizmos.DrawWireSphere(transform.position, _attackRange);
+        Gizmos.DrawWireSphere(AttackPivot.transform.position, _attackRange);
     }
 }

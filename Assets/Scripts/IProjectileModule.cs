@@ -1,18 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IProjectileModule : MonoBehaviour
+public interface IProjectileModule 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void OnFire(Projectile projectile);
+    void OnUpdate(Projectile projectile);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

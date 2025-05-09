@@ -4,32 +4,36 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private float _speed;
+    public float Speed;
     private float _damage;
     private List<IProjectileModule> _modules;
     private Vector2 _direction;
+    public Transform Target;
 
-    public void Init(float damage, float speed, Vector2 direction, List<IProjectileModule> modules)
+    public void Init(float damage, float speed, Transform enemyTransform, List<IProjectileModule> modules)
     {
-        this._damage = damage;
-        this._speed = speed;
-        this._modules = modules;
-
-        transform.up = direction;
+        _damage = damage;
+        Speed = speed;
+        _modules = modules;
+        Target = enemyTransform;
 
         foreach (var mod in modules)
         {
-            //mod.OnFire(this);
+            mod.OnFire(this);
         }
+
+        //테스트 삭제 추후 제거
+        Destroy(gameObject, 3f);
     }
 
     void Update()
     {
-        transform.position += transform.up * _speed * Time.deltaTime;
+        transform.position += transform.up * Speed * Time.deltaTime;
 
         foreach (var mod in _modules)
         {
-          //  mod.OnUpdate(this);
+            mod.OnUpdate(this);
         }
     }
+
 }
