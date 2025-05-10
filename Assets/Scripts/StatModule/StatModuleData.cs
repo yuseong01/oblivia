@@ -16,6 +16,7 @@ public class AttackRateModuleData : StatModuleData
     }
 }
 
+// ÅºÈ¯ È½¼ö
 [CreateAssetMenu(menuName = "StatModules/Attack Count")]
 public class AttackCountModuleData : StatModuleData
 {
@@ -23,5 +24,16 @@ public class AttackCountModuleData : StatModuleData
     public override IStatModule CreateInstance()
     {
         return new AttackCountModule(this);
+    }
+}
+
+// ÅºÈ¯ Å©±â
+[CreateAssetMenu(menuName = "StatModules/Projectile Size")]
+public class ProjectileSizeModuleData : StatModuleData
+{
+    public float Size = 1;
+    public override IStatModule CreateInstance()
+    {
+        return new PojectileSizeModule(this);
     }
 }

@@ -25,6 +25,8 @@ public class Projectile : MonoBehaviour
         _modules = modules;
         Target = enemyTransform;
         AttackDuration = statHandler.AttackDuration;
+        //ÅºÈ¯ Å©±â
+        this.transform.localScale = new Vector2(statHandler.ProjectileSize, statHandler.ProjectileSize);
 
         foreach (var mod in modules)
         {

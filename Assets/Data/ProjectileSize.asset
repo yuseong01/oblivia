@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: AttackRate
-  m_EditorClassIdentifier: Assembly-CSharp::AttackRateModuleData
-  Rate: 2
+  m_Name: ProjectileSize
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSizeModuleData
+  Size: 0.2

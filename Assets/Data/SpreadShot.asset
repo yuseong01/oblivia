@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: SpreadShot
   m_EditorClassIdentifier: Assembly-CSharp::SpreadShotData
-  Angle: 30
-  ProjCount: 4
+  Angle: 15
+  ProjCount: 10

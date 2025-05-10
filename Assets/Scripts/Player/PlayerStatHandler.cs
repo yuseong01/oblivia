@@ -71,4 +71,11 @@ public class PlayerStatHandler : MonoBehaviour
         get => _attackDuration;
         set => _attackDuration += value;
     }
+    //ÅºÈ¯ Å©±â
+    [SerializeField] private float _projectileSize = 0.2f;
+    public float ProjectileSize
+    {
+        get => _projectileSize;
+        set => _projectileSize += value;
+    }
 }
