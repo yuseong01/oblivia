@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using static IEnemy;
 
 public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
@@ -19,18 +21,32 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
 
         float dist = Vector2.Distance(enemyPos, playerPos);
 
-        if (dist > _arriveDistance)
+        switch (obj.GetEnemyType())
         {
-            Vector2 dir = (playerPos - enemyPos).normalized;
-            obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
+            case EnemyType.Normal: // 그냥 플레이어한테 다가감
+                if (dist <= _arriveDistance)
+                {
+                    obj.ChangeState(new AttackState<T>());
+                    return;
+                }
+                break;
+            case EnemyType.Ranged:
+                if (dist <= 3f) // 사정거리 도달
+                {
+                    obj.ChangeState(new AttackState<T>());
+                    return;
+                }
+                break;
+            case EnemyType.Boss:
+                // 보스 로직
+                break;
+        }
+        // 플레이어한테 다가가는 코드
+        Vector2 dir = (playerPos - enemyPos).normalized;
+        obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
+        Debug.Log("move State");
+        Debug.DrawLine(enemyPos, playerPos, Color.green);
 
-            // 시각화
-            Debug.DrawLine(enemyPos, playerPos, Color.green);
-        }
-        else
-        {
-            obj.ChangeState(new IdleState<T>()); // 도착하면 Idle
-        }
     }
 
     public void Exit(T obj)

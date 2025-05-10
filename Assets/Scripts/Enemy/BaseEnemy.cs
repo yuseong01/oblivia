@@ -9,10 +9,11 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
 {
     protected StateMachine<T> _fsm = new StateMachine<T>();
 
+    [Header("Enemy Settings")]
     [SerializeField] protected Transform _player;
     [SerializeField, Range(1f, 100f)] protected float _health = 100f;
-    [SerializeField] protected EnemyType _type = EnemyType.Normal;
     [SerializeField] protected float _detectRange = 5f;
+    [SerializeField] protected EnemyType _type = EnemyType.Normal;
     protected Animator _anim;
     // Unity √ ±‚»≠
     protected virtual void Awake()
@@ -40,7 +41,8 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
     public Transform GetPlayerPosition() => _player;
     public float GetPlayerHealth() => _health;
     public bool CheckInPlayerInRanged() => Vector3.Distance(transform.position, _player.position) < _detectRange;
-    public EnemyType GetEnemeyType() => _type;
+    public EnemyType GetEnemyType() => _type;
     public Animator GetAnimator() => _anim;
     public Transform GetEnemyPosition() => transform;
+    public float GetHealth() => _health;
 }

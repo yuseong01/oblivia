@@ -217,13 +217,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 640810640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b4697a78bd30c438c1b19712fff218, type: 3}
+  m_Script: {fileID: 11500000, guid: 6238156d361aba14ba3af9ff3b55d471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1466870568}
   _health: 100
-  _type: 1
   _detectRange: 5
+  _type: 3
+  forwardProjectile: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
 --- !u!1 &700305161
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     {
         if (obj.CheckInPlayerInRanged())
         {
-            switch (obj.GetEnemeyType())
+            switch (obj.GetEnemyType())
             {
                 case IEnemy.EnemyType.Flee:
                     obj.ChangeState(new FleeState<T>());
@@ -21,7 +21,9 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                 case IEnemy.EnemyType.Normal:
                     obj.ChangeState(new MoveState<T>());
                     return;
-                // 보스 로직 나중에 추가
+                case IEnemy.EnemyType.Ranged:
+                    obj.ChangeState(new MoveState<T>());
+                    return;
             }
         }
     }
