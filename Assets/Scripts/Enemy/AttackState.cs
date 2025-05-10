@@ -73,6 +73,13 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                 if (obj is IRangedEnemy ranged)
                     DoRangedShoot(obj, ranged);
                 break;
+            case EnemyType.Elite:
+                if(obj.GetHealth() < 50)
+                {
+                    obj.ChangeState(new FleeState<T>());
+                }
+                DoNormalAttack(obj);
+                break;
         }
     }
 

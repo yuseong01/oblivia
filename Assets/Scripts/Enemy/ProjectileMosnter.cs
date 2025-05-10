@@ -26,6 +26,7 @@ public class ProjectileMosnter : MonoBehaviour
         {
             // 플레이어 체력 떨어지게 하는 부분을 여기다가
             Debug.Log("Health 떨어짐");
+            Destroy(gameObject);
         }
     }
 }

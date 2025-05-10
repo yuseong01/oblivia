@@ -7,6 +7,7 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     public void Enter(T obj)
     {
         //obj.GetAnimator()?.SetBool("Move", false);
+        //obj.GetAnimator()?.SetBool("Idle", true);
     }
 
     public void Update(T obj)
@@ -22,6 +23,12 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                     obj.ChangeState(new MoveState<T>());
                     return;
                 case IEnemy.EnemyType.Ranged:
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                case IEnemy.EnemyType.Elite:
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                case IEnemy.EnemyType.Boss:
                     obj.ChangeState(new MoveState<T>());
                     return;
             }

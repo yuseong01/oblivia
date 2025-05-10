@@ -11,6 +11,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
 
     public void Enter(T obj)
     {
+        //obj.GetAnimator()?.SetBool("Idle", false);
         //obj.GetAnimator()?.SetBool("Move", true);
     }
 
@@ -37,6 +38,13 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
                     return;
                 }
                 break;
+            case EnemyType.Elite:
+                if (dist <= _arriveDistance) // 사정거리 도달
+                {
+                    obj.ChangeState(new AttackState<T>());
+                    return;
+                }
+                break;
             case EnemyType.Boss:
                 // 보스 로직
                 break;
@@ -44,7 +52,6 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
         // 플레이어한테 다가가는 코드
         Vector2 dir = (playerPos - enemyPos).normalized;
         obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
-        Debug.Log("move State");
         Debug.DrawLine(enemyPos, playerPos, Color.green);
 
     }

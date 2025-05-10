@@ -12,6 +12,7 @@ public interface IEnemy
         Flee,
         Boss,
         Ranged,
+        Elite,
     }
     Transform GetPlayerPosition(); // 플레이어 위치
     Transform GetEnemyPosition(); // Enemy 위치
