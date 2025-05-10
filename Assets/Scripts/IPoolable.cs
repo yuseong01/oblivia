@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IPollable
+public interface IPoolable
 {
-    void OnSpawn();
-    void OnDespawn();
+    void OnSpawned();
+    void OnDespawned();
 }
