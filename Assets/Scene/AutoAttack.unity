@@ -1183,6 +1183,8 @@ GameObject:
   - component: {fileID: 662471028}
   - component: {fileID: 662471029}
   - component: {fileID: 662471031}
+  - component: {fileID: 662471032}
+  - component: {fileID: 662471033}
   - component: {fileID: 662471027}
   - component: {fileID: 662471030}
   m_Layer: 7
@@ -1260,11 +1262,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5c3dac298ea5b4387de94d9fe909bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemEffectManager: {fileID: 0}
-  StatHandler: {fileID: 662471031}
-  ProjectilePrefab: {fileID: 2155350911195395070, guid: a2e4fb27e0958d7468afea243f89fb7e, type: 3}
-  AttackPivot: {fileID: 547542087}
+  _projectilePrefab: {fileID: 2155350911195395070, guid: a2e4fb27e0958d7468afea243f89fb7e, type: 3}
+  _attackPivot: {fileID: 547542087}
+  _statHandler: {fileID: 0}
+  _itemEffectManager: {fileID: 0}
   _nextAttackTime: 0
+  _isFamiliar: 0
 --- !u!114 &662471029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,7 +1339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _health: 100
-  _maxHealth: 1000
+  _maxHealth: 100
   _damage: 1
   _attackRate: 1
   _attackDelay: 0
@@ -1344,9 +1347,40 @@ MonoBehaviour:
   _attackRange: 5
   _attackCount: 1
   _attackAngle: 10
-  _knockbackForce: 0.05
-  _attackDuration: 0.5
+  _knockbackForce: 0.1
+  _attackDuration: 3
   _projectileSize: 0.2
+--- !u!114 &662471032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662471024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defe35776e5135d4e86638344da296e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orbitPrefab: {fileID: 7696673173684025821, guid: 1912f7c4d03220242865888516c646c8, type: 3}
+  _orbitPivot: {fileID: 547542087}
+  _objectCount: 0
+  _radius: 1
+  _rotationSpeed: 50
+--- !u!114 &662471033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662471024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0641ec3c9213fef429562357d74e14e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skill: {fileID: 11400000, guid: 4043d2c928d2a62489342677bb1fb2c9, type: 2}
+  _key: 32
 --- !u!1 &769993009
 GameObject:
   m_ObjectHideFlags: 0

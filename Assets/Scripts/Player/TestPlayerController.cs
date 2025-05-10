@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class TestPlayerController : MonoBehaviour
 {
-   private PlayerStatHandler _playerStatHandler;
-
+    private PlayerStatHandler _playerStatHandler;
+    private ItemEffectManager _itemEffectManager;
+    private OrbitController _orbitController;
 
     private Rigidbody2D _rb;
     private Vector2 _movement;
 
     void Awake()
     {
-        _playerStatHandler = GetComponent<PlayerStatHandler>(); 
+        _playerStatHandler = GetComponent<PlayerStatHandler>();
+        _itemEffectManager = GetComponent<ItemEffectManager>();
+        _orbitController = GetComponent<OrbitController>();
         _rb = GetComponent<Rigidbody2D>();
     }
 
@@ -22,6 +25,12 @@ public class TestPlayerController : MonoBehaviour
         _movement.x = Input.GetAxisRaw("Horizontal"); // -1, 0, 1
         _movement.y = Input.GetAxisRaw("Vertical");   // -1, 0, 1
         _movement.Normalize(); // 대각선 이동 속도 보정
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            _orbitController.CreateOrbitingObjects(_itemEffectManager, _playerStatHandler);
+        }
     }
 
     void FixedUpdate()
