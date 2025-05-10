@@ -15,18 +15,31 @@ public class AttackController : MonoBehaviour
     [SerializeField] private float _nextAttackTime = 0f;
     // 공격 범위 색
     private Color _gizmoColor = Color.red;
+    // 패밀리어 체크, 추후 길어지면 별도 스크립트로 분리 후 상속
+    [SerializeField] bool _isFamiliar;
 
     private void Awake()
     {
-        ItemEffectManager = GetComponent<ItemEffectManager>();
-        if(StatHandler == null)
-             StatHandler = GetComponent<PlayerStatHandler>();
+        if (!_isFamiliar)
+        {
+            ItemEffectManager = GetComponent<ItemEffectManager>();
+            if (StatHandler == null)
+                StatHandler = GetComponent<PlayerStatHandler>();
+        }
+        else
+        {
+     
+        }
+
     }
 
     private void Update()
     {
         if (Time.time >= _nextAttackTime)
         {
+            if (StatHandler == null || ItemEffectManager == null)
+                return;
+
             _nextAttackTime = Time.time + StatHandler.AttackRate;
 
             int enemyLayerMask = LayerMask.GetMask("Enemy");
@@ -95,6 +108,7 @@ public class AttackController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = _gizmoColor;
-        Gizmos.DrawWireSphere(AttackPivot.transform.position, StatHandler.AttackRange);
+        if (StatHandler != null )
+            Gizmos.DrawWireSphere(AttackPivot.transform.position, StatHandler.AttackRange);
     }
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
   ProjectileModules: []
   FireModules:
-  - {fileID: 11400000, guid: 9d93e0ec9eb97424ebf8db3ce6c3e57f, type: 2}
+  - {fileID: 11400000, guid: a2ae6d05385b8e540b4249b15faf80af, type: 2}
   StatModules: []
