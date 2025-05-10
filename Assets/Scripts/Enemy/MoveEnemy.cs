@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class MoveEnemy : BaseEnemy<MoveEnemy>
 {
-    public void TakeDamage(float amount)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        _health -= amount;
-        if (_health <= 0)
+        // 플레이어와 무기와 관련한 태그
+        if (other.CompareTag("PlayerBullet"))
         {
-            // FSM 상태 죽음으로
+            // 무기 데미지 가져와서 넣으면 될 것 같아요.
+            TakeDamage(1); // IEnemy의 구현 메서드
+            Destroy(other.gameObject); // bullet도 제거
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

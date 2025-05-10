@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProjectileMosnter : MonoBehaviour
 {
+    // projectile 시험해보려고 만든 스크립트입니다.
+    // 나중에 지울 스크립트
     private Vector3 _dir;
     private int _damage;
 
@@ -22,6 +24,7 @@ public class ProjectileMosnter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // 플레이어 체력 떨어지게 하는 부분을 여기다가
             Debug.Log("Health 떨어짐");
         }
     }

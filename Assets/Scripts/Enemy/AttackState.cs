@@ -11,15 +11,21 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
     public void Enter(T obj)
     {
         //obj.GetAnimator()?.SetBool("Move", false);
-        //obj.GetAnimator()?.SetTrigger("Attack");
     }
 
     public void Update(T obj)
     {
+        // 죽으면 DieState로
+        if (obj.GetHealth() <= 0f)
+        {
+            obj.ChangeState(new DieState<T>());
+            return;
+        }
+
         float dist = Vector2.Distance(obj.GetEnemyPosition().position, obj.GetPlayerPosition().position);
         float rangedRange = 4f;
         float normalRange = 1.5f;
-        Debug.Log("d");
+
         // 거리체크 만약 멀어지면 다시 Move State로
         switch (obj.GetEnemyType())
         {
@@ -78,6 +84,7 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
     // 그냥 플레이어한테 다가가는 몬스터
     private void DoNormalAttack(T obj)
     {
+        //obj.GetAnimator()?.SetTrigger("Attack");
         Transform player = obj.GetPlayerPosition();
         float dist = Vector2.Distance(obj.GetEnemyPosition().position, player.position);
         if (dist <= 1.2f)
@@ -87,19 +94,21 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
         }
     }
 
-    // 
+    // 원거리 공격 몬스터
     private void DoRangedShoot(T obj, IRangedEnemy ranged)
     {
+        //obj.GetAnimator()?.SetTrigger("Attack");
         GameObject prefab = ranged.GetProjectilePrefab("Forward");
         Vector3 dir = (obj.GetPlayerPosition().position - obj.GetEnemyPosition().position).normalized;
 
         GameObject proj = GameObject.Instantiate(prefab, obj.GetEnemyPosition().position, Quaternion.identity);
-        int damage = 3; // 예: 직선 투사체는 3 데미지
+        int damage = 3; // 데미지
         proj.GetComponent<ProjectileMosnter>()?.Initialize(dir, damage);
     }
-
+    // 더 넓은 범위로 넓게 공격하는 몬스터
     private void DoRadialShoot(T obj, IRangedEnemy ranged)
     {
+        //obj.GetAnimator()?.SetTrigger("Attack");
         int count = 12;
         int damage = 5;
         GameObject prefab = ranged.GetProjectilePrefab("Radial");

@@ -45,4 +45,12 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
     public Animator GetAnimator() => _anim;
     public Transform GetEnemyPosition() => transform;
     public float GetHealth() => _health;
+    public void TakeDamage(int amount)
+    {
+        _health -= amount;
+        if (_health <= 0f)
+        {
+            ChangeState(new DieState<T>());
+        }
+    }
 }

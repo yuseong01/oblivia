@@ -20,4 +20,5 @@ public interface IEnemy
     EnemyType GetEnemyType(); // Enemy type 체크
     Animator GetAnimator(); // Enemy 애니메이터 가져오기
     float GetHealth();
+    void TakeDamage(int amount);
 }

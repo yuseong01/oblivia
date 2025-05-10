@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public class FleeEnemy : BaseEnemy<FleeEnemy>
 {
-    public void TakeDamage(float amount)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        _health -= amount;
-        if (_health <= 0)
+        // 플레이어와 무기와 관련한 태그
+        if (other.CompareTag("PlayerBullet"))
         {
-            // FSM 상태 죽음으로 혹은 죽음 로직 추가
+            TakeDamage(1); // IEnemy의 구현 메서드
+            Destroy(other.gameObject); // bullet도 제거
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
