@@ -164,10 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5c3dac298ea5b4387de94d9fe909bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemEffectManager: {fileID: 0}
-  StatHandler: {fileID: 0}
-  ProjectilePrefab: {fileID: 2155350911195395070, guid: a2e4fb27e0958d7468afea243f89fb7e, type: 3}
-  AttackPivot: {fileID: 3944919952637190728}
+  _projectilePrefab: {fileID: 2155350911195395070, guid: a2e4fb27e0958d7468afea243f89fb7e, type: 3}
+  _attackPivot: {fileID: 3944919952637190728}
+  _statHandler: {fileID: 0}
+  _itemEffectManager: {fileID: 0}
   _nextAttackTime: 0
   _isFamiliar: 1
 --- !u!114 &3865276623436623996
