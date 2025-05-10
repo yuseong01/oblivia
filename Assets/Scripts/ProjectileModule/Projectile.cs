@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
         }
 
         //테스트 삭제 추후 제거
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, AttackDuration);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

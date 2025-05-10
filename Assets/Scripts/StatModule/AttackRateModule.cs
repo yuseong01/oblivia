@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackRateModule : MonoBehaviour, IStatModule
+public class AttackRateModule : IStatModule
 {    
     
     private AttackRateModuleData _attackRateData;

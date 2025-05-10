@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class PlayerStatHandler : MonoBehaviour
 {
+    [Header("Speed")]
+
+    [Header("Health")]
+    // 체력, 추후 ResuorceManager로 관리?
+    [SerializeField] private float _health = 100;
+    public float Health
+    {
+        get => _health;
+        set => _health = Mathf.Min(_health + value, MaxHealth);
+    }
+    [SerializeField] private float _maxHealth = 100;
+    public float MaxHealth
+    {
+        get => _maxHealth;
+        set => _maxHealth += value;
+    }
+
 
     // 공격 주기 관련 공식 :   attack Delay = 16 - (rate * 1.3), 추후 statHandler에 넣기
     // 공격 데미지 관련 공식 : FinalDamge = 1 + (Damage -1) * 1.2f

@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageModule :  IStatModule
+public class HealthModule :  IStatModule
 {
-    private DamageModuleData _data;
+    private HealthModuleData _data;
 
-    public DamageModule(DamageModuleData data)
+    public HealthModule(HealthModuleData data)
     {
         _data = data;
     }
     public void SetStat(PlayerStatHandler statHandler)
     {
-        statHandler.Damage = _data.Damage;
+        statHandler.Health = _data.Health;
     }
 }

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageModule :  IStatModule
+public class MaxHealthModule : IStatModule
 {
-    private DamageModuleData _data;
 
-    public DamageModule(DamageModuleData data)
+    private MaxHealthModuleData _data;
+
+    public MaxHealthModule(MaxHealthModuleData data)
     {
         _data = data;
     }
     public void SetStat(PlayerStatHandler statHandler)
     {
-        statHandler.Damage = _data.Damage;
+        statHandler.MaxHealth = _data.MaxHealth;
     }
 }

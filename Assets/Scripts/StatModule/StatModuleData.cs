@@ -48,3 +48,47 @@ public class ProjectileSizeModuleData : StatModuleData
         return new PojectileSizeModule(this);
     }
 }
+
+// 공격 유지시간
+[CreateAssetMenu(menuName = "StatModules/Duration")]
+public class DurationModuleData : StatModuleData
+{
+    public float Duration = 1;
+    public override IStatModule CreateInstance()
+    {
+        return new DurationModule(this);
+    }
+}
+
+// 공격 사거리(인식 범위)
+[CreateAssetMenu(menuName = "StatModules/Attack Range")]
+public class AttackRangeModuleData : StatModuleData
+{
+    public float Range = 1;
+    public override IStatModule CreateInstance()
+    {
+        return new AttackRangeModule(this);
+    }
+}
+
+// 현재 체력 관련
+[CreateAssetMenu(menuName = "StatModules/Health")]
+public class HealthModuleData : StatModuleData
+{
+    public float Health = 1;
+    public override IStatModule CreateInstance()
+    {
+        return new HealthModule(this);
+    }
+}
+
+// 최대 체력 관련
+[CreateAssetMenu(menuName = "StatModules/MaxHealth")]
+public class MaxHealthModuleData : StatModuleData
+{
+    public float MaxHealth = 1;
+    public override IStatModule CreateInstance()
+    {
+        return new MaxHealthModule(this);
+    }
+}

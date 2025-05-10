@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageModule :  IStatModule
+public class DurationModule : IStatModule
 {
-    private DamageModuleData _data;
 
-    public DamageModule(DamageModuleData data)
+    private DurationModuleData _data;
+
+    public DurationModule(DurationModuleData data)
     {
         _data = data;
     }
     public void SetStat(PlayerStatHandler statHandler)
     {
-        statHandler.Damage = _data.Damage;
+        statHandler.AttackDuration = _data.Duration;
     }
 }
