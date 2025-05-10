@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObjectPool<T> where T : MonoBehaviour
+public class ObjectPool<T> where T : MonoBehaviour, IPoolable
 {
     Queue<T> pool = new Queue<T>();
     private T _prefab; 
@@ -24,5 +24,19 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
     }
 
-    
+    public T Get()
+    {
+        T obj = pool.Dequeue();
+        obj.gameObject.SetActive(true);
+        obj.OnSpawned();
+
+        return obj;
+    }
+
+    public void Return(T obj)
+    {
+        obj.OnDespawned();
+        obj.gameObject.SetActive(false);
+        pool.Enqueue(obj);
+    }
 }
