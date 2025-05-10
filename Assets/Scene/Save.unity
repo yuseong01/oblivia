@@ -290,12 +290,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creat: {fileID: 675484576}
-  characterSelect: {fileID: 0}
+  characterSelect: {fileID: 592264890}
   slotText:
   - {fileID: 931673576}
   - {fileID: 2003122229}
   - {fileID: 2084643148}
   newPlayerName: {fileID: 2011928564}
+  availableCharacters:
+  - {fileID: 11400000, guid: 781c23c268514954cbb4fe4cb3afb120, type: 2}
+  - {fileID: 11400000, guid: 1505a7437531a514db52ca22b605d654, type: 2}
+  - {fileID: 11400000, guid: 653bd58ce030c664293c9f1efb91d18a, type: 2}
 --- !u!114 &132750675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,8 +625,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 132750674}
         m_TargetAssemblyTypeName: Select, Assembly-CSharp
-        m_MethodName: Slot
-        m_Mode: 3
+        m_MethodName: OnTest3ButtonClicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -956,8 +960,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 132750674}
         m_TargetAssemblyTypeName: Select, Assembly-CSharp
-        m_MethodName: Slot
-        m_Mode: 3
+        m_MethodName: OnTest1ButtonClicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1738,8 +1742,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 132750674}
         m_TargetAssemblyTypeName: Select, Assembly-CSharp
-        m_MethodName: Slot
-        m_Mode: 3
+        m_MethodName: OnTest2ButtonClicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1923,7 +1927,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 132750674}
         m_TargetAssemblyTypeName: Select, Assembly-CSharp
-        m_MethodName: GoGoGame
+        m_MethodName: ConfirmNameAndOpenCharacterSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
