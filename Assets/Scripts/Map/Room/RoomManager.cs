@@ -19,10 +19,12 @@ public class RoomManager : MonoBehaviour
     {
         // 방 생성
         GenerateRooms();
+
         foreach (var r in roomInstances) {
             Room room = r.Value.GetComponent<Room>();
             room.RegisterDoors();
         }
+
         // 문 생성
         ConnectDoor(roomInstances);
     }

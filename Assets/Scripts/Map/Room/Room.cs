@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Tilemaps;
 
 public enum RoomType {
     Start,
@@ -31,19 +32,11 @@ public class Room : MonoBehaviour
         this.type = type;
     }
 
-    // void Start() {
-    //     // 문 등록
-    //     foreach (Door d in GetComponentsInChildren<Door>()) {
-    //         doors[d.direction] = d;
-    //     }
-    // }
-
     public void RegisterDoors()
     {
         doors.Clear();
         foreach (Door d in GetComponentsInChildren<Door>(true)) {
             doors[d.direction] = d;
-            Debug.Log($"[Room] {d.direction} 방향 문 등록됨");
         }
     }
 
@@ -52,9 +45,9 @@ public class Room : MonoBehaviour
         if (doors.TryGetValue(dir, out Door door)) {
             door.SetDoor();
             door.isNeighbor = true;
-        } else {
-            Debug.LogWarning($"[Room] {dir} 방향 문 없음 - AddDoor 실패");
         }
+
+        SetCollision(dir);
     }
 
     public void DeleteDoor(Direction dir) {
@@ -64,8 +57,15 @@ public class Room : MonoBehaviour
     public bool CheckedNeighbor(Direction dir) {
         return doors[dir].isNeighbor;
     }
-    // public bool HasDoor(Direction dir)
-    // {
-    //     return doors.Contains(dir);
-    // }
+
+    void SetCollision(Direction dir) {
+        Transform collision = transform;
+
+        if (dir == Direction.Up) collision = transform.Find("Grid/CollisionU");
+        else if (dir == Direction.Down) collision = transform.Find("Grid/CollisionD");
+        else if (dir == Direction.Left) collision = transform.Find("Grid/CollisionL");
+        else if (dir == Direction.Right) collision = transform.Find("Grid/CollisionR");
+
+        collision.gameObject.SetActive(false);       
+    }
 }
