@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerStatHandler : MonoBehaviour
 {
     [Header("Speed")]
+    [SerializeField] private float _moveSpeed = 5;
+    public float MoveSpeed
+    {
+        get => _moveSpeed;
+        set => _moveSpeed += value;
+    }
 
     [Header("Health")]
     // 체력, 추후 ResuorceManager로 관리?
