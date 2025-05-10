@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public class RoomManager : Singleton<RoomManager>
 {
     // room prefab
     public GameObject room;
@@ -11,22 +11,38 @@ public class RoomManager : MonoBehaviour
     public int roomCount;
     // 만든 방 count
     public int createRoomCount = 0;
+    public Vector2Int currentRoomPos;
     // 생성된 방 좌표를 키 값으로 방 저장
     private Dictionary<Vector2Int, GameObject> roomInstances = new();
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     void Start()
     {
         // 방 생성
         GenerateRooms();
 
-        foreach (var r in roomInstances) {
+        foreach (var r in roomInstances) 
+        {
             Room room = r.Value.GetComponent<Room>();
             room.RegisterDoors();
         }
 
         // 문 생성
         ConnectDoor(roomInstances);
+    }
+
+    public void SetCurrentRoom(Vector2Int pos) 
+    {
+        currentRoomPos = pos;
+    }
+
+    public Vector2Int GetNextRoomPos(Direction dir) 
+    {
+        return currentRoomPos + DirectionToVector2Int(dir);
     }
 
     void GenerateRooms()
@@ -42,7 +58,7 @@ public class RoomManager : MonoBehaviour
             if (!roomInstances.ContainsKey(currentPos))
             {
                 GameObject newRoom = Instantiate(room, GridToWorld(currentPos), Quaternion.identity, transform);
-                Debug.Log(createRoomCount+ " : " + currentPos );
+                Debug.Log(createRoomCount + " : " + currentPos);
                 roomInstances[currentPos] = newRoom;
                 createRoomCount++;
             }
@@ -51,7 +67,7 @@ public class RoomManager : MonoBehaviour
     }
 
     // Vector2Int는 논리 좌표로 Unity 월드 좌표로 변환하는 과정 필요
-    Vector3 GridToWorld(Vector2Int gridPos)
+    public Vector3 GridToWorld(Vector2Int gridPos)
     {
         return new Vector3(gridPos.x * 20f, gridPos.y * 12f, 0f); 
     }
@@ -64,13 +80,15 @@ public class RoomManager : MonoBehaviour
     }
 
     // 각 방 순회하며 문 연결 수행
-    void ConnectDoor(Dictionary<Vector2Int, GameObject> roomInstances) {
+    void ConnectDoor(Dictionary<Vector2Int, GameObject> roomInstances) 
+    {
         foreach (var r in roomInstances) {
             Vector2Int pos = r.Key;
             Room room = r.Value.GetComponent<Room>();
+            room.position = pos;
 
             foreach (Direction dir in Enum.GetValues(typeof(Direction))) {
-                Vector2Int neighborPos = pos + DirectionToVector(dir);
+                Vector2Int neighborPos = pos + DirectionToVector2Int(dir);
 
                 if (roomInstances.ContainsKey(neighborPos)) {
                     Room neighborRoom = roomInstances[neighborPos].GetComponent<Room>();
@@ -87,8 +105,8 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    // 방향을 벡터로
-    Vector2Int DirectionToVector(Direction dir)
+    // 방향을 좌표로
+    public Vector2Int DirectionToVector2Int(Direction dir)
     {
         return dir switch {
             Direction.Up => Vector2Int.up,
@@ -99,8 +117,21 @@ public class RoomManager : MonoBehaviour
         };
     }
 
+    // 방향을 벡터로
+    public Vector3 DirectionToVector(Direction dir)
+    {
+        return dir switch
+        {
+            Direction.Up => Vector3.up,
+            Direction.Down => Vector3.down,
+            Direction.Left => Vector3.left,
+            Direction.Right => Vector3.right,
+            _ => Vector3.zero
+        };
+    }
+
     // 반대쪽
-    Direction Opposite(Direction dir)
+    public Direction Opposite(Direction dir)
     {
         return dir switch {
             Direction.Up => Direction.Down,

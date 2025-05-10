@@ -27,7 +27,8 @@ public class Room : MonoBehaviour
 
     public GameObject instance;
 
-    public void Init(Vector2Int pos, RoomType type = RoomType.Normal) {
+    public void Init(Vector2Int pos, RoomType type = RoomType.Normal) 
+    {
         this.position = pos;
         this.type = type;
     }
@@ -37,11 +38,13 @@ public class Room : MonoBehaviour
         doors.Clear();
         foreach (Door d in GetComponentsInChildren<Door>(true)) {
             doors[d.direction] = d;
+            doors[d.direction].currentRoomPos = this.position;
         }
     }
 
 
-    public void AddDoor(Direction dir) {
+    public void AddDoor(Direction dir) 
+    {
         if (doors.TryGetValue(dir, out Door door)) {
             door.SetDoor();
             door.isNeighbor = true;
@@ -50,15 +53,18 @@ public class Room : MonoBehaviour
         SetCollision(dir);
     }
 
-    public void DeleteDoor(Direction dir) {
-        doors[dir].DoorClose();
+    public void DeleteDoor(Direction dir) 
+    {
+        doors[dir].DelteDoor();
     }
 
-    public bool CheckedNeighbor(Direction dir) {
+    public bool CheckedNeighbor(Direction dir) 
+    {
         return doors[dir].isNeighbor;
     }
 
-    void SetCollision(Direction dir) {
+    void SetCollision(Direction dir) 
+    {
         Transform collision = transform;
 
         if (dir == Direction.Up) collision = transform.Find("Grid/CollisionU");
