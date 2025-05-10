@@ -13,7 +13,7 @@ public class Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        name.text += DataManager.instance.nowPlayer.name;
+        name.text += DataManager.instance.nowPlayer.playerName;
         damage.text += DataManager.instance.nowPlayer._damage.ToString();
         attackRate.text += DataManager.instance.nowPlayer._attackRate.ToString();
     }

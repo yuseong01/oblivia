@@ -16,53 +16,44 @@ using System.IO;
 public class PlayerData
 {
     // 저장에 필요한 데이터 추가
-    public string name;
-    public float _damage =3f;
-    public float _attackRate =3f;
-    public float _attackDelay = 3f;
-    public float _attackSpeed = 3f;
-    public float _attackRange = 3f;
+    public string playerName;
+    public string characterName;
+    public float _damage;
+    public float _attackRate;
+    public float _attackDelay;
+    public float _attackSpeed;
+    public float _attackRangef;
 }
 
 public class DataManager : MonoBehaviour
 {
-    //싱글톤
     public static DataManager instance;
 
     public PlayerData nowPlayer = new PlayerData();
-
     public GameObject player;
-
     public string path;
     public int nowSlot;
 
     private void Awake()
     {
-        #region 싱글톤
         if (instance == null) instance = this;
-        else if (instance != null) Destroy(instance.gameObject);
+        else Destroy(gameObject);
+
         DontDestroyOnLoad(this.gameObject);
-        #endregion
-        
+
         path = Application.persistentDataPath + "/save";
-        print(path);
-    }
-
-    private void Start()
-    {
-
+        Debug.Log("Save Path: " + path);
     }
 
     public void SaveData()
     {
-        
         string data = JsonUtility.ToJson(nowPlayer);
-        File.WriteAllText(path +  nowSlot.ToString(), data);
+        File.WriteAllText(path + nowSlot.ToString() + ".json", data);
     }
 
     public void LoadData()
     {
-        string data = File.ReadAllText(path + nowSlot.ToString());
+        string data = File.ReadAllText(path + nowSlot.ToString() + ".json");
         nowPlayer = JsonUtility.FromJson<PlayerData>(data);
     }
 
@@ -74,6 +65,8 @@ public class DataManager : MonoBehaviour
 
     public void DeleteData()
     {
-        // 게임 종료 시 파일 삭제 코드
+        // 추후 구현
     }
 }
+
+

@@ -1,28 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.IO;
+
 public class Select : MonoBehaviour
 {
     public GameObject creat;
+    public GameObject characterSelect;
     public TextMeshProUGUI[] slotText;
     public TextMeshProUGUI newPlayerName;
 
+    public CharacterData[] availableCharacters; // 캐릭터 리스트
     bool[] savefile = new bool[3];
-    // Start is called before the first frame update
+
     void Start()
     {
-        for(int i = 0; i< 3; i++ )
+        for (int i = 0; i < 3; i++)
         {
-            if (File.Exists(DataManager.instance.path +$"{i}"))
+            if (File.Exists(DataManager.instance.path + $"{i}.json"))
             {
                 savefile[i] = true;
                 DataManager.instance.nowSlot = i;
                 DataManager.instance.LoadData();
-                slotText[i].text = DataManager.instance.nowPlayer.name;
+                slotText[i].text = DataManager.instance.nowPlayer.playerName;
             }
             else
             {
@@ -33,17 +33,11 @@ public class Select : MonoBehaviour
         DataManager.instance.DataClear();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Slot(int number)
     {
         DataManager.instance.nowSlot = number;
 
-        if(savefile[number])
+        if (savefile[number])
         {
             DataManager.instance.LoadData();
             GoGoGame();
@@ -52,21 +46,45 @@ public class Select : MonoBehaviour
         {
             Creat();
         }
-
     }
 
     public void Creat()
     {
-        creat.gameObject.SetActive(true);
+        creat.SetActive(true);
     }
-    
+
+    public void CharcterSelect()
+    {
+        creat.SetActive(false);
+        characterSelect.SetActive(true);
+    }
+
     public void GoGoGame()
     {
-        if (!savefile[DataManager.instance.nowSlot])
-        {
-            DataManager.instance.nowPlayer.name = newPlayerName.text;
-            DataManager.instance.SaveData();
-        }
         SceneManager.LoadScene("Test");
     }
+
+    public void SelectCharacter(int characterIndex)
+    {
+        if (characterIndex >= 0 && characterIndex < availableCharacters.Length)
+        {
+            CharacterData selectedCharacter = availableCharacters[characterIndex];
+
+            DataManager.instance.nowPlayer.playerName = newPlayerName.text;
+            DataManager.instance.nowPlayer.characterName = selectedCharacter.characterName;
+            DataManager.instance.nowPlayer._damage = selectedCharacter.damage;
+            DataManager.instance.nowPlayer._attackRate = selectedCharacter.attackRate;
+            DataManager.instance.nowPlayer._attackDelay = selectedCharacter.attackDelay;
+            DataManager.instance.nowPlayer._attackSpeed = selectedCharacter.attackSpeed;
+            DataManager.instance.nowPlayer._attackRangef = selectedCharacter.attackRange;
+
+            DataManager.instance.SaveData();
+        }
+
+        GoGoGame();
+    }
+
+    public void OnTest1ButtonClicked() => SelectCharacter(0);
+    public void OnTest2ButtonClicked() => SelectCharacter(1);
+    public void OnTest3ButtonClicked() => SelectCharacter(2);
 }
