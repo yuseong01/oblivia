@@ -56,7 +56,7 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         if (obj is Boss && _elapsedTime >= _fleeDuration)
         {
             // 돌진 재진입
-            obj.ChangeState(new RushState<T>()); // 다시 Rush로!
+            obj.ChangeState(new AttackState<T>()); // 다시 Rush로!
         }
     }
 

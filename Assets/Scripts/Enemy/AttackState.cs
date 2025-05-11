@@ -74,19 +74,23 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     }
                     else
                     {
-                        if (rand < 0.5f)
+                        if (rand < 0.3f)
                         {
-                            DoRadialShoot(obj, rangedBoss); // 50%
+                            DoRadialShoot(obj, rangedBoss);
+                        }
+                        else if(rand > 0.3f && rand < 0.7f)
+                        {
+                            obj.ChangeState(new TeleportState<T>());
                         }
                         else
                         {
-                            obj.ChangeState(new TeleportState<T>()); // 50%
+                            obj.ChangeState(new RushState<T>());
                         }
                     }
                 }
                 break;
-            case EnemyType.CloneBoss:
-                obj.ChangeState(new TeleportState<T>());
+            case EnemyType.Clone:
+                obj.ChangeState(new MoveState<T>());
                 break;
             case EnemyType.Normal:
                 // 노말 로직

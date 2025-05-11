@@ -11,7 +11,7 @@ public interface IEnemy
         Normal,
         Flee,
         Boss,
-        CloneBoss,
+        Clone,
         Ranged,
         Elite,
     }
@@ -22,5 +22,6 @@ public interface IEnemy
     EnemyType GetEnemyType(); // Enemy type 체크
     Animator GetAnimator(); // Enemy 애니메이터 가져오기
     float GetHealth();
+    float GetSpeed();
     void TakeDamage(int amount);
 }
