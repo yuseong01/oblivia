@@ -464,7 +464,10 @@ MonoBehaviour:
   _health: 100
   _detectRange: 5
   _type: 2
+  _speed: 3
   _cloneBossPrefab: {fileID: 8269829040390055818, guid: bd4ca484754ee5248844e6dd1af1ee67, type: 3}
+  _forwardProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
+  _radialProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
 --- !u!1 &1765772239
 GameObject:
   m_ObjectHideFlags: 0
