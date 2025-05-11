@@ -19,3 +19,4 @@ MonoBehaviour:
   attackDelay: 20
   attackSpeed: 20
   attackRange: 20
+  characterId: test2
