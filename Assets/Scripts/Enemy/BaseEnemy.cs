@@ -10,15 +10,16 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
     protected StateMachine<T> _fsm = new StateMachine<T>();
 
     [Header("Enemy Settings")]
-    [SerializeField] protected Transform _player;
+    [SerializeField] public Transform _player;
     [SerializeField, Range(1f, 100f)] protected float _health = 100f;
     [SerializeField] protected float _detectRange = 5f;
     [SerializeField] protected EnemyType _type = EnemyType.Normal;
     [SerializeField] protected float _speed = 3f;
     protected Animator _anim;
-    // Unity ÃÊ±âÈ­
+    // Unity ï¿½Ê±ï¿½È­
     protected virtual void Awake()
     {
+        _player = GameObject.FindWithTag("Player").transform;
         _anim = GetComponent<Animator>();
     }
 
@@ -26,7 +27,7 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
     {
         if(_type == EnemyType.Boss)
             _fsm.ChangeState(new CloneState<T>(), this as T);
-        else _fsm.ChangeState(new IdleState<T>(), this as T); // T = »ó¼ÓÇÑ Enemy Å¸ÀÔ
+        else _fsm.ChangeState(new IdleState<T>(), this as T); // T = ï¿½ï¿½ï¿½ï¿½ï¿½ Enemy Å¸ï¿½ï¿½
     }
 
     protected virtual void Update()
@@ -34,13 +35,13 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
         _fsm.Update(this as T);
     }
 
-    // »óÅÂ ÀüÀÌ ÇÔ¼ö
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     public void ChangeState(IState<T> newState)
     {
         _fsm.ChangeState(newState, this as T);
     }
 
-    // IEnemy ±¸Çö
+    // IEnemy ï¿½ï¿½ï¿½ï¿½
     public Transform GetPlayerPosition() => _player;
     public float GetPlayerHealth() => _health;
     public bool CheckInPlayerInRanged() => Vector3.Distance(transform.position, _player.position) < _detectRange;

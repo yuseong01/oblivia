@@ -19,7 +19,7 @@ public class ObjectPool<T> where T : MonoBehaviour, IPoolable
         for(int i=0; i<size; i++)
         {
             T obj = Object.Instantiate(_prefab, _parent);
-            obj.gameObject.SetActive(false);
+            obj.gameObject.SetActive(true);
             pool.Enqueue(obj);
         }
     }
