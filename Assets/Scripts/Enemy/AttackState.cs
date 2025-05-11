@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using static IEnemy;
 
@@ -7,7 +8,7 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
 {
     private float _attackCooldown = 1.5f;
     private float _lastAttackTime;
-    
+
     public void Enter(T obj)
     {
         //obj.GetAnimator()?.SetBool("Move", false);
@@ -29,7 +30,6 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
         // 거리체크 만약 멀어지면 다시 Move State로
         switch (obj.GetEnemyType())
         {
-            case EnemyType.Boss:
             case EnemyType.Ranged:
                 if (dist > rangedRange)
                 {
@@ -53,17 +53,40 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
         switch (obj.GetEnemyType())
         {
             case EnemyType.Boss:
-                // 보스 로직
-                if (obj.GetHealth() <= 50f) // 체력이 절반이면 광역탄
+                if (obj is IRangedEnemy rangedBoss)
                 {
-                    if (obj is IRangedEnemy rangedBoss)
-                        DoRadialShoot(obj, rangedBoss);
+                    float rand = Random.value; // 0.0 ~ 1.0
+
+                    if (obj.GetHealth() <= 50f)
+                    {
+                        if (rand < 0.6f)
+                        {
+                            DoRadialShoot(obj, rangedBoss); // 60% 확률로 광역탄
+                        }
+                        else if (rand < 0.85f)
+                        {
+                            obj.ChangeState(new RushState<T>()); // 25% 확률로 돌진
+                        }
+                        else
+                        {
+                            obj.ChangeState(new TeleportState<T>()); // 15% 확률로 순간이동
+                        }
+                    }
+                    else
+                    {
+                        if (rand < 0.5f)
+                        {
+                            DoRadialShoot(obj, rangedBoss); // 50%
+                        }
+                        else
+                        {
+                            obj.ChangeState(new TeleportState<T>()); // 50%
+                        }
+                    }
                 }
-                else
-                {
-                    if (obj is IRangedEnemy rangedBoss)
-                        DoRangedShoot(obj, rangedBoss);
-                }
+                break;
+            case EnemyType.CloneBoss:
+                obj.ChangeState(new TeleportState<T>());
                 break;
             case EnemyType.Normal:
                 // 노말 로직

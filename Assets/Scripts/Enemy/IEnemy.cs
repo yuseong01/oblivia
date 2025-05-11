@@ -11,6 +11,7 @@ public interface IEnemy
         Normal,
         Flee,
         Boss,
+        CloneBoss,
         Ranged,
         Elite,
     }

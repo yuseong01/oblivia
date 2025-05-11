@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static IEnemy;
 using static UnityEditor.PlayerSettings;
 
 public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
@@ -11,17 +12,19 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     private float _minFleeDistance = 0.2f; // 의미 있게 도망쳤다고 간주할 최소 거리
     private Vector2 _minBounds = new Vector2(-8, -4); // 맵 최소 좌표
     private Vector2 _maxBounds = new Vector2(8, 4); // 맵 최대 좌표
-
+    private float _fleeDuration = 2f;
+    private float _elapsedTime = 0f;
     private Vector2 _targetPos;
     private bool _hasTarget = false;
 
     public void Enter(T obj)
     {
-        //SetFleeTarget(obj); // 도망 목표지점 설정
+        _elapsedTime = 0f;
     }
 
     public void Update(T obj)
     {
+        _elapsedTime += Time.deltaTime;
         Vector2 enemyPos = obj.GetEnemyPosition().position;
         Vector2 playerPos = obj.GetPlayerPosition().position;
 
@@ -50,6 +53,11 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
         // 디버그 시각화
         Debug.DrawLine(enemyPos, _targetPos, Color.red);
+        if (obj is Boss && _elapsedTime >= _fleeDuration)
+        {
+            // 돌진 재진입
+            obj.ChangeState(new RushState<T>()); // 다시 Rush로!
+        }
     }
 
     public void Exit(T obj)

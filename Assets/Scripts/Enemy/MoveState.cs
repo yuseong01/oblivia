@@ -46,6 +46,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
                 }
                 break;
             case EnemyType.Boss:
+                obj.ChangeState(new AttackState<T>());
                 // 보스 로직
                 break;
         }

@@ -29,7 +29,10 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                     obj.ChangeState(new MoveState<T>());
                     return;
                 case IEnemy.EnemyType.Boss:
-                    obj.ChangeState(new MoveState<T>());
+                    obj.ChangeState(new AttackState<T>());
+                    return;
+                case IEnemy.EnemyType.CloneBoss:
+                    obj.ChangeState(new TeleportState<T>());
                     return;
             }
         }

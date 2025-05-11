@@ -23,7 +23,9 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
 
     protected virtual void Start()
     {
-        _fsm.ChangeState(new IdleState<T>(), this as T); // T = 상속한 Enemy 타입
+        if(_type == EnemyType.Boss)
+            _fsm.ChangeState(new CloneState<T>(), this as T);
+        else _fsm.ChangeState(new IdleState<T>(), this as T); // T = 상속한 Enemy 타입
     }
 
     protected virtual void Update()
