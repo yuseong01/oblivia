@@ -2,22 +2,28 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Select : MonoBehaviour
 {
-    public GameObject creat;
-    public GameObject characterSelect;
+    public GameObject creat; // 이름 입력 UI
+    public GameObject characterSelect; // 캐릭터 선택 UI
     public TextMeshProUGUI[] slotText;
     public TextMeshProUGUI newPlayerName;
 
     public CharacterData[] availableCharacters; // 캐릭터 리스트
-    bool[] savefile = new bool[3];
+    public Button[] characterButtons; // 캐릭터 선택 버튼들 (에디터에서 연결)
+
+    private bool[] savefile = new bool[3];
+    private int currentSlot = -1;
 
     void Start()
     {
         for (int i = 0; i < 3; i++)
         {
-            if (File.Exists(DataManager.instance.path + $"{i}.json"))
+            string filePath = DataManager.instance.path + $"{i}.json";
+
+            if (File.Exists(filePath))
             {
                 savefile[i] = true;
                 DataManager.instance.nowSlot = i;
@@ -35,28 +41,102 @@ public class Select : MonoBehaviour
 
     public void Slot(int number)
     {
+        currentSlot = number;
         DataManager.instance.nowSlot = number;
 
         if (savefile[number])
         {
             DataManager.instance.LoadData();
-            GoGoGame();
+            GoGoGame(); // 기존 슬롯은 바로 시작
         }
         else
         {
-            Creat();
+            creat.SetActive(true); // 신규 유저일 경우 이름 입력
         }
     }
 
-    public void Creat()
+    public void ConfirmNameAndOpenCharacterSelect()
     {
-        creat.SetActive(true);
-    }
+        string playerName = newPlayerName.text.Trim();
 
-    public void CharcterSelect()
-    {
+        if (string.IsNullOrEmpty(playerName))
+        {
+            Debug.LogWarning("플레이어 이름을 입력해주세요.");
+            return;
+        }
+
         creat.SetActive(false);
         characterSelect.SetActive(true);
+
+        // 슬롯 텍스트들 숨기기
+        foreach (var slot in slotText)
+        {
+            slot.gameObject.SetActive(false);
+        }
+
+        UpdateCharacterButtons(); // 버튼 상태 업데이트
+    }
+    
+    // 메뉴로 돌아올 때 쓸 슬롯 보이게하는 메서드
+    public void BackToSlotSelect()
+    {
+        characterSelect.SetActive(false);
+        creat.SetActive(false);
+
+        foreach (var slot in slotText)
+        {
+            slot.gameObject.SetActive(true);
+        }
+    }
+
+    private void UpdateCharacterButtons()
+    {
+        for (int i = 0; i < characterButtons.Length; i++)
+        {
+            TextMeshProUGUI buttonText = characterButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+
+            if (i >= availableCharacters.Length)
+            {
+                characterButtons[i].interactable = false;
+                buttonText.text = "???";
+                continue;
+            }
+
+            string charId = availableCharacters[i].characterId;
+            bool isUnlocked = CharacterManager.Instance.IsUnlocked(charId);
+
+            characterButtons[i].interactable = isUnlocked;
+            buttonText.text = isUnlocked ? availableCharacters[i].characterName : "???";
+        }
+    }
+
+    public void SelectCharacter(int characterIndex)
+    {
+        if (characterIndex < 0 || characterIndex >= availableCharacters.Length)
+        {
+            Debug.LogWarning("유효하지 않은 캐릭터 인덱스입니다.");
+            return;
+        }
+
+        CharacterData selectedCharacter = availableCharacters[characterIndex];
+
+        if (!CharacterManager.Instance.IsUnlocked(selectedCharacter.characterId))
+        {
+            Debug.LogWarning("이 캐릭터는 아직 해금되지 않았습니다.");
+            return;
+        }
+
+        DataManager.instance.nowPlayer.playerName = newPlayerName.text.Trim();
+        DataManager.instance.nowPlayer.characterName = selectedCharacter.characterName;
+        DataManager.instance.nowPlayer._damage = selectedCharacter.damage;
+        DataManager.instance.nowPlayer._attackRate = selectedCharacter.attackRate;
+        DataManager.instance.nowPlayer._attackDelay = selectedCharacter.attackDelay;
+        DataManager.instance.nowPlayer._attackSpeed = selectedCharacter.attackSpeed;
+        DataManager.instance.nowPlayer._attackRangef = selectedCharacter.attackRange;
+
+        DataManager.instance.SaveData();
+
+        GoGoGame();
     }
 
     public void GoGoGame()
@@ -64,27 +144,18 @@ public class Select : MonoBehaviour
         SceneManager.LoadScene("Test");
     }
 
-    public void SelectCharacter(int characterIndex)
-    {
-        if (characterIndex >= 0 && characterIndex < availableCharacters.Length)
-        {
-            CharacterData selectedCharacter = availableCharacters[characterIndex];
-
-            DataManager.instance.nowPlayer.playerName = newPlayerName.text;
-            DataManager.instance.nowPlayer.characterName = selectedCharacter.characterName;
-            DataManager.instance.nowPlayer._damage = selectedCharacter.damage;
-            DataManager.instance.nowPlayer._attackRate = selectedCharacter.attackRate;
-            DataManager.instance.nowPlayer._attackDelay = selectedCharacter.attackDelay;
-            DataManager.instance.nowPlayer._attackSpeed = selectedCharacter.attackSpeed;
-            DataManager.instance.nowPlayer._attackRangef = selectedCharacter.attackRange;
-
-            DataManager.instance.SaveData();
-        }
-
-        GoGoGame();
-    }
-
+    // 버튼에 연결 (UI에서 직접 연결된 버튼들)
     public void OnTest1ButtonClicked() => SelectCharacter(0);
     public void OnTest2ButtonClicked() => SelectCharacter(1);
     public void OnTest3ButtonClicked() => SelectCharacter(2);
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            CharacterManager.Instance.UnlockCharacter("test3");
+            Debug.Log("test3 캐릭터 강제 해금됨");
+            UpdateCharacterButtons();
+        }
+    }
 }
