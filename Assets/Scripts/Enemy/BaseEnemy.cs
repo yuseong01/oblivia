@@ -14,6 +14,7 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
     [SerializeField, Range(1f, 100f)] protected float _health = 100f;
     [SerializeField] protected float _detectRange = 5f;
     [SerializeField] protected EnemyType _type = EnemyType.Normal;
+    [SerializeField] protected float _speed = 3f;
     protected Animator _anim;
     // Unity 초기화
     protected virtual void Awake()
@@ -23,7 +24,9 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
 
     protected virtual void Start()
     {
-        _fsm.ChangeState(new IdleState<T>(), this as T); // T = 상속한 Enemy 타입
+        if(_type == EnemyType.Boss)
+            _fsm.ChangeState(new CloneState<T>(), this as T);
+        else _fsm.ChangeState(new IdleState<T>(), this as T); // T = 상속한 Enemy 타입
     }
 
     protected virtual void Update()
@@ -45,6 +48,8 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
     public Animator GetAnimator() => _anim;
     public Transform GetEnemyPosition() => transform;
     public float GetHealth() => _health;
+    public float SetSpeed(float amount) => _speed = amount;
+    public float GetSpeed() => _speed;
     public void TakeDamage(int amount)
     {
         _health -= amount;

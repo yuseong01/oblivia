@@ -15,6 +15,24 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
 
         var col = obj.GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
+
+        if (obj is ISpawnable spawnable)
+        {
+            float chance = Random.value;
+            if (chance <= 1f) // 확률 조절 원하면 변경
+            {
+                GameObject prefab = spawnable.GetSpawnPrefab();
+                int count = spawnable.GetSpawnCount();
+                float radius = spawnable.GetSpawnRadius();
+
+                for (int i = 0; i < count; i++)
+                {
+                    Vector2 offset = Random.insideUnitCircle * radius;
+                    Vector3 pos = obj.transform.position + new Vector3(offset.x, 0f, offset.y);
+                    GameObject.Instantiate(prefab, pos, Quaternion.identity);
+                }
+            }
+        }
     }
 
     public void Update(T obj)

@@ -6,13 +6,14 @@ using static IEnemy;
 
 public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
-    private float _moveSpeed = 3f;
+    private float _moveSpeed;
     private float _arriveDistance = 1f; // 적이 이 거리보다 가까워지면 상태 전환
 
     public void Enter(T obj)
     {
         //obj.GetAnimator()?.SetBool("Idle", false);
         //obj.GetAnimator()?.SetBool("Move", true);
+        _moveSpeed = obj.GetSpeed();
     }
 
     public void Update(T obj)
@@ -46,6 +47,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
                 }
                 break;
             case EnemyType.Boss:
+                obj.ChangeState(new AttackState<T>());
                 // 보스 로직
                 break;
         }
