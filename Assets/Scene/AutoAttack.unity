@@ -423,7 +423,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &312894313
 Rigidbody2D:
   serializedVersion: 4
@@ -773,7 +773,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &458973095
 Rigidbody2D:
   serializedVersion: 4
@@ -1183,11 +1183,13 @@ GameObject:
   - component: {fileID: 662471028}
   - component: {fileID: 662471029}
   - component: {fileID: 662471031}
+  - component: {fileID: 662471032}
+  - component: {fileID: 662471033}
   - component: {fileID: 662471027}
   - component: {fileID: 662471030}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1201,8 +1203,8 @@ Transform:
   m_GameObject: {fileID: 662471024}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.92, y: -1.05, z: 0.004500015}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3.56, y: -2.06, z: 0.004500015}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 898392855}
@@ -1260,11 +1262,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5c3dac298ea5b4387de94d9fe909bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemEffectManager: {fileID: 0}
-  StatHandler: {fileID: 662471031}
-  ProjectilePrefab: {fileID: 2155350911195395070, guid: a2e4fb27e0958d7468afea243f89fb7e, type: 3}
-  AttackPivot: {fileID: 547542087}
+  _projectilePrefab: {fileID: 2155350911195395070, guid: a2e4fb27e0958d7468afea243f89fb7e, type: 3}
+  _attackPivot: {fileID: 547542087}
+  _statHandler: {fileID: 0}
+  _itemEffectManager: {fileID: 0}
   _nextAttackTime: 0
+  _isFamiliar: 0
 --- !u!114 &662471029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,7 +1339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _health: 100
-  _maxHealth: 1000
+  _maxHealth: 100
   _damage: 1
   _attackRate: 1
   _attackDelay: 0
@@ -1344,9 +1347,40 @@ MonoBehaviour:
   _attackRange: 5
   _attackCount: 1
   _attackAngle: 10
-  _knockbackForce: 0.05
-  _attackDuration: 0.5
-  _projectileSize: 0.2
+  _knockbackForce: 0.1
+  _attackDuration: 3
+  _projectileSize: 0.95
+--- !u!114 &662471032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662471024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defe35776e5135d4e86638344da296e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orbitPrefab: {fileID: 7696673173684025821, guid: 1912f7c4d03220242865888516c646c8, type: 3}
+  _orbitPivot: {fileID: 547542087}
+  _objectCount: 0
+  _radius: 1
+  _rotationSpeed: 50
+--- !u!114 &662471033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662471024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0641ec3c9213fef429562357d74e14e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skill: {fileID: 11400000, guid: 4043d2c928d2a62489342677bb1fb2c9, type: 2}
+  _key: 32
 --- !u!1 &769993009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,7 +1400,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &769993010
 Rigidbody2D:
   serializedVersion: 4
@@ -1595,7 +1629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 554342b2364b0064b93f6413fec2b73b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1adbd89770a28744d9d595ff453727db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1625,7 +1659,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &900151130
 Rigidbody2D:
   serializedVersion: 4
@@ -2756,7 +2790,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1365243912
 Rigidbody2D:
   serializedVersion: 4
@@ -3377,7 +3411,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1593175289
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3979,7 +4013,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &2038360299
 Rigidbody2D:
   serializedVersion: 4
@@ -4148,16 +4182,16 @@ SceneRoots:
   - {fileID: 1360350440}
   - {fileID: 171258641}
   - {fileID: 769993014}
+  - {fileID: 1593175292}
+  - {fileID: 312894317}
+  - {fileID: 458973099}
+  - {fileID: 900151134}
   - {fileID: 2038360303}
   - {fileID: 1365243916}
   - {fileID: 1213868985}
-  - {fileID: 312894317}
-  - {fileID: 1593175292}
   - {fileID: 2029028575}
   - {fileID: 468100605}
   - {fileID: 1379733607}
-  - {fileID: 458973099}
-  - {fileID: 900151134}
   - {fileID: 372448888}
   - {fileID: 1471495810}
   - {fileID: 958712822}

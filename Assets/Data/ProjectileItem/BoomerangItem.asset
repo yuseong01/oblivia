@@ -15,6 +15,6 @@ MonoBehaviour:
   ItemName: Boomerang
   Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
   ProjectileModules:
-  - {fileID: 11400000, guid: 50654b5686647614686717f721ddcab9, type: 2}
+  - {fileID: 11400000, guid: ac56439973482654598094a621183ed8, type: 2}
   FireModules: []
   StatModules: []
