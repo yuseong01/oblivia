@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class Test : MonoBehaviour
+public class TestScene : MonoBehaviour
 {
     public TextMeshProUGUI name;
     public TextMeshProUGUI damage;
