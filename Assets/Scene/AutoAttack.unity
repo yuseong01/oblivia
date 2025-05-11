@@ -423,7 +423,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &312894313
 Rigidbody2D:
   serializedVersion: 4
@@ -773,7 +773,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &458973095
 Rigidbody2D:
   serializedVersion: 4
@@ -1189,7 +1189,7 @@ GameObject:
   - component: {fileID: 662471030}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1203,8 +1203,8 @@ Transform:
   m_GameObject: {fileID: 662471024}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.92, y: -1.05, z: 0.004500015}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3.56, y: -2.06, z: 0.004500015}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 898392855}
@@ -1349,7 +1349,7 @@ MonoBehaviour:
   _attackAngle: 10
   _knockbackForce: 0.1
   _attackDuration: 3
-  _projectileSize: 0.2
+  _projectileSize: 0.95
 --- !u!114 &662471032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,7 +1400,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &769993010
 Rigidbody2D:
   serializedVersion: 4
@@ -1629,7 +1629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 554342b2364b0064b93f6413fec2b73b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1adbd89770a28744d9d595ff453727db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1659,7 +1659,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &900151130
 Rigidbody2D:
   serializedVersion: 4
@@ -2790,7 +2790,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1365243912
 Rigidbody2D:
   serializedVersion: 4
@@ -3411,7 +3411,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1593175289
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4013,7 +4013,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &2038360299
 Rigidbody2D:
   serializedVersion: 4
@@ -4182,16 +4182,16 @@ SceneRoots:
   - {fileID: 1360350440}
   - {fileID: 171258641}
   - {fileID: 769993014}
+  - {fileID: 1593175292}
+  - {fileID: 312894317}
+  - {fileID: 458973099}
+  - {fileID: 900151134}
   - {fileID: 2038360303}
   - {fileID: 1365243916}
   - {fileID: 1213868985}
-  - {fileID: 312894317}
-  - {fileID: 1593175292}
   - {fileID: 2029028575}
   - {fileID: 468100605}
   - {fileID: 1379733607}
-  - {fileID: 458973099}
-  - {fileID: 900151134}
   - {fileID: 372448888}
   - {fileID: 1471495810}
   - {fileID: 958712822}
