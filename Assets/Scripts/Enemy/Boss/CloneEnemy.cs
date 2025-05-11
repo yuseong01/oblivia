@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Clone : BaseEnemy<Clone>, IExplodable,ISpawnable
+public class CloneEnemy : BaseEnemy<CloneEnemy>, IExplodable,ISpawnable
 {
     [Header("Æø¹ß or ÁÖº¯ ¸÷ ¼³Á¤")]
     [SerializeField] private float _explosionDamage = 10f;
