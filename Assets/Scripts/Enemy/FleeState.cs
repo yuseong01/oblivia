@@ -103,8 +103,7 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     // �ʾȿ� �ִ� ��ǥ���� Ȯ��
     private bool IsInsideMap(Vector2 pos)
     {
-        return pos.x >= _minBounds.x && pos.x <= _maxBounds.x &&
-               pos.y >= _minBounds.y && pos.y <= _maxBounds.y;
+        return pos.x >= _minBounds.x && pos.x <= _maxBounds.x && pos.y >= _minBounds.y && pos.y <= _maxBounds.y;
     }
     // ��ǥ ��ġ�� �ٱ��� ���� ��� ������ �� ������ ������� �Լ� 
     // ������ margin�� ������ŭ ��������

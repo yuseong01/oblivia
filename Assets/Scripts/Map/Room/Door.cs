@@ -11,6 +11,9 @@ public class Door : MonoBehaviour
     public Vector2Int currentRoomPos;
     public Vector2Int nextRoomPos;
 
+    // 몬스터 spwan 됐는지 체크
+    private bool hasSpawned = false;
+    public List<RoomSpawn> spawnPoints;
     void Awake() 
     {
         SetDir();

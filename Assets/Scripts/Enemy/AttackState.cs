@@ -16,13 +16,6 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
 
     public void Update(T obj)
     {
-        // Á×À¸¸é DieState·Î
-        if (obj.GetHealth() <= 0f)
-        {
-            obj.ChangeState(new DieState<T>());
-            return;
-        }
-
         float dist = Vector2.Distance(obj.GetEnemyPosition().position, obj.GetPlayerPosition().position);
         float rangedRange = 4f;
         float normalRange = 1.5f;

@@ -52,7 +52,7 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
         }
         trans.position = upPos;
 
-        // 4. 다음 상태로 전이 (Attack)
+        // 다음 상태
         obj.ChangeState(new AttackState<T>());
     }
 }

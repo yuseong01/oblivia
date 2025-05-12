@@ -35,7 +35,7 @@ public class CloneState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMa
 
     public void Update(T obj)
     {
-        // 보스, 클론보스 모두 IdleState로 진입
+        // 클론들 모두 IdleState로 진입
         if (_timer >= _cloneDuration)
         {
             obj.SetSpeed(Random.Range(2f, _numberOfClones));

@@ -34,7 +34,7 @@ public class RoomManager : Singleton<RoomManager>
 
     void Start()
     {
-        // 방 생성
+        // 3. 방 생성
         GenerateRooms();
         SetRoomType();
 
@@ -42,6 +42,9 @@ public class RoomManager : Singleton<RoomManager>
         {
             Room room = r.Value.GetComponent<Room>();
             room.RegisterDoors();
+
+            // 적 스폰
+           
         }
 
         // 문 생성
@@ -80,7 +83,11 @@ public class RoomManager : Singleton<RoomManager>
             if (!roomInstances.ContainsKey(currentPos))
             {
                 GameObject newRoom = Instantiate(room, GridToWorld(currentPos), Quaternion.identity, transform);
+                Room roomComponent = newRoom.GetComponent<Room>();
                 Debug.Log(createRoomCount + " : " + currentPos);
+                // 1. 룸 타입 설정
+                RoomType randomType = RoomType.Normal;
+                // 2. 초기화
                 roomInstances[currentPos] = newRoom;
                 createRoomCount++;
             }
@@ -136,6 +143,12 @@ public class RoomManager : Singleton<RoomManager>
         // 가장 먼 방 Boss Room
         Vector2Int farthestPos = FindFarthestRoom(new Vector2Int(0,0), roomInstances);
         roomInstances[farthestPos].GetComponent<Room>().type = RoomType.Boss;
+
+        foreach (var r in roomInstances)
+        {
+            Room room = r.Value.GetComponent<Room>();
+            room.TypeInit(room.type);
+        }
     }
 
     Vector2Int FindFarthestRoom(Vector2Int start, Dictionary<Vector2Int, GameObject> roomInstances)

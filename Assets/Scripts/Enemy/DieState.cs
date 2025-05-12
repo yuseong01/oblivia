@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
+public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>, IPoolable
 {
     private float _timer;
     private float _dieTime = 1f;
+    private string _poolKey;
+    public DieState(string poolKey)
+    {
+        _poolKey = poolKey;
+    }
+
 
     public void Enter(T obj)
     {
+        Debug.Log("죽음");
         _timer = 0f;
         //obj.GetAnimator()?.SetTrigger("Die");
 
@@ -40,21 +47,12 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
 
         if (_timer >= _dieTime)
         {
-            // RoomManager.Instance?.EnemyDied(); 뭔가 이렇게 Enemy가 죽었다는 것을 RoomManager에 알리면 될 것 같아요
-            // 마지막 Enemy가 죽으면 문이 열리게끔? 아래 코드 느낌
-            /*
-             * public void OnEnemyDied()
-                 {
-                     aliveEnemyCount--;
-        
+            // Room에 알림 (선택적)
+            //RoomManager.Instance?.OnEnemyDied();
 
-               if (aliveEnemyCount <= 0)
-               {
-                 HandleRoomClear();
-                 }
-                  }
-             */
-            GameObject.Destroy(obj.gameObject);
+            // 풀 반환
+            PoolManager.Instance.Return<T>(_poolKey, obj);
+
         }
     }
    public void Exit(T obj) { }

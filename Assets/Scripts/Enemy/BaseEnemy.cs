@@ -5,29 +5,23 @@ using UnityEngine;
 using UnityEngine.AI;
 using static IEnemy;
 
-public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
+public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>, IPoolable
 {
     protected StateMachine<T> _fsm = new StateMachine<T>();
 
     [Header("Enemy Settings")]
     [SerializeField] public Transform _player;
-    [SerializeField, Range(1f, 100f)] protected float _health = 100f;
+    [SerializeField, Range(0f, 100f)] protected float _health = 100f;
     [SerializeField] protected float _detectRange = 5f;
     [SerializeField] protected EnemyType _type = EnemyType.Normal;
     [SerializeField] protected float _speed = 3f;
+
     protected Animator _anim;
     // Unity �ʱ�ȭ
     protected virtual void Awake()
     {
-        _player = GameObject.FindWithTag("Player").transform;
         _anim = GetComponent<Animator>();
-    }
-
-    protected virtual void Start()
-    {
-        if(_type == EnemyType.Boss)
-            _fsm.ChangeState(new CloneState<T>(), this as T);
-        else _fsm.ChangeState(new IdleState<T>(), this as T); // T = ����� Enemy Ÿ��
+       
     }
 
     protected virtual void Update()
@@ -56,7 +50,21 @@ public class BaseEnemy<T> : MonoBehaviour, IEnemy, IStateMachineOwner<T> where T
         _health -= amount;
         if (_health <= 0f)
         {
-            ChangeState(new DieState<T>());
+            ChangeState(new DieState<T>(_type.ToString()));
         }
+    }
+
+    public void OnSpawned()
+    {
+        gameObject.SetActive(true);
+        _player = GameObject.FindWithTag("Player").transform;
+        _health = 100;
+        if (_type == EnemyType.Boss)
+            _fsm.ChangeState(new CloneState<T>(), this as T);
+        else _fsm.ChangeState(new IdleState<T>(), this as T); // T = ����� Enemy Ÿ��
+    }
+    public void OnDespawned()
+    {
+        gameObject.SetActive(false);
     }
 }
