@@ -16,7 +16,7 @@ MonoBehaviour:
   characterName: test1
   characterId: test1
   moveSpeed: 5
-  maxHealth: 100
+  maxHealth: 6
   damage: 1
   attackRate: 1
   attackDelay: 0
