@@ -13,7 +13,7 @@ public class TestScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        name.text += DataManager.instance.nowPlayer.playerName;
+        //name.text += DataManager.instance.nowPlayer.playerName;
         damage.text += DataManager.instance.nowPlayer.damage.ToString();
         attackRate.text += DataManager.instance.nowPlayer.attackRate.ToString();
     }

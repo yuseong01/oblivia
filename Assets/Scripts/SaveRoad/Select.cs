@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class Select : MonoBehaviour
 {
     public GameObject creat; // 이름 입력 UI
@@ -28,7 +29,7 @@ public class Select : MonoBehaviour
                 savefile[i] = true;
                 DataManager.instance.nowSlot = i;
                 DataManager.instance.LoadData();
-                slotText[i].text = DataManager.instance.nowPlayer.playerName;
+                //slotText[i].text = DataManager.instance.nowPlayer.playerName;
             }
             else
             {
@@ -112,49 +113,54 @@ public class Select : MonoBehaviour
 
     public void SelectCharacter(int characterIndex)
     {
-        if (characterIndex < 0 || characterIndex >= availableCharacters.Length)
-        {
-            Debug.LogWarning("유효하지 않은 캐릭터 인덱스입니다.");
-            return;
-        }
+        #region temp
+        //if (characterIndex < 0 || characterIndex >= availableCharacters.Length)
+        //{
+        //    Debug.LogWarning("유효하지 않은 캐릭터 인덱스입니다.");
+        //    return;
+        //}
 
-        CharacterData selectedCharacter = availableCharacters[characterIndex];
+        //CharacterData selectedCharacter = availableCharacters[characterIndex];
 
-        if (!CharacterManager.Instance.IsUnlocked(selectedCharacter.characterId))
-        {
-            Debug.LogWarning("이 캐릭터는 아직 해금되지 않았습니다.");
-            return;
-        }
+        //if (!CharacterManager.Instance.IsUnlocked(selectedCharacter.characterId))
+        //{
+        //    Debug.LogWarning("이 캐릭터는 아직 해금되지 않았습니다.");
+        //    return;
+        //}
 
-        DataManager.instance.nowPlayer.playerName = newPlayerName.text.Trim();
+        //DataManager.instance.nowPlayer.playerName = newPlayerName.text.Trim();
 
-        DataManager.instance.nowPlayer.characterName = selectedCharacter.characterName;
-        DataManager.instance.nowPlayer.characterId = selectedCharacter.characterId;
+        //DataManager.instance.nowPlayer.characterName = selectedCharacter.characterName;
+        //DataManager.instance.nowPlayer.characterId = selectedCharacter.characterId;
 
-        DataManager.instance.nowPlayer.moveSpeed = selectedCharacter.moveSpeed;
-        DataManager.instance.nowPlayer.maxHealth = selectedCharacter.maxHealth;
+        //DataManager.instance.nowPlayer.moveSpeed = selectedCharacter.moveSpeed;
+        //DataManager.instance.nowPlayer.maxHealth = selectedCharacter.maxHealth;
 
-        DataManager.instance.nowPlayer.damage = selectedCharacter.damage;
-        DataManager.instance.nowPlayer.attackRate = selectedCharacter.attackRate;
-        DataManager.instance.nowPlayer.attackDelay = selectedCharacter.attackDelay;
-        DataManager.instance.nowPlayer.attackSpeed = selectedCharacter.attackSpeed;
-        DataManager.instance.nowPlayer.attackRange = selectedCharacter.attackRange;
-        DataManager.instance.nowPlayer.attackCount = selectedCharacter.attackCount;
-        DataManager.instance.nowPlayer.attackAngle = selectedCharacter.attackAngle;
-        DataManager.instance.nowPlayer.knockbackForce = selectedCharacter.knockbackForce;
-        DataManager.instance.nowPlayer.attackDuration = selectedCharacter.attackDuration;
-        DataManager.instance.nowPlayer.projectileSize = selectedCharacter.projectileSize;
+        //DataManager.instance.nowPlayer.damage = selectedCharacter.damage;
+        //DataManager.instance.nowPlayer.attackRate = selectedCharacter.attackRate;
+        //DataManager.instance.nowPlayer.attackDelay = selectedCharacter.attackDelay;
+        //DataManager.instance.nowPlayer.attackSpeed = selectedCharacter.attackSpeed;
+        //DataManager.instance.nowPlayer.attackRange = selectedCharacter.attackRange;
+        //DataManager.instance.nowPlayer.attackCount = selectedCharacter.attackCount;
+        //DataManager.instance.nowPlayer.attackAngle = selectedCharacter.attackAngle;
+        //DataManager.instance.nowPlayer.knockbackForce = selectedCharacter.knockbackForce;
+        //DataManager.instance.nowPlayer.attackDuration = selectedCharacter.attackDuration;
+        //DataManager.instance.nowPlayer.projectileSize = selectedCharacter.projectileSize;
 
-        DataManager.instance.SaveData();
+        //DataManager.instance.SaveData();
 
+        #endregion
+
+        DataManager.instance.nowCharacterData = characterData[characterIndex];
         GoGoGame();
     }
 
     public void GoGoGame()
     {
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene("AutoAttack");
     }
 
+    [SerializeField] CharacterData[] characterData;
     // 버튼에 연결 (UI에서 직접 연결된 버튼들)
     public void OnTest1ButtonClicked() => SelectCharacter(0);
     public void OnTest2ButtonClicked() => SelectCharacter(1);
