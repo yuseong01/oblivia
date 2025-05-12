@@ -31,16 +31,7 @@ public class TestPlayerController : MonoBehaviour
         _movement.Normalize(); // 대각선 이동 속도 보정
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            _playerStatHandler.Health = 1;
-          //  _orbitController.CreateOrbitingObjects(_itemEffectManager, _playerStatHandler);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            _playerStatHandler.Health = -1;
-            //  _orbitController.CreateOrbitingObjects(_itemEffectManager, _playerStatHandler);
-        }
+
     }
 
     void FixedUpdate()

@@ -5,16 +5,35 @@ public class OrbitController : MonoBehaviour
 {
     [SerializeField] private GameObject _orbitPrefab;
     [SerializeField] private GameObject _orbitPivot;
-    [SerializeField] private int _objectCount = 0;
+     private int _objectCount;
     [SerializeField] private float _radius = 1f;
     [SerializeField] private float _rotationSpeed = 50f;
 
     private List<Transform> _orbitingObjects = new List<Transform>();
     private List<float> _angles = new List<float>(); // 각도 정보 저장
 
-    public void CreateOrbitingObjects(ItemEffectManager item, PlayerStatHandler stat)
+    [SerializeField] private PlayerStatHandler _playerStatHandler;
+    [SerializeField] private ItemEffectManager _itemEffects;
+
+    private void Awake()
     {
-        _objectCount++;
+        _playerStatHandler = GetComponent<PlayerStatHandler>();
+        _itemEffects = GetComponent<ItemEffectManager>();
+    }
+
+    void OnEnable()
+    {
+        _playerStatHandler.OnOrbitCountChanged += CreateOrbitingObjects;
+    }
+
+    void OnDisable()
+    {
+        _playerStatHandler.OnOrbitCountChanged -= CreateOrbitingObjects;
+    }
+
+    public void CreateOrbitingObjects()
+    {
+        _objectCount = _playerStatHandler.OrbitCount;
 
         foreach (var obj in _orbitingObjects)
         {
@@ -31,8 +50,8 @@ public class OrbitController : MonoBehaviour
             Vector3 pos = _orbitPivot.transform.position + Quaternion.Euler(0, 0, angle) * Vector3.right * _radius;
             GameObject orbitObj = Instantiate(_orbitPrefab, pos, Quaternion.identity);
             var controller = orbitObj.GetComponent<AttackController>();
-            controller.ItemEffectManager = item;
-            controller.StatHandler = stat;
+            controller.ItemEffectManager = _itemEffects;
+            controller.StatHandler = _playerStatHandler;
             _orbitingObjects.Add(orbitObj.transform);
         }
     }

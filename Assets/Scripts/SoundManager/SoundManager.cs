@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum SFXType {Jump, Hit, Die} //임시 예시입니다 필요하신 sfx추가하시면 됩니다!
@@ -18,6 +16,8 @@ public class SoundManager : Singleton<SoundManager>
 
     private void Start()
     {
+        bgmSource.volume = PlayerPrefs.GetFloat("BGMVolume", 1f);
+        sfxSource.volume = PlayerPrefs.GetFloat("SFXVolume", 1f);
         PlayBGMSource(defalutBGMClip); //배경음 자동실행
     }
     public void PlayBGMSource(AudioClip audioClip)  //배경음악 교체시
@@ -28,6 +28,12 @@ public class SoundManager : Singleton<SoundManager>
         bgmSource.loop = true;
 
         bgmSource.Play();
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     //사운드만 갈경우
@@ -47,5 +53,15 @@ public class SoundManager : Singleton<SoundManager>
             case SFXType.Hit:sfxSource.PlayOneShot(hitClip); break;
             case SFXType.Die:sfxSource.PlayOneShot(dieClip); break;
         }
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        bgmSource.volume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
     }
 }

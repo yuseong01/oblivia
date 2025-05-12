@@ -29,6 +29,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    #region ¿Œ∆Æ∑Œ
     IEnumerator PlayIntro()
     {
         isIntroPlaying = true;
@@ -56,6 +57,8 @@ public class MenuManager : MonoBehaviour
         introPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
     }
+
+    #endregion
 
     public void OnStartGameButton()
     {
