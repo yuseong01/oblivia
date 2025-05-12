@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4d1961ea30c5e14c93edaa7dbce7b8c, type: 3}
-  m_Name: test3
+  m_Name: test1
   m_EditorClassIdentifier: 
   playerName: 
-  characterName: test3
-  damage: 30
-  attackRate: 30
-  attackDelay: 30
-  attackSpeed: 30
-  attackRange: 30
+  characterName: test1
+  damage: 10
+  attackRate: 10
+  attackDelay: 10
+  attackSpeed: 10
+  attackRange: 10
+  characterId: test1

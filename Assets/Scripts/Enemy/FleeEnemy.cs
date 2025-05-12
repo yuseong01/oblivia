@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FleeEnemy : BaseEnemy<FleeEnemy>
+public class FleeEnemy : BaseEnemy<FleeEnemy>, IPoolable
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // ÇÃ·¹ÀÌ¾î¿Í ¹«±â¿Í °ü·ÃÇÑ ÅÂ±×
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â±ï¿½
         if (other.CompareTag("PlayerBullet"))
         {
-            TakeDamage(1); // IEnemyÀÇ ±¸Çö ¸Þ¼­µå
-            Destroy(other.gameObject); // bulletµµ Á¦°Å
+            TakeDamage(1); // IEnemyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+            Destroy(other.gameObject); // bulletï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _detectRange);
+    }
+
+    public void OnSpawned()
+    {
+
+    }
+    public void OnDespawned()
+    {
+
     }
 }

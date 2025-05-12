@@ -7,11 +7,11 @@ using static UnityEditor.PlayerSettings;
 
 public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
-    private float _fleeDistance = 4f; // ÇÃ·¹ÀÌ¾î°¡ ÀÌ °Å¸®º¸´Ù °¡±î¿ì¸é µµ¸Á ½ÃÀÛ
+    private float _fleeDistance = 4f; // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private float _moveSpeed = 3f;
-    private float _minFleeDistance = 0.2f; // ÀÇ¹Ì ÀÖ°Ô µµ¸ÁÃÆ´Ù°í °£ÁÖÇÒ ÃÖ¼Ò °Å¸®
-    private Vector2 _minBounds = new Vector2(-8, -4); // ¸Ê ÃÖ¼Ò ÁÂÇ¥
-    private Vector2 _maxBounds = new Vector2(8, 4); // ¸Ê ÃÖ´ë ÁÂÇ¥
+    private float _minFleeDistance = 0.2f; // ï¿½Ç¹ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Æ´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½Å¸ï¿½
+    private Vector2 _minBounds = new Vector2(-8, -4); // ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½Ç¥
+    private Vector2 _maxBounds = new Vector2(8, 4); // ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ç¥
     private float _fleeDuration = 2f;
     private float _elapsedTime = 0f;
     private Vector2 _targetPos;
@@ -28,35 +28,35 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         Vector2 enemyPos = obj.GetEnemyPosition().position;
         Vector2 playerPos = obj.GetPlayerPosition().position;
 
-        // ÃæºÐÈ÷ ¸Ö¾îÁ³À¸¸é IdleState·Î µ¹¾Æ°¨
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IdleStateï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½
         if (Vector2.Distance(enemyPos, playerPos) > _fleeDistance + 0.5f)
         {
             obj.ChangeState(new IdleState<T>());
             return;
         }
 
-        // ¸ñÇ¥¿¡ µµÂøÇß´ÂÁö È®ÀÎ
+        // ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
         if (!_hasTarget || Vector2.Distance(enemyPos, _targetPos) < 0.2f)
         {
-            SetFleeTarget(obj, enemyPos, playerPos); // »õ µµ¸Á À§Ä¡·Î ¼³Á¤
+            SetFleeTarget(obj, enemyPos, playerPos); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         Vector2 direction = (_targetPos - enemyPos).normalized;
         Vector2 newPos = enemyPos + direction * _moveSpeed * Time.deltaTime;
 
-        // ¸ñÇ¥ À§Ä¡°¡ ÇöÀç À§Ä¡º¸´Ù ³Ê¹« °¡±î¿ì¸é ¿òÁ÷ÀÌÁö ¸»°í °Å¸®°¡ ÃæºÐÇÏ¸é ÀÌµ¿
-        // ÇÊ¿äÇÑ ÀÌÀ¯´Â ¶³¸² ¹æÁö
+        // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ìµï¿½
+        // ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (Vector2.Distance(enemyPos, _targetPos) > 0.01f)
         {
             obj.GetEnemyPosition().position = newPos;
         }
 
-        // µð¹ö±× ½Ã°¢È­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½È­
         Debug.DrawLine(enemyPos, _targetPos, Color.red);
         if (obj is Boss && _elapsedTime >= _fleeDuration)
         {
-            // µ¹Áø ÀçÁøÀÔ
-            obj.ChangeState(new AttackState<T>()); // ´Ù½Ã Rush·Î!
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            obj.ChangeState(new AttackState<T>()); // ï¿½Ù½ï¿½ Rushï¿½ï¿½!
         }
     }
 
@@ -65,50 +65,50 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         _hasTarget = false;
     }
 
-    // µµ¸Á ¸ñÇ¥ À§Ä¡¸¦ ÁöÁ¤ÇÏ´Â ÇÔ¼ö
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
     private void SetFleeTarget(T  enemy, Vector2 enemyPos, Vector2 playerPos)
     {
-        Vector2 fleeDir = (enemyPos - playerPos).normalized; // µµ¸Á ¹æÇâ
+        Vector2 fleeDir = (enemyPos - playerPos).normalized; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // ¿©·¯ ¹æÇâ ½Ãµµ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
         for (int i = 0; i < 10; i++)
         {
-            float angle = Random.Range(-90f, 90f); // fleeDirÀ» ±âÁØÀ¸·Î ¡¾90µµ È¸Àü
+            float angle = Random.Range(-90f, 90f); // fleeDirï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½90ï¿½ï¿½ È¸ï¿½ï¿½
             Vector2 dir = Quaternion.Euler(0, 0, angle) * fleeDir;
-            Vector2 destination = enemyPos + dir * _fleeDistance; // µµ¸Á ¸ñÇ¥ À§Ä¡
+            Vector2 destination = enemyPos + dir * _fleeDistance; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡
 
-            // ¸ñÇ¥°¡ À¯È¿ÇÏ¸é ÇØ´ç À§Ä¡·Î ¼³Á¤
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (IsValidTarget(destination, enemyPos, playerPos))
             {
-                _targetPos = ClampToBounds(destination); // ¸Ê °æ°è ¾ÈÀ¸·Î Á¦ÇÑ
+                _targetPos = ClampToBounds(destination); // ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 _hasTarget = true;
                 return;
             }
         }
-        // ÈÄº¸ µµ¸Á ¹æÇâÀÌ ÀüºÎ ¸·ÇûÀ» °æ¿ì
-        // ÇÃ·¹ÀÌ¾î ¹Ý´ë + ¸Ê Áß½É ÂÊ ¹æÇâÀ» È¥ÇÕÇÏ¿© fallback ¹æÇâ °è»ê
+        // ï¿½Äºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ý´ï¿½ + ï¿½ï¿½ ï¿½ß½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¥ï¿½ï¿½ï¿½Ï¿ï¿½ fallback ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         Vector2 fallback = enemyPos + ((fleeDir * 0.6f) + (-enemyPos.normalized) * 0.4f).normalized * (_fleeDistance * 0.5f);
         _targetPos = ClampToBounds(fallback);
         _hasTarget = true;
     }
 
-    // ¸ñÇ¥ ÁöÁ¡ÀÌ À¯È¿ÇÑÁö ÆÇ´Ü
+    // ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
     private bool IsValidTarget(Vector2 target, Vector2 from, Vector2 player)
     {
-        // ¸Ê¾È¿¡ ÀÖ´Â ÁÂÇ¥°¡ ¾Æ´Ï¸é return
+        // ï¿½Ê¾È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ return
         if (!IsInsideMap(target)) return false;
         float currDist = Vector2.Distance(from, player);
         float nextDist = Vector2.Distance(target, player);
         return nextDist > currDist + _minFleeDistance;
     }
-    // ¸Ê¾È¿¡ ÀÖ´Â ÁÂÇ¥ÀÎÁö È®ÀÎ
+    // ï¿½Ê¾È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     private bool IsInsideMap(Vector2 pos)
     {
         return pos.x >= _minBounds.x && pos.x <= _maxBounds.x &&
                pos.y >= _minBounds.y && pos.y <= _maxBounds.y;
     }
-    // ¸ñÇ¥ À§Ä¡°¡ ¹Ù±ù¿¡ ÀÖÀ» °æ¿ì °­Á¦·Î ¸Ê ¾ÈÀ¸·Î ²ø¾î¿À´Â ÇÔ¼ö 
-    // ÇÏÁö¸¸ marginÀÇ ¿©À¯¸¸Å­ ¾ÈÂÊÀ¸·Î
+    // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ 
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ marginï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Vector2 ClampToBounds(Vector2 pos, float margin = 0.3f)
     {
         float x = Mathf.Clamp(pos.x, _minBounds.x + margin, _maxBounds.x - margin);

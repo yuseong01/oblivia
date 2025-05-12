@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     public  float AttackDuration;
     private PlayerStatHandler _statHandler;
     [SerializeField] private LayerMask _targetLayers;
-    public float HitCooldown = 0.2f; // °ø°Ý ÀÎÅÍ¹ú
+    public float HitCooldown = 0.2f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¹ï¿½
 
     private Dictionary<Collider2D, float> _lastHitTime = new Dictionary<Collider2D, float>();
 
@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
         _modules = modules;
         Target = enemyTransform;
         AttackDuration = statHandler.AttackDuration;
-        //ÅºÈ¯ Å©±â
+        //ÅºÈ¯ Å©ï¿½ï¿½
         this.transform.localScale = new Vector2(statHandler.ProjectileSize, statHandler.ProjectileSize);
 
         foreach (var mod in modules)
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
             mod.OnFire(this);
         }
 
-        //Å×½ºÆ® »èÁ¦ ÃßÈÄ Á¦°Å
+        //ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Destroy(gameObject, AttackDuration);
     }
 
@@ -48,13 +48,13 @@ public class Projectile : MonoBehaviour
             if (Time.time - lastTime >= HitCooldown)
             {
                 // collision.GetComponent<Enemy>()?.TakeDamage(_damage);
-                Debug.Log($"Àû °ø°Ý{_damage}");
+                Debug.Log($"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½{_damage}");
                 _lastHitTime[collision] = Time.time;
 
                 Rigidbody2D rb = collision.attachedRigidbody;
                 if (rb != null)
                 {
-                    Vector2 knockbackDir = transform.up; // ÅºÈ¯ÀÌ ³¯¾Æ¿Â ¹Ý´ë ¹æÇâ
+                    Vector2 knockbackDir = transform.up; // ÅºÈ¯ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½Ý´ï¿½ ï¿½ï¿½ï¿½ï¿½
                     rb.AddForce(knockbackDir * _statHandler.KnockbackPower, ForceMode2D.Impulse);
                 }
 
@@ -71,7 +71,7 @@ public class Projectile : MonoBehaviour
             mod.OnUpdate(this);
         }
 
-        // È¸Àü ÀÌÈÄÀÇ forward ¹æÇâÀ» ±âÁØÀ¸·Î ÀÌµ¿
+        // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ forward ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         transform.position += transform.up * Speed * Time.deltaTime;
     }
 
