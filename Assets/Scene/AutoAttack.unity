@@ -525,7 +525,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &312894313
 Rigidbody2D:
   serializedVersion: 4
@@ -726,8 +726,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 1633290812142620731, guid: 2eba9d3dce62b464889ea4575073f7f4, type: 3}
-  roomCount: 1
-  createRoomCount: 0
   currentRoomPos: {x: 0, y: 0}
 --- !u!1 &372448883
 GameObject:
@@ -998,7 +996,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &458973095
 Rigidbody2D:
   serializedVersion: 4
@@ -1529,7 +1527,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &769993010
 Rigidbody2D:
   serializedVersion: 4
@@ -1852,7 +1850,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &900151130
 Rigidbody2D:
   serializedVersion: 4
@@ -2247,6 +2245,10 @@ PrefabInstance:
       propertyPath: _projectileSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1777434844800950234, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      propertyPath: _UIPrefab
+      value: 
+      objectReference: {fileID: 1481322033505905593, guid: 42ea55b39180c274d81663978a7cb18e, type: 3}
     - target: {fileID: 1999162084652056299, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.56
@@ -3073,7 +3075,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1365243912
 Rigidbody2D:
   serializedVersion: 4
@@ -3894,10 +3896,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1.24, y: 1.24}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -3945,15 +3947,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 58497e02b1b14b24da991b956dcc0661, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.24, y: 1.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1593175291
@@ -3981,7 +3983,7 @@ Transform:
   m_GameObject: {fileID: 1593175288}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1082.723, y: -427.33185, z: 4.191}
+  m_LocalPosition: {x: -1078.86, y: -429.51, z: 4.191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4734,7 +4736,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &2038360299
 Rigidbody2D:
   serializedVersion: 4
