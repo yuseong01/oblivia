@@ -92,7 +92,7 @@ public class DataManager : MonoBehaviour
 
         StatHandler.MoveSpeed = nowCharacterData.moveSpeed;
         StatHandler.MaxHealth = nowCharacterData.maxHealth;
-
+        StatHandler.Health = nowCharacterData.maxHealth;
         StatHandler.Damage = nowCharacterData.damage;
         StatHandler.AttackRate = nowCharacterData.attackRate;
         StatHandler.AttackDelay = nowCharacterData.attackDelay;
