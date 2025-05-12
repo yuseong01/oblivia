@@ -19,13 +19,20 @@ public class ObjectPool<T> where T : MonoBehaviour, IPoolable
         for(int i=0; i<size; i++)
         {
             T obj = Object.Instantiate(_prefab, _parent);
-            obj.gameObject.SetActive(true);
+            obj.gameObject.SetActive(false);
             pool.Enqueue(obj);
         }
+
     }
 
     public T Get()
     {
+        if(pool.Count==0)
+        {
+            T objTemp = Object.Instantiate(_prefab, _parent);
+            objTemp.gameObject.SetActive(true);
+            return objTemp;
+        }
         T obj = pool.Dequeue();
         obj.gameObject.SetActive(true);
         obj.OnSpawned();
