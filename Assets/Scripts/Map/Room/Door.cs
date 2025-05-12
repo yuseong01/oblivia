@@ -98,7 +98,8 @@ public class Door : MonoBehaviour
             CameraController.Instance.MoveRoom(nextRoomCenter);
 
             // currentRoomPos 갱신
-            RoomManager.Instance.SetCurrentRoom(nextRoomPos);
+            RoomManager.Instance.SetCurrentRoom(nextRoomPos); 
+            Debug.Log(RoomManager.Instance.GetRoomType());
         }
     }
 
