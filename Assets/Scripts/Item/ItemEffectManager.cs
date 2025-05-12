@@ -7,6 +7,7 @@ public class ItemEffectManager : MonoBehaviour
     private PlayerStatHandler _statHandler;
     private List<IProjectileModule> activeModules = new List<IProjectileModule>();
     private List<IFireModule> fireModules = new List<IFireModule>();
+    [SerializeField] private GameObject _UIPrefab;
 
     private void Awake()
     {
@@ -15,7 +16,16 @@ public class ItemEffectManager : MonoBehaviour
 
     public void AddItem(ItemData item)
     {
-        foreach(var projModuleData in item.ProjectileModules)
+        var go =  Instantiate(_UIPrefab);
+        UI_ItemDescription descriptionUI = go.GetComponent<UI_ItemDescription>();
+        if (descriptionUI != null)
+        {
+            descriptionUI.Itemdata = item;
+        }
+        descriptionUI.gameObject.SetActive(true);
+
+
+        foreach (var projModuleData in item.ProjectileModules)
         {
             activeModules.Add(projModuleData.CreateInstance());
         }
