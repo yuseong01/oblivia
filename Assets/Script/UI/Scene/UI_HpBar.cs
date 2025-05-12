@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UI_HpBar : UI_Scene
 {
     public PlayerStatHandler Stathandler;
-    private Image _healthSlider;
 
     enum Images
     {
@@ -20,12 +19,8 @@ public class UI_HpBar : UI_Scene
 
         Bind<Image>(typeof(Images));
 
-        // Get<Button>((int)Buttons.NomalModeButton).onClick.AddListener(OnNomalButtonClick);
-        //  Get<Button>((int)Buttons.HardModeButton).onClick.AddListener(OnHardButtonClick);
-        //  Get<Button>((int)Buttons.QuitButton).onClick.AddListener(OnQuitButtonClick);
-     UpdateHealthBar(Stathandler.Health);
-       UpdateMaxHealthBar(Stathandler.MaxHealth);
-
+        UpdateHealthBar(Stathandler.Health);
+        UpdateMaxHealthBar(Stathandler.MaxHealth);
     }
 
     void OnEnable()
