@@ -17,6 +17,10 @@ public class TestPlayerController : MonoBehaviour
         _itemEffectManager = GetComponent<ItemEffectManager>();
         _orbitController = GetComponent<OrbitController>();
         _rb = GetComponent<Rigidbody2D>();
+
+      //  _playerStatHandler.MaxHealth = 6;
+   //     _playerStatHandler.Health = 2;
+
     }
 
     void Update()
@@ -29,7 +33,13 @@ public class TestPlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            _orbitController.CreateOrbitingObjects(_itemEffectManager, _playerStatHandler);
+            _playerStatHandler.Health = 1;
+          //  _orbitController.CreateOrbitingObjects(_itemEffectManager, _playerStatHandler);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            _playerStatHandler.Health = -1;
+            //  _orbitController.CreateOrbitingObjects(_itemEffectManager, _playerStatHandler);
         }
     }
 
