@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public enum SFXType {Jump, Hit, Die} //임시 예시입니다 필요하신 sfx추가하시면 됩니다!
