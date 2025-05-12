@@ -63,19 +63,21 @@ public class Select : MonoBehaviour
         SceneManager.LoadScene("AutoAttack");
     }
 
-    // 테스트용 캐릭터 해금
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            CharacterManager.Instance.UnlockCharacter("test3");
-            Debug.Log("test3 캐릭터 강제 해금됨");
-            UpdateCharacterButtons();
-        }
-    }
-
     // 버튼에 연결 (에디터에서 호출)
     public void OnTest1ButtonClicked() => SelectCharacter(0);
     public void OnTest2ButtonClicked() => SelectCharacter(1);
     public void OnTest3ButtonClicked() => SelectCharacter(2);
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            CharacterManager.Instance.UnlockCharacter("test3");
+
+            UpdateCharacterButtons();
+        }
+
+    }
+
+
 }
