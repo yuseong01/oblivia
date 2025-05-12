@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using static IEnemy;
 
 public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>, IPoolable
 {
@@ -15,13 +17,12 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
 
     public void Enter(T obj)
     {
-        Debug.Log("죽음");
         _timer = 0f;
         //obj.GetAnimator()?.SetTrigger("Die");
 
         var col = obj.GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
-
+        /*
         if (obj is ISpawnable spawnable)
         {
             float chance = Random.value;
@@ -35,10 +36,10 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
                 {
                     Vector2 offset = Random.insideUnitCircle * radius;
                     Vector3 pos = obj.transform.position + new Vector3(offset.x, 0f, offset.y);
-                    GameObject.Instantiate(prefab, pos, Quaternion.identity);
+                    //GameObject.Instantiate(prefab, pos, Quaternion.identity);
                 }
             }
-        }
+        }*/
     }
 
     public void Update(T obj)
@@ -49,10 +50,8 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
         {
             // Room에 알림 (선택적)
             //RoomManager.Instance?.OnEnemyDied();
-
-            // 풀 반환
-            PoolManager.Instance.Return<T>(_poolKey, obj);
-
+            // null체크하고 불러오기
+            (obj as BaseEnemy<T>)?.ReturnToPool();
         }
     }
    public void Exit(T obj) { }

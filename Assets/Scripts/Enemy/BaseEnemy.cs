@@ -15,15 +15,19 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     [SerializeField] protected float _detectRange = 5f;
     [SerializeField] protected EnemyType _type = EnemyType.Normal;
     [SerializeField] protected float _speed = 3f;
-
+    private string _poolKey;
     protected Animator _anim;
     // Unity �ʱ�ȭ
     protected virtual void Awake()
     {
         _anim = GetComponent<Animator>();
-       
-    }
+        _poolKey = _type.ToString();
 
+    }
+    private void Start()
+    {
+        ChangeState(new DieState<T>(_poolKey));
+    }
     protected virtual void Update()
     {
         _fsm.Update(this as T);
@@ -66,5 +70,23 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     public void OnDespawned()
     {
         gameObject.SetActive(false);
+    }
+
+    public void ReturnToPool()
+    {
+        switch (_type)
+        {
+            case EnemyType.Flee:
+                PoolManager.Instance.Return(_poolKey, this as FleeEnemy);
+                break;
+            case EnemyType.Normal:
+                PoolManager.Instance.Return(_poolKey, this as MoveEnemy);
+                break;
+            case EnemyType.Boss:
+                PoolManager.Instance.Return(_poolKey, this as Boss);
+                break;
+            default:
+                break;
+        }
     }
 }
