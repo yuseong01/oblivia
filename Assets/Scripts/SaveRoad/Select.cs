@@ -127,12 +127,23 @@ public class Select : MonoBehaviour
         }
 
         DataManager.instance.nowPlayer.playerName = newPlayerName.text.Trim();
+
         DataManager.instance.nowPlayer.characterName = selectedCharacter.characterName;
-        DataManager.instance.nowPlayer._damage = selectedCharacter.damage;
-        DataManager.instance.nowPlayer._attackRate = selectedCharacter.attackRate;
-        DataManager.instance.nowPlayer._attackDelay = selectedCharacter.attackDelay;
-        DataManager.instance.nowPlayer._attackSpeed = selectedCharacter.attackSpeed;
-        DataManager.instance.nowPlayer._attackRangef = selectedCharacter.attackRange;
+        DataManager.instance.nowPlayer.characterId = selectedCharacter.characterId;
+
+        DataManager.instance.nowPlayer.moveSpeed = selectedCharacter.moveSpeed;
+        DataManager.instance.nowPlayer.maxHealth = selectedCharacter.maxHealth;
+
+        DataManager.instance.nowPlayer.damage = selectedCharacter.damage;
+        DataManager.instance.nowPlayer.attackRate = selectedCharacter.attackRate;
+        DataManager.instance.nowPlayer.attackDelay = selectedCharacter.attackDelay;
+        DataManager.instance.nowPlayer.attackSpeed = selectedCharacter.attackSpeed;
+        DataManager.instance.nowPlayer.attackRange = selectedCharacter.attackRange;
+        DataManager.instance.nowPlayer.attackCount = selectedCharacter.attackCount;
+        DataManager.instance.nowPlayer.attackAngle = selectedCharacter.attackAngle;
+        DataManager.instance.nowPlayer.knockbackForce = selectedCharacter.knockbackForce;
+        DataManager.instance.nowPlayer.attackDuration = selectedCharacter.attackDuration;
+        DataManager.instance.nowPlayer.projectileSize = selectedCharacter.projectileSize;
 
         DataManager.instance.SaveData();
 

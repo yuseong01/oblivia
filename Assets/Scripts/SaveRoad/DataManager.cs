@@ -17,12 +17,23 @@ public class PlayerData
 {
     // 저장에 필요한 데이터 추가
     public string playerName;
+
     public string characterName;
-    public float _damage;
-    public float _attackRate;
-    public float _attackDelay;
-    public float _attackSpeed;
-    public float _attackRangef;
+    public string characterId;
+
+    public float moveSpeed;
+    public float maxHealth;
+
+    public float damage;
+    public float attackRate;
+    public float attackDelay;
+    public float attackSpeed;
+    public float attackRange;
+    public float attackCount;
+    public float attackAngle;
+    public float knockbackForce;
+    public float attackDuration;
+    public float projectileSize;
 }
 
 public class DataManager : MonoBehaviour
@@ -30,7 +41,7 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
 
     public PlayerData nowPlayer = new PlayerData();
-    public GameObject player;
+
     public string path;
     public int nowSlot;
 

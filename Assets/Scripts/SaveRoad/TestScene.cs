@@ -14,8 +14,8 @@ public class TestScene : MonoBehaviour
     void Start()
     {
         name.text += DataManager.instance.nowPlayer.playerName;
-        damage.text += DataManager.instance.nowPlayer._damage.ToString();
-        attackRate.text += DataManager.instance.nowPlayer._attackRate.ToString();
+        damage.text += DataManager.instance.nowPlayer.damage.ToString();
+        attackRate.text += DataManager.instance.nowPlayer.attackRate.ToString();
     }
 
     // Update is called once per frame
@@ -26,14 +26,14 @@ public class TestScene : MonoBehaviour
 
     public void DamageUp()
     {
-        DataManager.instance.nowPlayer._damage++;
-        damage.text = "Damage : " + DataManager.instance.nowPlayer._damage.ToString();
+        DataManager.instance.nowPlayer.damage++;
+        damage.text = "Damage : " + DataManager.instance.nowPlayer.damage.ToString();
     }
 
     public void AttackRateUp()
     {
-        DataManager.instance.nowPlayer._attackRate++;
-        attackRate.text= "Attack Rate : "+ DataManager.instance.nowPlayer._attackRate.ToString();
+        DataManager.instance.nowPlayer.attackRate++;
+        attackRate.text= "Attack Rate : "+ DataManager.instance.nowPlayer.attackRate.ToString();
     }
 
     public void Save()
