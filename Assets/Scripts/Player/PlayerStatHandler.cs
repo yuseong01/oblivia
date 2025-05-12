@@ -8,6 +8,7 @@ public class PlayerStatHandler : MonoBehaviour
     // 체력 변경시 UI 변경을 위한 이벤트
     public event Action<float> OnHealthChanged;
     public event Action<float> OnMaxHealthChanged;
+    public event Action OnOrbitCountChanged;
 
 
 
@@ -123,6 +124,18 @@ public class PlayerStatHandler : MonoBehaviour
         set => _projectileSize += value;
     }
 
+    //탄환 크기
+    [SerializeField] private int _orbitCount;
+    public int OrbitCount
+    {
+        get => _orbitCount;
+        set 
+        { 
+            _orbitCount += value;
+            OnOrbitCountChanged.Invoke();
+        }
+    }
+
     // 깊은 복사를 위한 Clone 메서드
     public PlayerStatHandler Clone()
     {
@@ -134,4 +147,5 @@ public class PlayerStatHandler : MonoBehaviour
         clone.ProjectileSize = this.ProjectileSize;
         return clone;
     }
+
 }
