@@ -7,13 +7,25 @@ public class RoomManager : Singleton<RoomManager>
 {
     // room prefab
     public GameObject room;
-    // 방 총 개수
-    public int roomCount;
-    // 만든 방 count
-    public int createRoomCount = 0;
-    public Vector2Int currentRoomPos;
     // 생성된 방 좌표를 키 값으로 방 저장
+    public Vector2Int currentRoomPos;
+    
+    // 방 총 개수
+    int roomCount;
+    // 만든 방 count
+    int createRoomCount = 0;
+
     private Dictionary<Vector2Int, GameObject> roomInstances = new();
+
+    // 방향 값을 좌표 값으로 
+    private static readonly List<Vector2Int> directions = new()
+    {
+        new Vector2Int(0, 1),   // U
+        new Vector2Int(0, -1),  // D
+        new Vector2Int(-1, 0),  // L
+        new Vector2Int(1, 0)    // R
+    };
+
 
     protected override void Awake()
     {
@@ -24,6 +36,7 @@ public class RoomManager : Singleton<RoomManager>
     {
         // 방 생성
         GenerateRooms();
+        SetRoomType();
 
         foreach (var r in roomInstances) 
         {
@@ -40,9 +53,18 @@ public class RoomManager : Singleton<RoomManager>
         currentRoomPos = pos;
     }
 
+    public Vector2Int GetCurrentRoom() {
+        return currentRoomPos;
+    }
+
     public Vector2Int GetNextRoomPos(Direction dir) 
     {
         return currentRoomPos + DirectionToVector2Int(dir);
+    }
+
+    public RoomType GetRoomType() {
+        RoomType currentRoomType = roomInstances[currentRoomPos].GetComponent<Room>().type;
+        return currentRoomType;
     }
 
     void GenerateRooms()
@@ -64,12 +86,6 @@ public class RoomManager : Singleton<RoomManager>
             }
             currentPos += GetRandomDirection();
         }
-    }
-
-    // Vector2Int는 논리 좌표로 Unity 월드 좌표로 변환하는 과정 필요
-    public Vector3 GridToWorld(Vector2Int gridPos)
-    {
-        return new Vector3(gridPos.x * 20f, gridPos.y * 12f, 0f); 
     }
 
     Vector2Int GetRandomDirection()
@@ -103,6 +119,62 @@ public class RoomManager : Singleton<RoomManager>
                 }
             }
         }
+    }
+
+    void SetRoomType() {
+        // 우선 모든 방을 Normal로
+        foreach (var r in roomInstances) {
+            Vector2Int pos = r.Key;
+            Room room = r.Value.GetComponent<Room>();
+
+            room.type = RoomType.Normal;
+        }
+        
+        // Start Room 지정
+        roomInstances[new Vector2Int(0, 0)].GetComponent<Room>().type = RoomType.Start;
+
+        // 가장 먼 방 Boss Room
+        Vector2Int farthestPos = FindFarthestRoom(new Vector2Int(0,0), roomInstances);
+        roomInstances[farthestPos].GetComponent<Room>().type = RoomType.Boss;
+    }
+
+    Vector2Int FindFarthestRoom(Vector2Int start, Dictionary<Vector2Int, GameObject> roomInstances)
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+
+        Vector2Int farthest = start;
+
+        queue.Enqueue(start);
+        visited.Add(start);
+
+        // BFS
+        while (queue.Count > 0)
+        {
+            Vector2Int current = queue.Dequeue();
+            farthest = current; // 마지막에 방문한 방
+
+            // 4방향 모두 확인
+            foreach (Vector2Int dir in directions)
+            {
+                Vector2Int neighbor = current + dir;
+                // 현재 방의 이웃이면서 방문한 적 없으면
+                if (roomInstances.ContainsKey(neighbor) && !visited.Contains(neighbor))
+                {
+                    visited.Add(neighbor);
+                    queue.Enqueue(neighbor);
+                }
+            }
+        }
+
+        return farthest;
+    }
+
+
+    // Vector2Int는 논리 좌표로 Unity 월드 좌표로 변환하는 과정 필요
+    public Vector3 GridToWorld(Vector2Int gridPos)
+    {
+        return new Vector3(gridPos.x * 20f, gridPos.y * 12f, 0f); 
     }
 
     // 방향을 좌표로
