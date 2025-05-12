@@ -131,15 +131,14 @@ public class Room : MonoBehaviour
     {
         if (enemy == null || spawnPoints == null || spawnPoints.Length == 0) return;
 
-        // 스폰 위치 랜덤 선택
+        // 스폰 위치 랜덤 
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        // 적 위치 설정
+        // 적 위치
         GameObject go = enemy.gameObject;
         go.transform.position = spawnPoint.position;
         go.transform.rotation = Quaternion.identity;
 
-        // 활성화
         go.SetActive(true);
     }
 }

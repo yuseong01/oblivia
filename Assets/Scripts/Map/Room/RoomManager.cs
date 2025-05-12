@@ -9,7 +9,7 @@ public class RoomManager : Singleton<RoomManager>
     public GameObject room;
     // 생성된 방 좌표를 키 값으로 방 저장
     public Vector2Int currentRoomPos;
-    
+    public Transform[] SpawnPoints;
     // 방 총 개수
     int roomCount;
     // 만든 방 count
