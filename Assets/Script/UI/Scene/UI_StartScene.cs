@@ -31,11 +31,11 @@ public class UI_StartScene : UI_Scene
 
     protected void OnNomalButtonClick()
     {
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
     }
     protected void OnHardButtonClick()
     {
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
 
     }
     protected void OnQuitButtonClick()

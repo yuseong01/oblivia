@@ -16,7 +16,7 @@ public class CharacterData : ScriptableObject
     public float attackDelay;
     public float attackSpeed;
     public float attackRange;
-    public float attackCount;
+    public int attackCount;
     public float attackAngle;
     public float knockbackForce;
     public float attackDuration;

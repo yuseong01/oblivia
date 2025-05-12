@@ -82,7 +82,7 @@ public class PlayerStatHandler : MonoBehaviour
     }
     //³Ë¹é ÆÄ¿ö
     [SerializeField] private float _knockbackForce ;
-    public float KnockbackPower
+    public float KnockbackForce
     {
         get => _knockbackForce;
         set => _knockbackForce += value;
@@ -109,7 +109,7 @@ public class PlayerStatHandler : MonoBehaviour
         clone.Damage = this.Damage;
         clone.AttackSpeed = this.AttackSpeed;
         clone.AttackDuration = this.AttackDuration;
-        clone.KnockbackPower = this.KnockbackPower;
+        clone.KnockbackForce = this.KnockbackForce;
         clone.ProjectileSize = this.ProjectileSize;
         return clone;
     }

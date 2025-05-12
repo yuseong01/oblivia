@@ -34,8 +34,8 @@ public class UI_SettingPopup : UI_Popup
         Get<Button>((int)Buttons.PointButton).onClick.AddListener(OnPointButtonClicked);
         Button goStartButton =  Get<Button>((int)Buttons.GoStartButton);
         goStartButton.onClick.AddListener(OnGoMainButtonClicked);
-        if (SceneManager.GetActiveScene().name == "Start") // startScene에서는 Start로 돌아가는 함수 불필요
-            goStartButton.gameObject.SetActive(false);
+        //if (SceneManager.GetActiveScene().name == "Start") // startScene에서는 Start로 돌아가는 함수 불필요
+        //    goStartButton.gameObject.SetActive(false);
 
 
         Slider bgmSlider = Get<Slider>((int)Sliders.BGMSlider);
@@ -57,7 +57,7 @@ public class UI_SettingPopup : UI_Popup
     }
     protected void OnGoMainButtonClicked()
     {
-        SceneManager.LoadScene("Start");
+        //SceneManager.LoadScene("Start");
     }
     private void OnBgmSliderValueChange(float value)
     {
