@@ -14,7 +14,7 @@ public class PoolManager : Singleton<PoolManager>
     [SerializeField] private Transform _enemyParent;
 
     private Dictionary<string, object> pools = new();
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,5 +30,15 @@ public class PoolManager : Singleton<PoolManager>
     {
         var pool = new ObjectPool<T>(prefab, count, parent);
         pools.Add(key, pool);
+    }
+
+    public T Get<T>(string key) where T : MonoBehaviour, IPoolable
+    {
+        return ((ObjectPool<T>)pools[key]).Get();
+    }
+
+    public void Return<T>(string key, T obj) where T : MonoBehaviour, IPoolable
+    {
+        ((ObjectPool<T>)pools[key]).Return(obj);
     }
 }

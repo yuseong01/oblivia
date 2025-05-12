@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour
                 if (rb != null)
                 {
                     Vector2 knockbackDir = transform.up; // źȯ�� ���ƿ� �ݴ� ����
-                    rb.AddForce(knockbackDir * _statHandler.KnockbackPower, ForceMode2D.Impulse);
+                    rb.AddForce(knockbackDir * _statHandler.KnockbackForce, ForceMode2D.Impulse);
                 }
 
                 if (!CanPenetrate)
