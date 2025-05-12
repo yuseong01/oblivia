@@ -348,6 +348,10 @@ MonoBehaviour:
   - {fileID: 460491014}
   - {fileID: 1297804557}
   - {fileID: 283599466}
+  characterData:
+  - {fileID: 11400000, guid: 781c23c268514954cbb4fe4cb3afb120, type: 2}
+  - {fileID: 11400000, guid: 1505a7437531a514db52ca22b605d654, type: 2}
+  - {fileID: 11400000, guid: 653bd58ce030c664293c9f1efb91d18a, type: 2}
 --- !u!114 &132750675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2320,7 +2324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe8e37f73109b04bbff5706c7482a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  nowCharacterData: {fileID: 0}
   path: 
   nowSlot: 0
 --- !u!4 &1698786728
