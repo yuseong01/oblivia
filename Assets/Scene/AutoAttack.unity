@@ -1963,7 +1963,7 @@ Transform:
   m_GameObject: {fileID: 520314591}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.030099638, y: -0.7760998, z: -0.081842445}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3543,7 +3543,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5863,7 +5863,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fleeEnemyPrefab: {fileID: 2872997066129847048, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  _bossPrefab: {fileID: 0}
   _enemyParent: {fileID: 1362004004}
+  _bossParent: {fileID: 0}
+  _roomSpawn: []
 --- !u!4 &1730770963
 Transform:
   m_ObjectHideFlags: 0

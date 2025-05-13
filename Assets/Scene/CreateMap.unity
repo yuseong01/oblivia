@@ -337,8 +337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 1633290812142620731, guid: 2eba9d3dce62b464889ea4575073f7f4, type: 3}
-  roomCount: 10
-  createRoomCount: 0
   currentRoomPos: {x: 0, y: 0}
 --- !u!4 &547431324
 Transform:
@@ -350,6 +348,73 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &678683250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678683252}
+  - component: {fileID: 678683251}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &678683251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678683250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afac43f29d934cc8ba175f07aa49255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fleeEnemyPrefab: {fileID: 2872997066129847048, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  _bossPrefab: {fileID: 3531235655021825335, guid: ef4fc945b239f7d47a89fff090e48e69, type: 3}
+  _enemyParent: {fileID: 678683252}
+  _bossParent: {fileID: 678683252}
+  _roomSpawn:
+  - roomType: 0
+    enemies:
+    - type: 1
+      poolKey: Flee
+      count: 1
+      prefab: {fileID: 4043589511158882836, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 1
+      poolKey: Flee
+      count: 1
+      prefab: {fileID: 4043589511158882836, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  - roomType: 3
+    enemies:
+    - type: 1
+      poolKey: Flee
+      count: 1
+      prefab: {fileID: 4043589511158882836, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+--- !u!4 &678683252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678683250}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.965557, y: 2.799925, z: 0.44836995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -469,13 +534,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1609876494361520104, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      propertyPath: _moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1999162084652056299, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1999162084652056299, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1999162084652056299, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: m_LocalPosition.x
@@ -541,6 +610,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7443350461325651531, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      propertyPath: m_Color.b
+      value: 0.735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443350461325651531, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      propertyPath: m_Color.g
+      value: 0.735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443350461325651531, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      propertyPath: m_Color.r
+      value: 0.735849
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -554,3 +635,4 @@ SceneRoots:
   - {fileID: 547431324}
   - {fileID: 134475263}
   - {fileID: 1808839302}
+  - {fileID: 678683252}

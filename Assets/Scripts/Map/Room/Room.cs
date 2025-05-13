@@ -18,6 +18,8 @@ public enum Direction {
 
 public class Room : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer floorRenderer;
+
     // Map 상의 위치 좌표
     public Vector2Int position;
 
@@ -48,6 +50,7 @@ public class Room : MonoBehaviour
             _enemyList = new List<EnemySpawnInfo>();
         }
     }
+
     public void RegisterDoors()
     {
         doors.Clear();
@@ -58,6 +61,23 @@ public class Room : MonoBehaviour
         SpawnEnemies();
     }
 
+    public void SetMapSprite() {
+        if (this.type == RoomType.Boss) {
+            if (Resources.Load<Sprite>("ArtWork/Boss") == null)
+                Debug.Log("boss map 찾을 수 없음");
+            floorRenderer.sprite = Resources.Load<Sprite>("Map/Boss");
+
+            Vector3 scale = floorRenderer.transform.localScale;
+            scale.x = 1.21f;
+            floorRenderer.transform.localScale = scale;
+        }
+        else {
+            if (Resources.Load<Sprite>("ArtWork/NormalMap2") == null)
+                Debug.Log("map 찾을 수 없음");
+            floorRenderer.sprite = Resources.Load<Sprite>("Map/NormalMap2");
+        }
+
+    }
 
     public void AddDoor(Direction dir) 
     {
