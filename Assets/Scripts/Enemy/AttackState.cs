@@ -141,7 +141,9 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
         GameObject prefab = ranged.GetProjectilePrefab("Radial");
         for (int i = 0; i < count; i++)
         {
+            // 360도 원을 기준으로 배치할 각도 계산
             float angle = (360f / count) * i * Mathf.Deg2Rad;
+            // 원형 방향 벡터 cos : x/ sin : y
             Vector3 dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
             GameObject proj = GameObject.Instantiate(prefab, obj.GetEnemyPosition().position, Quaternion.identity);
             proj.GetComponent<ProjectileMosnter>()?.Initialize(dir, damage);
