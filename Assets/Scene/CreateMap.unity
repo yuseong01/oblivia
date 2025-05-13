@@ -382,8 +382,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afac43f29d934cc8ba175f07aa49255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fleeEnemyPrefab: {fileID: 2872997066129847048, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  _rangedPrefab: {fileID: 0}
+  _movePrefab: {fileID: 0}
   _bossPrefab: {fileID: 3531235655021825335, guid: ef4fc945b239f7d47a89fff090e48e69, type: 3}
+  _teleportPrefab: {fileID: 0}
   _enemyParent: {fileID: 678683252}
   _bossParent: {fileID: 678683252}
   _roomSpawn:
