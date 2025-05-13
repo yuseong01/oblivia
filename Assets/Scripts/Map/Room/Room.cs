@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
@@ -11,7 +12,14 @@ public enum RoomType {
     Treasure,
     Boss
 }
-
+public enum SpawnPattern
+{
+    Line,
+    Triangle,
+    Diamond,
+    Circle,
+    Random // 그냥 그리드에서 뽑는 경우
+}
 public enum Direction {
     Up, Down, Left, Right
 }
@@ -24,8 +32,9 @@ public class Room : MonoBehaviour
     [SerializeField] private Vector2 _margin = new Vector2(2f, 2f);
     private bool _isEnemiesSpawn = false; // 중복을 막자
     private int _totalEnemyCount = 0; // 전체 몹 갯수
+
     public int TotalEnemyCount => _totalEnemyCount;
-                int spawnCount = 0;
+    int spawnCount = 0;
     public Vector2 GetMinBounds() => _minBounds;
     public Vector2 GetMaxBounds() => _maxBounds;
     // Map 상의 위치 좌표
@@ -41,7 +50,7 @@ public class Room : MonoBehaviour
     public Dictionary<Direction, Door> doors = new();
 
     public GameObject instance;
-    [SerializeField] private Transform[] _spawnPoints;
+    
     private List<EnemySpawnInfo> _enemyList; // 룸이 가진 적 정보
 
     public void Init(Vector2Int pos, RoomType type = RoomType.Normal) 
@@ -152,61 +161,124 @@ public class Room : MonoBehaviour
             Debug.Log("enemyList 없음");
             return;
         }
+        Vector3 center = (_minBounds + _maxBounds) / 2f;
         foreach (var enemy in _enemyList)
         {
 
-            if (enemy.count != 0)
-                spawnCount = UnityEngine.Random.Range(2, enemy.count);
+            spawnCount = enemy.count;
             _totalEnemyCount += spawnCount; // 몹 갯수 누적 저장
-            for (int i = 0; i < spawnCount; i++)
-            {
-                // 풀에서 꺼내서 위치 설정
-                string poolKey = enemy.poolKey;
-                switch (enemy.type)
+            List<Vector2> offsets;
+            if (enemy.type == EnemyType.Elite || enemy.type == EnemyType.Boss)
+                offsets = GetElitePatternOffsets(spawnCount);
+            else
+                offsets = GetPatternOffsets(spawnCount);
+                for (int i = 0; i < spawnCount; i++)
                 {
-                    case EnemyType.Flee:
-                        var flee = PoolManager.Instance.Get<FleeEnemy>(poolKey);
-                        SpawnEnemy(flee, _spawnPoints);
-                        break;
+                    // 풀에서 꺼내서 위치 설정
+                    string poolKey = enemy.poolKey;
+                    Vector2 offset = offsets.Count > i ? offsets[i] : Random.insideUnitCircle;
+                    Vector3 spawnPos = center + (Vector3)(offset * 1.5f); // 간격 1.5f
 
-                    case EnemyType.Ranged:
-                        var ranged = PoolManager.Instance.Get<RangedEnemy>(poolKey);
-                        SpawnEnemy(ranged, _spawnPoints);
-                        break;
 
-                    case EnemyType.Boss:
-                        var boss = PoolManager.Instance.Get<Boss>(poolKey);
-                        SpawnEnemy(boss, _spawnPoints);
-                        break;
-                    case EnemyType.Normal:
-                        var normal = PoolManager.Instance.Get<MoveEnemy>(poolKey);
-                        SpawnEnemy(normal, _spawnPoints);
-                        break;
-                    case EnemyType.Teleport:
-                        var teleport = PoolManager.Instance.Get<TeleportEnemy>(poolKey);
-                        SpawnEnemy(teleport, _spawnPoints);
-                        break;
+                    switch (enemy.type)
+                    {
+                        case EnemyType.Flee:
+                            var flee = PoolManager.Instance.Get<FleeEnemy>(poolKey);
+                            SpawnEnemy(flee, spawnPos);
+                            break;
+
+                        case EnemyType.Ranged:
+                            var ranged = PoolManager.Instance.Get<RangedEnemy>(poolKey);
+                            SpawnEnemy(ranged, spawnPos);
+                            break;
+
+                        case EnemyType.Boss:
+                            var boss = PoolManager.Instance.Get<Boss>(poolKey);
+                            SpawnEnemy(boss, spawnPos);
+                            break;
+                        case EnemyType.Normal:
+                            var normal = PoolManager.Instance.Get<MoveEnemy>(poolKey);
+                            SpawnEnemy(normal, spawnPos);
+                            break;
+                        case EnemyType.Teleport:
+                            var teleport = PoolManager.Instance.Get<TeleportEnemy>(poolKey);
+                            SpawnEnemy(teleport, spawnPos);
+                            break;
+                    }
                 }
-            }
         }
 
     }
-    private void SpawnEnemy<T>(BaseEnemy<T> enemy, Transform[] spawnPoints) where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>, IPoolable
-    {
-        if (enemy == null || spawnPoints == null || spawnPoints.Length == 0) return;
 
-        // 스폰 위치 랜덤 
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+    // spawn grid패턴으로 가져오기 엘리트용
+    public List<Vector2> GetElitePatternOffsets(int count)
+    {
+        List<Vector2> offsets = new();
+        switch(count)
+        {
+            case 1:
+                offsets.Add(new Vector2(0, 0)); 
+                break;
+            case 2:
+                offsets.Add(new Vector2(-0.7f, 0));
+                offsets.Add(new Vector2(0.7f, 0));
+                break;
+        }
+        return offsets;
+    }
+    // spawn grid패턴으로 가져오기 잡몬용
+    public List<Vector2> GetPatternOffsets(int count)
+    {
+        List<Vector2> offsets = new();
+
+        switch (count)
+        {
+            case 2: // 일렬로
+                for (int i = 0; i < count; i++)
+                {
+                    float x = (i - (count - 1)/2f) * 1.5f;
+                    offsets.Add(new Vector2(x, 0));
+                }
+                break;
+
+            case 3:// 삼각형
+                offsets.Add(new Vector2(0, 2));
+                offsets.Add(new Vector2(-2, 0));
+                offsets.Add(new Vector2(2, 0));
+                break;
+
+            case 4: // 다이아몬드
+                offsets.Add(new Vector2(0, 2));
+                offsets.Add(new Vector2(-2, 0));
+                offsets.Add(new Vector2(2, 0));
+                offsets.Add(new Vector2(0, -2));
+                break;
+
+            default: // 둥근원
+                for (int i = 0; i < count; i++)
+                {
+                    float angle = (360f / count) * i * Mathf.Deg2Rad;
+                    offsets.Add(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 1.2f);
+                }
+                break;
+        }
+
+        return offsets;
+    }
+    private void SpawnEnemy<T>(BaseEnemy<T> enemy, Vector3 spawnPoint) where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>, IPoolable
+    {
+        if (enemy == null || spawnPoint == null ) return;
 
         // 적 위치
         GameObject go = enemy.gameObject;
-        go.transform.position = spawnPoint.position;
+        go.transform.position = spawnPoint;
         go.transform.rotation = Quaternion.identity;
         go.SetActive(true);
 
         // 현재 방 연결
         enemy.SetCurrentRoom(this);
     }
+
     public void CalculateRoomBounds()
     {
         if (floorRenderer != null)
@@ -216,16 +288,6 @@ public class Room : MonoBehaviour
             _minBounds = new Vector2(bounds.min.x + _margin.x, bounds.min.y + _margin.y);
             _maxBounds = new Vector2(bounds.max.x - _margin.x, bounds.max.y - _margin.y);
         }
-    }
-
-    // bounds크기를 알아보자 -> teleport enemy 움직임 크기 볼려구
-    private void OnDrawGizmosSelected()
-    {
-        Vector3 center = (_minBounds + _maxBounds) / 2f;
-        Vector3 size = _maxBounds - _minBounds;
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(center, size);
     }
 
     public void EnemyDied()

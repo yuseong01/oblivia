@@ -4598,7 +4598,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1169483016
@@ -5130,7 +5130,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1311967755
@@ -7094,11 +7094,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afac43f29d934cc8ba175f07aa49255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fleeEnemyPrefab: {fileID: 2872997066129847048, guid: f63a025a3797941e19f7930c21d70360, type: 3}
-  _bossPrefab: {fileID: 0}
+  _rangedPrefab: {fileID: 474660601703285724, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
+  _movePrefab: {fileID: 1515228967705930097, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+  _bossPrefab: {fileID: 6357986066415398257, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  _teleportPrefab: {fileID: 8884700069627570088, guid: a1d592334d9207747ad74298694ee719, type: 3}
   _enemyParent: {fileID: 1362004004}
-  _bossParent: {fileID: 0}
-  _roomSpawn: []
+  _bossParent: {fileID: 1362004004}
+  _roomSpawn:
+  - roomType: 0
+    enemies:
+    - type: 0
+      poolKey: Normal
+      count: 0
+      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 0
+      poolKey: Normal
+      count: 1
+      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 4
+      poolKey: Ranged
+      count: 2
+      prefab: {fileID: 3930795542360209, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 0
+      poolKey: Normal
+      count: 3
+      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 0
+      poolKey: Normal
+      count: 4
+      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 0
+      poolKey: Normal
+      count: 5
+      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+  - roomType: 3
+    enemies:
+    - type: 2
+      poolKey: Boss
+      count: 1
+      prefab: {fileID: 4043589511158882836, guid: f63a025a3797941e19f7930c21d70360, type: 3}
 --- !u!4 &1730770963
 Transform:
   m_ObjectHideFlags: 0
@@ -7363,7 +7407,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1802912587
@@ -7937,7 +7981,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2029028570
