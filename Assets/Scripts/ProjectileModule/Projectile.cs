@@ -47,8 +47,9 @@ public class Projectile : MonoBehaviour
 
             if (Time.time - lastTime >= HitCooldown)
             {
-                // collision.GetComponent<Enemy>()?.TakeDamage(_damage);
-                Debug.Log($"�� ����{_damage}");
+                var enemy = collision.GetComponent<IEnemy>();
+                enemy?.TakeDamage(_damage);
+                //Debug.Log($"{collision.name}가 {_damage}만큼 맞아서 {enemy.GetHealth()}");
                 _lastHitTime[collision] = Time.time;
 
                 Rigidbody2D rb = collision.attachedRigidbody;

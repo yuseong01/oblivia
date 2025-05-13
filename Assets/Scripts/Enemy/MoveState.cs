@@ -50,6 +50,9 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
                 obj.ChangeState(new AttackState<T>());
                 // 보스 로직
                 break;
+            case EnemyType.Teleport:
+                obj.ChangeState(new AttackState<T>());
+                break;
         }
         // 플레이어한테 다가가는 코드
         Vector2 dir = (playerPos - enemyPos).normalized;

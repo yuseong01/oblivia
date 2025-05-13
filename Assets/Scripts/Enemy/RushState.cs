@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
-    private float _rushSpeed = 5f;
+    private float _rushSpeed = 10f;
     private float _rushDuration = 1f;
     private float _elapsedTime = 0f;
     private Vector3 _rushDirection;

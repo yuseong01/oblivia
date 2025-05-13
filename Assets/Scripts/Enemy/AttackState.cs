@@ -38,6 +38,13 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     return;
                 }
                 break;
+            case EnemyType.Teleport:
+                if (dist > normalRange)
+                {
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                }
+                break;
         }
         // 타이머 체크 및 공격 적용
         if (Time.time - _lastAttackTime < _attackCooldown)
@@ -99,6 +106,9 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     obj.ChangeState(new FleeState<T>());
                 }
                 DoNormalAttack(obj);
+                break;
+            case EnemyType.Teleport:
+                obj.ChangeState(new TeleportState<T>());
                 break;
         }
     }

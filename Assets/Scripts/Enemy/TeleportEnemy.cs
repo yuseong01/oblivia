@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveEnemy : BaseEnemy<MoveEnemy>
+public class TeleportEnemy : BaseEnemy<TeleportEnemy>
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("Player"))
+        // 플레이어와 무기와 관련한 태그
+        if (other.CompareTag("PlayerBullet"))
         {
-            PlayerStatHandler playerStatHandler = other.GetComponent<PlayerStatHandler>();
-            if(playerStatHandler != null)
-            {
-                playerStatHandler.Health = -GetAttackPower();
-            }
+            // 무기 데미지 가져와서 넣으면 될 것 같아요.
+            TakeDamage(1); // IEnemy의 구현 메서드
+            Destroy(other.gameObject); // bullet도 제거
         }
     }
     private void OnDrawGizmosSelected()

@@ -44,7 +44,7 @@ public class RoomManager : Singleton<RoomManager>
             room.RegisterDoors();
             room.SetMapSprite();
             // 적 스폰
-           
+            room.SpawnEnemies();
         }
 
         // 문 생성
@@ -88,6 +88,10 @@ public class RoomManager : Singleton<RoomManager>
                 // 1. 룸 타입 설정
                 // RoomType randomType = RoomType.Normal;
                 // 2. 초기화
+                roomComponent.Init(currentPos, RoomType.Normal);
+                // 3. 바운드 설정
+                roomComponent.SetMargin(new Vector2(2f, 2f)); // ✨ 강제 적용
+                roomComponent.CalculateRoomBounds();         // ✨ 이후에 바운드 계산
                 roomInstances[currentPos] = newRoom;
                 createRoomCount++;
             }
