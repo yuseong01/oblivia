@@ -7,15 +7,13 @@ public class CloneEnemy : BaseEnemy<CloneEnemy>, IExplodable,ISpawnable
     [Header("Æø¹ß or ÁÖº¯ ¸÷ ¼³Á¤")]
     [SerializeField] private float _explosionDamage = 10f;
     [SerializeField] private GameObject _spawnPrefab;
-    [Header("¸Ê ÀÌµ¿ °æ°è")]
-    [SerializeField] private Vector2 _minBounds = new Vector2(-8f, -4f); // ¸Ê ÃÖ¼Ò ÁÂÇ¥ (x, z)
-    [SerializeField] private Vector2 _maxBounds = new Vector2(8f, 4f);   // ¸Ê ÃÖ´ë ÁÂÇ¥ (x, z)
 
     [Header("ÀÌµ¿ ¼³Á¤")]
     [SerializeField] private float _moveSpeed = 1.5f;
     [SerializeField] private float _waitTime = 1f;
-
-    private Coroutine _moveRoutine;
+    public GameObject GetSpawnPrefab() => _spawnPrefab;
+    public int GetSpawnCount() => 3;
+    public float GetSpawnRadius() => 2.5f;
     private void Awake()
     {
         if (_player == null)
@@ -25,12 +23,10 @@ public class CloneEnemy : BaseEnemy<CloneEnemy>, IExplodable,ISpawnable
                 _player = playerObj.transform;
         }
     }
-    private void OnTriggerEnter(Collider other)
-    { 
-        Debug.Log("OnTriggerEnter ¹ß»ý! ¡æ " + other.name);
-        if (other.CompareTag("Player"))
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log("´ÙÀ½");
             Explode();
         }
     }
@@ -47,8 +43,4 @@ public class CloneEnemy : BaseEnemy<CloneEnemy>, IExplodable,ISpawnable
 
         Destroy(gameObject);
     }
-
-    public GameObject GetSpawnPrefab() => _spawnPrefab;
-    public int GetSpawnCount() => 3;
-    public float GetSpawnRadius() => 2.5f;
 }

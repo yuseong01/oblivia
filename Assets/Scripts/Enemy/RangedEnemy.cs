@@ -8,9 +8,8 @@ public class RangedEnemy : BaseEnemy<RangedEnemy>, IRangedEnemy
     [Header("Projectile")]
     [SerializeField] private GameObject forwardProjectile;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         _type = EnemyType.Ranged;
     }
 

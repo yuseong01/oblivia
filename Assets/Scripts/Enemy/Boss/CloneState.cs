@@ -24,18 +24,18 @@ public class CloneState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMa
 
         Vector3 center = obj.transform.position;
         List<Vector3> positions = GetLinearPositions(center, _numberOfClones, _spacing);
-
+        /*
         foreach (var pos in positions)
         {
             GameObject cloneObj = GameObject.Instantiate(clonePrefab, pos, Quaternion.identity);
             var cloneScript = cloneObj.GetComponent<CloneEnemy>();
             spawnedClones.Add(cloneObj);
-        }
+        }*/
     }
 
     public void Update(T obj)
     {
-        // 보스, 클론보스 모두 IdleState로 진입
+        // 클론들 모두 IdleState로 진입
         if (_timer >= _cloneDuration)
         {
             obj.SetSpeed(Random.Range(2f, _numberOfClones));

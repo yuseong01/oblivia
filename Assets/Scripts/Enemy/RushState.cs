@@ -10,7 +10,6 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     private Vector3 _rushDirection;
     public void Enter(T obj)
     {
-        Debug.Log("돌진시작");
         _elapsedTime = 0f;
 
         // 돌진 방향: 플레이어 향함
