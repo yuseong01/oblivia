@@ -36,12 +36,13 @@ public class RoomManager : Singleton<RoomManager>
         // 3. 방 생성
         GenerateRooms();
         SetRoomType();
+        
 
         foreach (var r in roomInstances) 
         {
             Room room = r.Value.GetComponent<Room>();
             room.RegisterDoors();
-
+            room.SetMapSprite();
             // 적 스폰
            
         }
@@ -85,7 +86,7 @@ public class RoomManager : Singleton<RoomManager>
                 Room roomComponent = newRoom.GetComponent<Room>();
                 Debug.Log(createRoomCount + " : " + currentPos);
                 // 1. 룸 타입 설정
-                RoomType randomType = RoomType.Normal;
+                // RoomType randomType = RoomType.Normal;
                 // 2. 초기화
                 roomInstances[currentPos] = newRoom;
                 createRoomCount++;
@@ -142,6 +143,7 @@ public class RoomManager : Singleton<RoomManager>
         // 가장 먼 방 Boss Room
         Vector2Int farthestPos = FindFarthestRoom(new Vector2Int(0,0), roomInstances);
         roomInstances[farthestPos].GetComponent<Room>().type = RoomType.Boss;
+        // roomInstances[farthestPos].GetComponent<Room>().SetMapSprite();
 
         foreach (var r in roomInstances)
         {

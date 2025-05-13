@@ -75,9 +75,9 @@ public class Door : MonoBehaviour
         else if (nextDoorDir == Direction.Down)
             spawnPos = nextRoomCenter + new UnityEngine.Vector3(0f, -3f, 0f);
         else if (nextDoorDir == Direction.Left) 
-            spawnPos = nextRoomCenter + new UnityEngine.Vector3(-7.5f, 0f, 0f);
+            spawnPos = nextRoomCenter + new UnityEngine.Vector3(-7f, 0f, 0f);
         else if (nextDoorDir == Direction.Right)
-            spawnPos = nextRoomCenter + new UnityEngine.Vector3(7.5f, 0f, 0f);
+            spawnPos = nextRoomCenter + new UnityEngine.Vector3(6.5f, 0f, 0f);
 
         return spawnPos;
     }
