@@ -9,8 +9,12 @@ public class PoolManager : Singleton<PoolManager>
     //[SerializeField] private Bullet _bulletPrefab;
     //[SerializeField] private Enemy _meleeEnemyPrefab; //근거리
     //[SerializeField] private Enemy _rangedEnemyPrefab; //원거리
-    [SerializeField] private FleeEnemy _fleeEnemyPrefab; //원거리
-    [SerializeField] private Boss _bossPrefab; //원거리
+    [Header("Enemy Prefab")]
+    //[SerializeField] private FleeEnemy _fleeEnemyPrefab; // 도망치는애
+    [SerializeField] private RangedEnemy _rangedPrefab; // 원거리
+    [SerializeField] private MoveEnemy _movePrefab; //단거리
+    [SerializeField] private Boss _bossPrefab; // 보스
+    [SerializeField] private TeleportEnemy _teleportPrefab; // 보스
     //[SerializeField] private Transform _bulletParent;
     [SerializeField] private Transform _enemyParent;
     [SerializeField] private Transform _bossParent;
@@ -28,18 +32,19 @@ public class PoolManager : Singleton<PoolManager>
         //CreatePool<Bullet>("EnemyRanged", _rangedEnemyPrefab, 20, _enemyParent);
         
         // 1, 적 pool 에 등록
-        CreatePool<FleeEnemy>("Flee", _fleeEnemyPrefab, 20, _enemyParent);
-        CreatePool<Boss>("Boss", _bossPrefab, 10, _bossParent);
+        //CreatePool<FleeEnemy>("Flee", _fleeEnemyPrefab, 20, _enemyParent);
+        CreatePool<Boss>("Boss", _=_bossPrefab, 10, _bossParent);
+        CreatePool<RangedEnemy>("Ranged", _rangedPrefab, 20, _bossParent);
+        CreatePool<MoveEnemy>("Normal", _movePrefab, 20, _bossParent);
+        CreatePool<TeleportEnemy>("Teleport", _teleportPrefab, 20, _bossParent);
         // 2. 적 정보 매핑 여기까지는 잘되고 room 
         foreach (var config in _roomSpawn)
         {
             if (!_roomSpawnMap.ContainsKey(config.roomType))
             {
-                Debug.Log(config.roomType + " 처음이다.");
                 // 처음 등록할 경우
                 _roomSpawnMap[config.roomType] = new List<List<EnemySpawnInfo>>();
             }
-            Debug.Log(config.roomType +" 처음이 아니다");
             // enemies 추가
             _roomSpawnMap[config.roomType].Add(config.enemies);
         }

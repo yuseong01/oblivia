@@ -52,7 +52,7 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
         // ����� �ð�ȭ
         Debug.DrawLine(enemyPos, _targetPos, Color.red);
-        if (obj is Boss && _elapsedTime >= _fleeDuration)
+        if ((obj is Boss || obj is RangedEnemy) && _elapsedTime >= _fleeDuration)
         {
             // ���� ������
             obj.ChangeState(new AttackState<T>()); // �ٽ� Rush��!

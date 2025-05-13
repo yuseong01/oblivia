@@ -23,7 +23,11 @@ public class RangedEnemy : BaseEnemy<RangedEnemy>, IRangedEnemy
         // 플레이어와 무기와 관련한 태그
         if (other.CompareTag("PlayerBullet"))
         {
-            TakeDamage(1); // IEnemy의 구현 메서드
+            PlayerStatHandler playerStatHandler = other.GetComponent<PlayerStatHandler>();
+            if (playerStatHandler != null)
+            {
+                playerStatHandler.Health = -GetAttackPower();
+            }
             Destroy(other.gameObject); // bullet도 제거
         }
     }

@@ -11,15 +11,20 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
 
     [Header("Enemy Settings")]
     [SerializeField] public Transform _player;
-    [SerializeField, Range(0f, 100f)] protected float _health = 100f;
+    [SerializeField, Range(0f, 10f)] protected float _health = 10f;
     [SerializeField] protected float _detectRange = 5f;
     [SerializeField] protected EnemyType _type = EnemyType.Normal;
     [SerializeField] protected float _speed = 3f;
+    [SerializeField] protected float _attackPower = 10f;
     private string _poolKey;
+    private Room _currentRoom;
+    private bool _isDead = false;
     protected Animator _anim;
     // Unity �ʱ�ȭ
     protected virtual void Awake()
     {
+        _player = GameObject.FindWithTag("Player").transform;
+
         _anim = GetComponent<Animator>();
         _poolKey = _type.ToString();
 
@@ -51,20 +56,27 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     public float GetHealth() => _health;
     public float SetSpeed(float amount) => _speed = amount;
     public float GetSpeed() => _speed;
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount) // 몬스터가 공격을 받는 거
     {
+        if (_isDead) return;
         _health -= amount;
         if (_health <= 0f)
         {
+            _isDead = true;
+            _currentRoom?.EnemyDied();
             ChangeState(new DieState<T>(_type.ToString()));
         }
     }
-
+    public Room GetCurrentRoom() => _currentRoom;
+    public void SetCurrentRoom(Room room) => _currentRoom = room;
     public void OnSpawned()
     {
+        // 초기화
         gameObject.SetActive(true);
+        _speed = UnityEngine.Random.Range(3f, 13f); // 여기에 원하는 범위 설정
+        _isDead = false;
         _player = GameObject.FindWithTag("Player").transform;
-        _health = 100;
+        _health = 10;
         if (_type == EnemyType.Boss)
             _fsm.ChangeState(new CloneState<T>(), this as T);
         else _fsm.ChangeState(new IdleState<T>(), this as T); // T = ����� Enemy Ÿ��
@@ -87,8 +99,15 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
             case EnemyType.Boss:
                 PoolManager.Instance.Return(_poolKey, this as Boss);
                 break;
+            case EnemyType.Teleport:
+                PoolManager.Instance.Return(_poolKey, this as TeleportEnemy);
+                break;
+            case EnemyType.Ranged:
+                PoolManager.Instance.Return(_poolKey, this as RangedEnemy);
+                break;
             default:
                 break;
         }
     }
+    public float GetAttackPower()=> _attackPower;
 }

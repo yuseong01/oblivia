@@ -1,25 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static IEnemy;
 
 public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
     private float _moveDuration = 0.3f;
     private float _stayDuration = 0.2f;
-    private Vector2 _minBounds = new Vector2(-8f, -4f);
-    private Vector2 _maxBounds = new Vector2(8f, 4f);
+    private Coroutine _teleportRoutine;
 
     public void Enter(T obj)
     {
         obj.StartCoroutine(TeleportRoutine(obj));
     }
 
-    public void Update(T obj) { }
+    public void Update(T obj) 
+    {
+    }
 
-    public void Exit(T obj) { }
+    public void Exit(T obj) 
+    {
+        if (_teleportRoutine != null)
+        {
+            obj.StopCoroutine(_teleportRoutine);
+            _teleportRoutine = null;
+        }
+    }
 
     private IEnumerator TeleportRoutine(T obj)
     {
+        if (obj.GetHealth() <= 0f) yield break;
         Transform trans = obj.transform;
         Vector3 originalPos = trans.position;
 
@@ -36,9 +47,13 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
 
         // 순간이동
         yield return new WaitForSeconds(_stayDuration);
-        float x = Random.Range(_minBounds.x, _maxBounds.x);
-        float y = Mathf.Clamp(Random.Range(-4f, 4f), _minBounds.y+downPos.y, _maxBounds.y+downPos.y);
-        Vector3 teleportPos = new Vector3(x, y, trans.position.z);
+        Vector2 min = obj.GetCurrentRoom().GetMinBounds();
+        Vector2 max = obj.GetCurrentRoom().GetMaxBounds();
+
+        float x = Random.Range(min.x, max.x);
+        float y = Random.Range(min.y, max.y);
+        Vector3 teleportPos = new Vector3(x, y, obj.transform.position.z);
+
         trans.position = teleportPos;
 
         // 위로 올라오는 애니메이션
@@ -53,6 +68,10 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
         trans.position = upPos;
 
         // 다음 상태
-        obj.ChangeState(new AttackState<T>());
+        if(obj.GetEnemyType() == EnemyType.Teleport)
+            obj.ChangeState(new IdleState<T>());
+        else obj.ChangeState(new AttackState<T>());
+        
+
     }
 }

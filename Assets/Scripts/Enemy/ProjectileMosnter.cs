@@ -24,8 +24,11 @@ public class ProjectileMosnter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // 플레이어 체력 떨어지게 하는 부분을 여기다가
-            Debug.Log("Health 떨어짐");
+            PlayerStatHandler playerStatHandler = other.GetComponent<PlayerStatHandler>();
+            if (playerStatHandler != null)
+            {
+                playerStatHandler.Health = -_damage;
+            }
             Destroy(gameObject);
         }
     }
