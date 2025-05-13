@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FleeEnemy : BaseEnemy<FleeEnemy>, IPoolable
+public class FleeEnemy : BaseEnemy<FleeEnemy>
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,12 +20,4 @@ public class FleeEnemy : BaseEnemy<FleeEnemy>, IPoolable
         Gizmos.DrawWireSphere(transform.position, _detectRange);
     }
 
-    public void OnSpawned()
-    {
-
-    }
-    public void OnDespawned()
-    {
-
-    }
 }
