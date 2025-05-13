@@ -6,8 +6,9 @@ public class UI_Settings : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Button closeButton; // Reference to the "X" button
 
-    private bool isOpen => settingsPanel.activeSelf;
+    public bool isOpen => settingsPanel.activeSelf;
 
     private void Start()
     {
@@ -20,7 +21,9 @@ public class UI_Settings : MonoBehaviour
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
 
-        settingsPanel.SetActive(false); // 시작할 때 비활성화
+        //settingsPanel.SetActive(false); // 시작할 때 비활성화
+
+        closeButton.onClick.AddListener(CloseSettings);
     }
 
     private void Update()

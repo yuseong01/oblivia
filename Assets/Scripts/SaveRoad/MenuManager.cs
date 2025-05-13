@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour
         introPanel.SetActive(true);
         mainMenuPanel.SetActive(false);
 
-        yield return new WaitForSeconds(2f); // 인트로 시간
+        yield return new WaitForSeconds(43f); // 인트로 시간
 
         EndIntro();
     }
@@ -56,6 +56,8 @@ public class MenuManager : MonoBehaviour
         isIntroPlaying = false;
         introPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+
+        //SoundManager.Instance.PlayBGMSource(SoundManager.Instance.DefaultBGMClip);
     }
 
     #endregion
@@ -79,5 +81,26 @@ public class MenuManager : MonoBehaviour
         }
 
         panelWrapper.anchoredPosition = targetPos; // 위치 보정
+    }
+
+    public void OnBackToMainMenuButton()
+    {
+        StartCoroutine(SlideToMainMenu());
+    }
+
+    IEnumerator SlideToMainMenu()
+    {
+        Vector2 startPos = panelWrapper.anchoredPosition;
+        Vector2 targetPos = startPos - slideOffset;
+
+        float elapsed = 0f;
+        while (elapsed < slideDuration)
+        {
+            elapsed += Time.deltaTime;
+            panelWrapper.anchoredPosition = Vector2.Lerp(startPos, targetPos, elapsed / slideDuration);
+            yield return null;
+        }
+
+        panelWrapper.anchoredPosition = targetPos;
     }
 }
