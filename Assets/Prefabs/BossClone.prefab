@@ -148,3 +148,6 @@ MonoBehaviour:
   _detectRange: 5
   _type: 1
   _speed: 3
+  _spawnPrefab: {fileID: 4043589511158882836}
+  _spawnCount: 4
+  _spawnRadius: 1.5

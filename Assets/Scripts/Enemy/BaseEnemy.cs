@@ -26,7 +26,9 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     }
     private void Start()
     {
-        ChangeState(new DieState<T>(_poolKey));
+        ChangeState(new IdleState<T>());
+        // Die 확인용
+        //ChangeState(new DieState<T>(_type.ToString()));
     }
     protected virtual void Update()
     {
