@@ -25,6 +25,7 @@ public class Room : MonoBehaviour
     private bool _isEnemiesSpawn = false; // 중복을 막자
     private int _totalEnemyCount = 0; // 전체 몹 갯수
     public int TotalEnemyCount => _totalEnemyCount;
+                int spawnCount = 0;
     public Vector2 GetMinBounds() => _minBounds;
     public Vector2 GetMaxBounds() => _maxBounds;
     // Map 상의 위치 좌표
@@ -108,6 +109,22 @@ public class Room : MonoBehaviour
         doors[dir].DelteDoor();
     }
 
+    public void CheckedDoor() {
+        Room room = gameObject.GetComponent<Room>();
+        if (_totalEnemyCount == 0) {
+            foreach(var d in room.GetComponentsInChildren<Door>()) {
+                d.DoorOpen();
+            }
+        }
+        else {
+            foreach(var d in room.GetComponentsInChildren<Door>()) {
+                d.DoorClose();
+            }
+        }
+            
+    }
+
+
     public bool CheckedNeighbor(Direction dir) 
     {
         return doors[dir].isNeighbor;
@@ -137,7 +154,7 @@ public class Room : MonoBehaviour
         }
         foreach (var enemy in _enemyList)
         {
-            int spawnCount = 0;
+
             if (enemy.count != 0)
                 spawnCount = UnityEngine.Random.Range(2, enemy.count);
             _totalEnemyCount += spawnCount; // 몹 갯수 누적 저장
@@ -213,12 +230,13 @@ public class Room : MonoBehaviour
 
     public void EnemyDied()
     {
+        Room room = gameObject.GetComponent<Room>();
+
         _totalEnemyCount--;
-        Debug.Log("죽었네..");
+        Debug.Log("죽었네...");
         if(type == RoomType.Boss &&  _totalEnemyCount == 0 )
         {
             Debug.Log("<color=red>메인화면으로</color>");
-   
         }
         if(_totalEnemyCount > 0)
         {
@@ -228,6 +246,10 @@ public class Room : MonoBehaviour
         {
             // 다 없어진 경우
             //문 열리게끔
+            foreach(var d in room.GetComponentsInChildren<Door>()) {
+                d.DoorOpen();
+            }
+
             Debug.Log("<color=yellow><b>이 방은 끝</b></color>");
         }
     }

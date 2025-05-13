@@ -43,6 +43,7 @@ public class RoomManager : Singleton<RoomManager>
             Room room = r.Value.GetComponent<Room>();
             room.RegisterDoors();
             room.SetMapSprite();
+            room.CheckedDoor();
             // 적 스폰
             room.SpawnEnemies();
         }
@@ -143,6 +144,9 @@ public class RoomManager : Singleton<RoomManager>
         
         // Start Room 지정
         roomInstances[new Vector2Int(0, 0)].GetComponent<Room>().type = RoomType.Start;
+        foreach(var d in roomInstances[new Vector2Int(0,0)].GetComponentsInChildren<Door>()) {
+            d.DoorOpen();
+        }
 
         // 가장 먼 방 Boss Room
         Vector2Int farthestPos = FindFarthestRoom(new Vector2Int(0,0), roomInstances);
