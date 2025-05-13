@@ -6,6 +6,7 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     public string ItemName;
+    public string Description;
     public Sprite Icon;
 
     public List<ProjectileModuleData> ProjectileModules;

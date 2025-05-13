@@ -17,6 +17,10 @@ public class TestPlayerController : MonoBehaviour
         _itemEffectManager = GetComponent<ItemEffectManager>();
         _orbitController = GetComponent<OrbitController>();
         _rb = GetComponent<Rigidbody2D>();
+
+      //  _playerStatHandler.MaxHealth = 6;
+   //     _playerStatHandler.Health = 2;
+
     }
 
     void Update()
@@ -27,10 +31,7 @@ public class TestPlayerController : MonoBehaviour
         _movement.Normalize(); // 대각선 이동 속도 보정
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            _orbitController.CreateOrbitingObjects(_itemEffectManager, _playerStatHandler);
-        }
+
     }
 
     void FixedUpdate()

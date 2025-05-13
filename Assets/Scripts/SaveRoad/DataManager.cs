@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
@@ -92,7 +90,7 @@ public class DataManager : MonoBehaviour
 
         StatHandler.MoveSpeed = nowCharacterData.moveSpeed;
         StatHandler.MaxHealth = nowCharacterData.maxHealth;
-
+        StatHandler.Health = nowCharacterData.maxHealth;
         StatHandler.Damage = nowCharacterData.damage;
         StatHandler.AttackRate = nowCharacterData.attackRate;
         StatHandler.AttackDelay = nowCharacterData.attackDelay;

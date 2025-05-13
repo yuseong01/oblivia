@@ -1,10 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatHandler : MonoBehaviour
 {
-    [Header("Speed")]
+    // 체력 변경시 UI 변경을 위한 이벤트
+    public event Action<float> OnHealthChanged;
+    public event Action<float> OnMaxHealthChanged;
+    public event Action OnOrbitCountChanged;
+
+
+
+    [Header("<Speed>")]
     [SerializeField] private float _moveSpeed;
     public float MoveSpeed
     {
@@ -12,25 +20,39 @@ public class PlayerStatHandler : MonoBehaviour
         set => _moveSpeed += value;
     }
 
-    [Header("Health")]
+    [Header("<Health>")]
     // 체력, 추후 ResuorceManager로 관리?
+    public float limitHealth = 10;
     [SerializeField] private float _health;
     public float Health
     {
         get => _health;
-        set => _health = Mathf.Min(_health + value, MaxHealth);
+        set
+        {
+            _health = Mathf.Min(_health + value, MaxHealth);
+            OnHealthChanged?.Invoke(_health);
+        }
     }
     [SerializeField] private float _maxHealth;
     public float MaxHealth
     {
         get => _maxHealth;
-        set => _maxHealth += value;
+        set
+        {
+            float newHealth = Mathf.Min(_maxHealth + value, limitHealth);
+
+            if (_maxHealth != newHealth)
+            {
+                _maxHealth = newHealth;
+                OnMaxHealthChanged?.Invoke(_maxHealth);
+            }
+        }
     }
 
 
     // 공격 주기 관련 공식 :   attack Delay = 16 - (rate * 1.3), 추후 statHandler에 넣기
     // 공격 데미지 관련 공식 : FinalDamge = 1 + (Damage -1) * 1.2f
-    [Header("Attack")]
+    [Header("<Attack>")]
     // 공격력
     [SerializeField] private float _damage;
     public float Damage
@@ -39,7 +61,7 @@ public class PlayerStatHandler : MonoBehaviour
         set => _damage += value;
     }
     // 발사 주기
-    [SerializeField] private float _attackRate ;
+    [SerializeField] private float _attackRate;
     public float AttackRate
     {
         get => (Mathf.Max(5, 20 - (_attackRate) * 1.3f) / 60 + _attackDelay);
@@ -53,14 +75,14 @@ public class PlayerStatHandler : MonoBehaviour
         set => _attackDelay += value;
     }
     //탄환 속도
-    [SerializeField] private float _attackSpeed ; 
+    [SerializeField] private float _attackSpeed;
     public float AttackSpeed
     {
         get => _attackSpeed;
         set => _attackSpeed += value;
     }
     //공격 범위
-    [SerializeField] private float _attackRange ;
+    [SerializeField] private float _attackRange;
     public float AttackRange
     {
         get => _attackRange;
@@ -81,7 +103,7 @@ public class PlayerStatHandler : MonoBehaviour
         set => _attackAngle += value;
     }
     //넉백 파워
-    [SerializeField] private float _knockbackForce ;
+    [SerializeField] private float _knockbackForce;
     public float KnockbackForce
     {
         get => _knockbackForce;
@@ -102,6 +124,18 @@ public class PlayerStatHandler : MonoBehaviour
         set => _projectileSize += value;
     }
 
+    //탄환 크기
+    [SerializeField] private int _orbitCount;
+    public int OrbitCount
+    {
+        get => _orbitCount;
+        set 
+        { 
+            _orbitCount += value;
+            OnOrbitCountChanged.Invoke();
+        }
+    }
+
     // 깊은 복사를 위한 Clone 메서드
     public PlayerStatHandler Clone()
     {
@@ -113,4 +147,5 @@ public class PlayerStatHandler : MonoBehaviour
         clone.ProjectileSize = this.ProjectileSize;
         return clone;
     }
+
 }
