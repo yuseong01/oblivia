@@ -19,25 +19,14 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
     {
         _timer = 0f;
         //obj.GetAnimator()?.SetTrigger("Die");
-        var col = obj.GetComponent<Collider2D>();
-        if (col != null) col.enabled = false;
         // obj가 스폰되는 애면 죽었을때 스폰시키기 
         CheckRadius(obj);
+        (obj as BaseEnemy<T>)?.ReturnToPool();
     }
 
     public void Update(T obj)
     {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _dieTime)
-        {
-            var col = obj.GetComponent<Collider2D>();
-            if (col != null) col.enabled = true;
-            // Room에 알림 (선택적)
-            //RoomManager.Instance?.OnEnemyDied();
-            // null체크하고 불러오기
-            (obj as BaseEnemy<T>)?.ReturnToPool();
-        }
+       
     }
    public void Exit(T obj) { }
 

@@ -14,6 +14,7 @@ public interface IEnemy
         Clone,
         Ranged,
         Elite,
+        Teleport,
     }
     Transform GetPlayerPosition(); // 플레이어 위치
     Transform GetEnemyPosition(); // Enemy 위치
@@ -24,5 +25,8 @@ public interface IEnemy
     float GetHealth();
     float SetSpeed(float amount);
     float GetSpeed();
-    void TakeDamage(int amount);
+    void TakeDamage(float amount);
+    Room GetCurrentRoom();
+    void SetCurrentRoom(Room room);
+    float GetAttackPower();
 }
