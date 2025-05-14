@@ -8,9 +8,11 @@ public class UI_Skill : UI_Scene
     public SkillController SkillController;
     private Skill _skill;
     private Image _skillIcon;
+    private Image _skillBackIcon;
     enum Images
     {
         Skill,
+        Back,
     }
  
     public override void Init()
@@ -22,6 +24,9 @@ public class UI_Skill : UI_Scene
 
         _skillIcon = Get<Image>((int)Images.Skill);
         _skillIcon.sprite = _skill.Icon;
+
+        _skillBackIcon = Get<Image>((int)Images.Back);
+        _skillBackIcon.sprite = _skill.Icon;
     }
 
     private void Update()

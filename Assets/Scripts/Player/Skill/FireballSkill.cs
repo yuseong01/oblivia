@@ -9,8 +9,9 @@ public class FireballSkill : Skill
 {
     public GameObject FireballPrefab;
     public float Speed = 5f;
-    public float ExtraDamage = 10f; // 추가된 데미지 변수
-    public float ExtraSize = 0.2f; // 추가된 데미지 변수
+    public float ExtraDamage = 10f; // 추가된 데미지
+    public float ExtraSpeed = 5f; // 추가된 속도
+    public float ExtraSize = 0.2f; // 추가된 데미지
 
     protected override void ActivateSkill(AttackController controller)
     {
@@ -24,6 +25,7 @@ public class FireballSkill : Skill
         PlayerStatHandler clonedStats = controller.GetComponent<PlayerStatHandler>().Clone();
         clonedStats.Damage = ExtraDamage; // 추가 데미지 적용
         clonedStats.ProjectileSize = ExtraSize; // 추가 크기 적용
+        clonedStats.AttackSpeed = ExtraSpeed;
         Projectile projectile = fireball.GetComponent<Projectile>();
         if (projectile != null)
         {
