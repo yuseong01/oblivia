@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: test2
   m_EditorClassIdentifier: 
   characterName: "\uC5B4\uB460\uC758 \uD3EC\uC878"
-  characterId: test2
+  characterId: 2
   moveSpeed: 0
   maxHealth: 0
   damage: 20
