@@ -15,6 +15,9 @@ public interface IEnemy
         Ranged,
         Elite,
         Teleport,
+        Rush,
+        Minion,
+        Explode,
     }
     Transform GetPlayerPosition(); // 플레이어 위치
     Transform GetEnemyPosition(); // Enemy 위치

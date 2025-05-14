@@ -6,16 +6,17 @@ using UnityEngine.InputSystem;
 
 public class PoolManager : Singleton<PoolManager>
 {
-    //[SerializeField] private Bullet _bulletPrefab;
-    //[SerializeField] private Enemy _meleeEnemyPrefab; //근거리
-    //[SerializeField] private Enemy _rangedEnemyPrefab; //원거리
     [Header("Enemy Prefab")]
-    //[SerializeField] private FleeEnemy _fleeEnemyPrefab; // 도망치는애
+    [SerializeField] private FleeEnemy _fleePrefab; // 도망치는애
     [SerializeField] private RangedEnemy _rangedPrefab; // 원거리
     [SerializeField] private MoveEnemy _movePrefab; //단거리
     [SerializeField] private Boss _bossPrefab; // 보스
-    [SerializeField] private TeleportEnemy _teleportPrefab; // 보스
-    //[SerializeField] private Transform _bulletParent;
+    [SerializeField] private TeleportEnemy _teleportPrefab; // 텔레포트
+    [SerializeField] private RushEnemy _rushPrefab; // 대쉬
+    [SerializeField] private RushEnemy _rush2Prefab; // 대쉬2
+    [SerializeField] private ExplodeEnemy _explodePrefab; // 대쉬2
+    [SerializeField] private MinionEnemy _minionPrefab; // 대쉬2
+    [Header("parnet 위치")]
     [SerializeField] private Transform _enemyParent;
     [SerializeField] private Transform _bossParent;
     [Header("Room Spawn")]
@@ -27,16 +28,17 @@ public class PoolManager : Singleton<PoolManager>
     protected override void Awake()
     {
         base.Awake();
-        //CreatePool<Bullet>("Bullet", _bulletPrefab, 30, _bulletParent);
-        //CreatePool<EnemyMelee>("EnemyMelee", _meleeEnemyPrefab, 20, _enemyParent);
-        //CreatePool<Bullet>("EnemyRanged", _rangedEnemyPrefab, 20, _enemyParent);
         
-        // 1, 적 pool 에 등록
-        //CreatePool<FleeEnemy>("Flee", _fleeEnemyPrefab, 20, _enemyParent);
+        // 1, 적 pool 에 등록 그리고 room에서 get등록 basenemy return 등록 잊지 말자
         CreatePool<Boss>("Boss", _=_bossPrefab, 10, _bossParent);
         CreatePool<RangedEnemy>("Ranged", _rangedPrefab, 20, _bossParent);
         CreatePool<MoveEnemy>("Normal", _movePrefab, 20, _bossParent);
         CreatePool<TeleportEnemy>("Teleport", _teleportPrefab, 20, _bossParent);
+        CreatePool<RushEnemy>("Rush", _rushPrefab, 20, _bossParent);
+        CreatePool<RushEnemy>("Rush2", _rush2Prefab, 20, _bossParent);
+        CreatePool<FleeEnemy>("Flee", _fleePrefab, 20, _bossParent);
+        CreatePool<ExplodeEnemy>("Explode", _explodePrefab, 20, _bossParent);
+        CreatePool<MinionEnemy>("Minion", _minionPrefab, 20, _bossParent);
         // 2. 적 정보 매핑 여기까지는 잘되고 room 
         foreach (var config in _roomSpawn)
         {

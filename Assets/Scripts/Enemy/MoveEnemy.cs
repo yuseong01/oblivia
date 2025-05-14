@@ -9,6 +9,7 @@ public class MoveEnemy : BaseEnemy<MoveEnemy>
 
         if (other.CompareTag("Player"))
         {
+            Physics2D.IgnoreCollision(_innerCollider, other, true);
             PlayerStatHandler playerStatHandler = other.GetComponent<PlayerStatHandler>();
             if(playerStatHandler != null)
             {
