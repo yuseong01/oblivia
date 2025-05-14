@@ -7110,10 +7110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afac43f29d934cc8ba175f07aa49255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fleePrefab: {fileID: 0}
   _rangedPrefab: {fileID: 474660601703285724, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
   _movePrefab: {fileID: 1515228967705930097, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
   _bossPrefab: {fileID: 6357986066415398257, guid: f63a025a3797941e19f7930c21d70360, type: 3}
   _teleportPrefab: {fileID: 8884700069627570088, guid: a1d592334d9207747ad74298694ee719, type: 3}
+  _rushPrefab: {fileID: 0}
+  _rush2Prefab: {fileID: 0}
+  _explodePrefab: {fileID: 0}
+  _minionPrefab: {fileID: 0}
   _enemyParent: {fileID: 1362004004}
   _bossParent: {fileID: 1362004004}
   _roomSpawn:
