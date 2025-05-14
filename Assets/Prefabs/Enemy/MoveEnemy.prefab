@@ -105,8 +105,10 @@ MonoBehaviour:
   _detectRange: 2
   _type: 0
   _speed: 3
-  _attackPower: 10
+  _attackPower: 1
   _innerCollider: {fileID: 0}
+  _minBounds: {x: -8, y: -4}
+  _maxBounds: {x: 8, y: 4}
 --- !u!61 &8039902138076269242
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -171,6 +173,8 @@ MonoBehaviour:
   _speed: 3
   _attackPower: 10
   _innerCollider: {fileID: 0}
+  _minBounds: {x: -8, y: -4}
+  _maxBounds: {x: 8, y: 4}
 --- !u!95 &9078589774479474205
 Animator:
   serializedVersion: 5

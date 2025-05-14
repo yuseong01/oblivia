@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using static IEnemy;
 
@@ -33,6 +34,9 @@ public class Room : MonoBehaviour
     [SerializeField] private Vector2 _minBounds;
     [SerializeField] private Vector2 _maxBounds;
     [SerializeField] private Vector2 _margin = new Vector2(2f, 2f);
+    [SerializeField] private GameObject _itemPivot;
+    [SerializeField] private GameObject[] _items;
+
     private bool _isEnemiesSpawn = false; // 중복을 막자
     private int _totalEnemyCount = 0; // 전체 몹 갯수
     public int TotalEnemyCount => _totalEnemyCount;
@@ -330,10 +334,15 @@ public class Room : MonoBehaviour
         Room room = gameObject.GetComponent<Room>();
 
         _totalEnemyCount--;
+        ChallengeManager.Instance.IncreaseProgress("kill_monster", 1);
+
         Debug.Log($"{_totalEnemyCount}");
         if (type == RoomType.Boss && _totalEnemyCount == 0)
         {
+            ChallengeManager.Instance.IncreaseProgress("1_stage_boss_clear", 1);
             Debug.Log("<color=red>메인화면으로</color>");
+
+            Invoke(nameof(GoToMainSence), 3f);
         }
         else if(_totalEnemyCount == 0) 
         {
@@ -345,6 +354,36 @@ public class Room : MonoBehaviour
             }
 
             Debug.Log("<color=yellow><b>이 방은 끝</b></color>");
+            // null이 아닌 아이템만 필터링
+            var availableItems = new List<GameObject>();
+            foreach (var item in _items)
+            {
+                if (item != null)
+                    availableItems.Add(item);
+            }
+
+            if (availableItems.Count > 0 && _itemPivot != null)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, availableItems.Count);
+                GameObject selectedItem = availableItems[randomIndex];
+                Instantiate(selectedItem, _itemPivot.transform.position, Quaternion.identity);
+
+                // 원본 배열에서 제거하려면:
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    if (_items[i] == selectedItem)
+                    {
+                        _items[i] = null;
+                        break;
+                    }
+                }
+            }
+
         }
+    }
+
+    private void GoToMainSence()
+    {
+        SceneManager.LoadScene("Save");
     }
 }

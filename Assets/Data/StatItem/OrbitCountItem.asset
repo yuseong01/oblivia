@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: OrbitCountItem
   m_EditorClassIdentifier: 
-  ItemName: OrbitCountItem
-  Description: "\u3147\u3147"
-  Icon: {fileID: 21300000, guid: ba63ed65390afa44d846aa19b4f51bc7, type: 3}
+  ItemName: "\uD638\uC704\uB839"
+  Description: "\uB530\uB77C\uB2E4\uB2C8\uBA70 \uB3C4\uC640\uC8FC\uB294 \uD63C\uB839\uC744
+    \uC18C\uD658\uD55C\uB2E4."
+  Icon: {fileID: 21300000, guid: 3427b5129e289d44a8c6a2d2241362c0, type: 3}
   ProjectileModules: []
   FireModules: []
   StatModules:

@@ -108,6 +108,9 @@ MonoBehaviour:
   _targetLayers:
     serializedVersion: 2
     m_Bits: 64
+  _wallLayers:
+    serializedVersion: 2
+    m_Bits: 512
   HitCooldown: 0.2
 --- !u!114 &-3858082774270184503
 MonoBehaviour:

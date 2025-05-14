@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: BoomerangItem
   m_EditorClassIdentifier: 
-  ItemName: Boomerang
-  Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
+  ItemName: "\uADC0\uD658\uC120"
+  Description: "\uB358\uC9C0\uBA74 \uB3CC\uC544\uC624\uB294 \uC2E0\uBB18\uD55C \uBD80\uCC44."
+  Icon: {fileID: 21300000, guid: 028d28345b716dd45bbd74deed0429d0, type: 3}
   ProjectileModules:
   - {fileID: 11400000, guid: ac56439973482654598094a621183ed8, type: 2}
   FireModules: []

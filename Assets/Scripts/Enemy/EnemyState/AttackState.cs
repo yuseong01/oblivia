@@ -13,6 +13,13 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
     {
        // obj.GetAnimator()?.SetBool("Attack", false);
         obj.GetAnimator()?.CrossFade("Attack", 0f);
+
+        var sr = (obj as MonoBehaviour).GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            Vector3 dir = obj.GetPlayerPosition().position - obj.transform.position;
+            sr.flipX = dir.x < 0;
+        }
     }
 
     public void Update(T obj)

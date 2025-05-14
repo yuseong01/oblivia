@@ -149,8 +149,10 @@ MonoBehaviour:
   _detectRange: 5
   _type: 8
   _speed: 3
-  _attackPower: 10
+  _attackPower: 1
   _innerCollider: {fileID: 0}
+  _minBounds: {x: -8, y: -4}
+  _maxBounds: {x: 8, y: 4}
 --- !u!95 &1307118812550326402
 Animator:
   serializedVersion: 5

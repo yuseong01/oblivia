@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2705281975991432946}
   - component: {fileID: 6571790206876595042}
   - component: {fileID: 3319136960741345711}
+  - component: {fileID: -726393585259264626}
   m_Layer: 0
   m_Name: ProjectileMonster
   m_TagString: Untagged
@@ -97,3 +98,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25af0409f24796a4b968d27a3f4aa89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &-726393585259264626
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5072215996912832189}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.33333334

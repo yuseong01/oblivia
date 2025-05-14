@@ -11,8 +11,6 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
     private float _distance = 1f;
     public void Enter(T obj)
     {
-        //obj.GetAnimator()?.SetBool("Idle", false);
-        //obj.GetAnimator()?.SetBool("Move", true);
         obj.GetAnimator()?.CrossFade("Move", 0f);
         _moveSpeed = obj.GetSpeed();
     }
@@ -37,6 +35,13 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
                 }
                 break;
         }
+        // 바라보는 방향 설정
+        var sr = (obj as MonoBehaviour).GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.flipX = playerPos.x < enemyPos.x;
+        }
+
         // 플레이어와의 간격 보는 코드
         Vector2 playerDistance = playerPos - enemyPos;
         float distance = playerDistance.magnitude;
