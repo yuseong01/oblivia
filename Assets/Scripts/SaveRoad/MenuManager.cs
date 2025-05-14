@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     public GameObject introPanel;
     public GameObject mainMenuPanel;
     public RectTransform panelWrapper;
+    public GameObject introText;
 
     [Header("Slide Settings")]
     public float slideDuration = 1f;
@@ -36,11 +37,20 @@ public class MenuManager : MonoBehaviour
         introPanel.SetActive(true);
         mainMenuPanel.SetActive(false);
 
-        yield return new WaitForSeconds(43f); // 인트로 시간
+        // 인트로 이미지 표시 후 41초간 대기 총 인트로 시간은 43초
+        yield return new WaitForSeconds(2f);
+
+        // 이미지 비활성화
+        if (introText != null)
+        {
+            introText.SetActive(false);
+        }
+
+        // 2초 더 대기 후 인트로 종료
+        yield return new WaitForSeconds(41f);
 
         EndIntro();
     }
-
     void SkipIntro()
     {
         if (introCoroutine != null)
