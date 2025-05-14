@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TestPlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private float speed = 5f;
+    [SerializeField]
+    private float deadZone = 0.1f;
+    VirtualJoystick joystick;
     private PlayerStatHandler _playerStatHandler;
     private ItemEffectManager _itemEffectManager;
     private OrbitController _orbitController;
@@ -22,28 +27,56 @@ public class TestPlayerController : MonoBehaviour
         _orbitController = GetComponent<OrbitController>();
         _rb = GetComponent<Rigidbody2D>();
     }
+    private void Start()
+    {
+        joystick = VirtualJoystick.instance.GetComponent<VirtualJoystick>();
+    }
 
     void Update()
     {
-        _movement.x = Input.GetAxisRaw("Horizontal");
-        _movement.y = Input.GetAxisRaw("Vertical");
-        _movement.Normalize();
+        Vector2 input = new Vector2(joystick.horizontal, joystick.vertical);
 
-        // 좌우 방향에 따라 스프라이트 반전
-        if (_movement.x != 0)
+        float magnitude = Mathf.Min(input.magnitude / joystick.stickRange, 1f);
+
+        if (magnitude < deadZone)
+            magnitude = 0f;
+
+
+        Vector2 ratioInput = input.normalized * magnitude;
+        transform.position += (Vector3)(ratioInput * speed * Time.deltaTime);
+
+        if (ratioInput.x != 0)
         {
-            _spriteRenderer.flipX = _movement.x < 0;
+            _spriteRenderer.flipX = ratioInput.x < 0;
         }
-
-
-        // 애니메이션 전환
-        if (_movement != Vector2.zero)
+        if (ratioInput != Vector2.zero)
         {
             PlayAnimation("Walk");
         }
         else
         {
-            PlayAnimation("Idle");
+           // PlayAnimation("Idle");
+
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");
+            _movement.Normalize();
+
+            // 좌우 방향에 따라 스프라이트 반전
+            if (_movement.x != 0)
+            {
+                _spriteRenderer.flipX = _movement.x < 0;
+            }
+
+
+            // 애니메이션 전환
+            if (_movement != Vector2.zero)
+            {
+                PlayAnimation("Walk");
+            }
+            else
+            {
+                PlayAnimation("Idle");
+            }
         }
     }
 

@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
     public  float AttackDuration;
     private PlayerStatHandler _statHandler;
     [SerializeField] private LayerMask _targetLayers;
+    [SerializeField] private LayerMask _wallLayers;
     public float HitCooldown = 0.2f; // ���� ���͹�
 
     private Dictionary<Collider2D, float> _lastHitTime = new Dictionary<Collider2D, float>();
@@ -63,10 +64,18 @@ public class Projectile : MonoBehaviour
                     Destroy(gameObject);
             }
         }
+        if (((1 << collision.gameObject.layer) & _wallLayers) != 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
     {
+        if(Target == null)
+        {
+            Destroy(gameObject);
+        }
         foreach (var mod in _modules)
         {
             mod.OnUpdate(this);

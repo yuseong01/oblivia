@@ -150,8 +150,10 @@ MonoBehaviour:
   _detectRange: 5
   _type: 5
   _speed: 3
-  _attackPower: 10
+  _attackPower: 1
   _innerCollider: {fileID: 299268701026441029}
+  _minBounds: {x: -8, y: -4}
+  _maxBounds: {x: 8, y: 4}
   _forwardProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
   _radialProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
 --- !u!95 &4622482487177666888

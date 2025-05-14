@@ -11,7 +11,7 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
 
     [Header("Enemy Settings")]
     [SerializeField] public Transform _player;
-    [SerializeField, Range(0f, 10f)] protected float _health = 10f;
+    [SerializeField, Range(0f, 200f)] protected float _health = 10f;
     [SerializeField] protected float _detectRange = 5f;
     [SerializeField] protected EnemyType _type = EnemyType.Normal;
     [SerializeField] protected float _speed = 3f;
@@ -48,6 +48,18 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     }
 
     // ���� ���� �Լ�
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            PlayerStatHandler playerStatHandler = other.GetComponent<PlayerStatHandler>();
+            if (playerStatHandler != null)
+            {
+                playerStatHandler.Health = -GetAttackPower();
+            }
+        }
+    }
     public void ChangeState(IState<T> _currentState)
     {
         _fsm.ChangeState(_currentState, this as T);
@@ -86,10 +98,9 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     {
         // 초기화
         gameObject.SetActive(true);
-        _speed = UnityEngine.Random.Range(3f, 13f); // 여기에 원하는 범위 설정
+        _speed = UnityEngine.Random.Range(1f, 2f); // 여기에 원하는 범위 설정
         _isDead = false;
         _player = GameObject.FindWithTag("Player").transform;
-        _health = 10;
         if (_type == EnemyType.Boss)
             _fsm.ChangeState(new CloneState<T>(), this as T);
         else _fsm.ChangeState(new IdleState<T>(), this as T); // T = ����� Enemy Ÿ��

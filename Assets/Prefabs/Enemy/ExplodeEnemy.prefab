@@ -227,8 +227,10 @@ MonoBehaviour:
   _detectRange: 5
   _type: 10
   _speed: 3
-  _attackPower: 10
+  _attackPower: 1
   _innerCollider: {fileID: 5054368406666715566}
+  _minBounds: {x: -8, y: -4}
+  _maxBounds: {x: 8, y: 4}
   _spawnPrefab: {fileID: 3973199383335479890, guid: d9259a449cbeb7b4180559883e99873c, type: 3}
   _spawnCount: 4
   _spawnRadius: 1

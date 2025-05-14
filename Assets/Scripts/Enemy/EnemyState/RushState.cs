@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
-    private float _rushSpeed = 10f;
+    private float _rushSpeed = 3f;
     private float _rushDuration = 1f;
     private float _elapsedTime = 0f;
     private Vector3 _rushDirection;
@@ -19,6 +19,7 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     public void Enter(T obj)
     {
         _elapsedTime = 0f;
+        obj.GetAnimator()?.CrossFade("Attack", 0f);
 
         // 돌진 방향: 플레이어 향함
         Vector3 toPlayer = obj.GetPlayerPosition().position - obj.transform.position;

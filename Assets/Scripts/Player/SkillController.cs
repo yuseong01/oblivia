@@ -15,11 +15,16 @@ public class SkillController : MonoBehaviour
     {
         if (_skill != null && Input.GetKeyDown(_key))
         {
-            Collider2D[] cor = _attackController.CheckEnemy();
-            if(cor.Length > 0)
-            {
-                _skill.TryActivateSkill(_attackController);
-            }
+            ActiveSkill();
+        }
+    }
+
+    public void ActiveSkill()
+    {
+        Collider2D[] cor = _attackController.CheckEnemy();
+        if (cor.Length > 0)
+        {
+            _skill.TryActivateSkill(_attackController);
         }
     }
 

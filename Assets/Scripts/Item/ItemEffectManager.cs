@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemEffectManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class ItemEffectManager : MonoBehaviour
     private List<IProjectileModule> activeModules = new List<IProjectileModule>();
     private List<IFireModule> fireModules = new List<IFireModule>();
     [SerializeField] private GameObject _UIPrefab;
+    [SerializeField] private GameObject _ItemUIParent;
+    [SerializeField] private GameObject _ItemUIPrefab;
+
 
     private void Awake()
     {
@@ -17,6 +21,13 @@ public class ItemEffectManager : MonoBehaviour
     public void AddItem(ItemData item)
     {
         var go =  Instantiate(_UIPrefab);
+        var go2 = Instantiate(_ItemUIPrefab);
+
+        var image = go2.GetComponent<Image>();
+        image.sprite = item.Icon;
+
+        go2.transform.SetParent(_ItemUIParent.transform);
+        go2.transform.localScale = Vector3.one;
         UI_ItemDescription descriptionUI = go.GetComponent<UI_ItemDescription>();
         if (descriptionUI != null)
         {
