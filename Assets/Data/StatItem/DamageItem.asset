@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: DamageItem
   m_EditorClassIdentifier: 
-  ItemName: Damage
-  Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
+  ItemName: "\uD638\uC870"
+  Description: "\uC0B0\uAD70\uC758 \uD63C\uC774 \uAE43\uB4E0 \uBC1C\uD1B1. \uD798\uC774
+    \uB118\uCE5C\uB2E4."
+  Icon: {fileID: 21300000, guid: eaa7861d55c12af419ba3410f6e7b713, type: 3}
   ProjectileModules: []
   FireModules: []
   StatModules:

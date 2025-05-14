@@ -29,6 +29,11 @@ public class UI_Skill : UI_Scene
         _skillBackIcon.sprite = _skill.Icon;
     }
 
+    public void ActiveSkillByButton()
+    {
+        SkillController.ActiveSkill();
+    }
+
     private void Update()
     {
         if (_skill != null)

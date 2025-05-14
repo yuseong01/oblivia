@@ -50,7 +50,13 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
         Vector2 direction = (_targetPos - enemyPos).normalized;
         Vector2 newPos = enemyPos + direction * _moveSpeed * Time.deltaTime;
-
+        Vector2 dir = (_targetPos - enemyPos).normalized;
+        if (dir.x != 0)
+        {
+            Vector3 scale = obj.transform.localScale;
+            scale.x = dir.x > 0 ? -1f : 1f; // 플레이어로부터 멀어지는 방향을 바라보게
+            obj.transform.localScale = scale;
+        }
         // ��ǥ ��ġ�� ���� ��ġ���� �ʹ� ������ �������� ���� �Ÿ��� ����ϸ� �̵�
         // �ʿ��� ������ ���� ����
         if (Vector2.Distance(enemyPos, _targetPos) > 0.01f)

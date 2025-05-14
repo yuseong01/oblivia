@@ -21,6 +21,7 @@ public interface IEnemy
         Explode,
     }
     Transform GetPlayerPosition(); // 플레이어 위치
+    SpriteRenderer GetSpriteRenderer(); // 플레이어 위치
     Transform GetEnemyPosition(); // Enemy 위치
     float GetPlayerHealth(); // 플레이어 체력
     bool CheckInPlayerInRanged(); // 플레이어와 가까운지 체크

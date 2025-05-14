@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: MoveSpeedItem
   m_EditorClassIdentifier: 
-  ItemName: MoveSpeed
-  Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
+  ItemName: "\uD48D\uD654\uC2E0\uBC1C"
+  Description: "\uBC14\uB78C\uC744 \uB2F4\uC740 \uC9DA\uC2E0. \uC2E0\uC73C\uBA74
+    \uBC1C\uAC78\uC74C\uC774 \uAC00\uBCBC\uC6CC\uC9C4\uB2E4."
+  Icon: {fileID: 21300000, guid: 1f8ecc433312750458a5217cd671dd1a, type: 3}
   ProjectileModules: []
   FireModules: []
   StatModules:

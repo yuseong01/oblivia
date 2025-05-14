@@ -7,7 +7,7 @@ using static IEnemy;
 public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>, IPoolable
 {
     private float _timer;
-    private float _dieTime = 1f;
+    private float _dieTime = 2f;
     private string _poolKey;
     private BaseEnemy<T> _baseEnemy;
 
