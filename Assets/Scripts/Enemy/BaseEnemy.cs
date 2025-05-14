@@ -115,6 +115,12 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
             case EnemyType.Explode:
                 PoolManager.Instance.Return(_poolKey, this as ExplodeEnemy);
                 break;
+            case EnemyType.Elite1:
+                PoolManager.Instance.Return(_poolKey, this as ElitEnemy);
+                break;
+            case EnemyType.Elite2:
+                PoolManager.Instance.Return(_poolKey, this as ElitEnemy);
+                break;
             default:
                 break;
         }
