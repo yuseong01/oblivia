@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4d1961ea30c5e14c93edaa7dbce7b8c, type: 3}
-  m_Name: test3
+  m_Name: test1
   m_EditorClassIdentifier: 
-  playerName: 
-  characterName: test3
-  damage: 30
-  attackRate: 30
-  attackDelay: 30
-  attackSpeed: 30
-  attackRange: 30
-  characterId: test3
+  characterName: "\uBC31\uC758 \uC8C4\uC778"
+  characterId: test1
+  moveSpeed: 5
+  maxHealth: 6
+  damage: 1
+  attackRate: 1
+  attackDelay: 0
+  attackSpeed: 5
+  attackRange: 5
+  attackCount: 1
+  attackAngle: 10
+  knockbackForce: 0.1
+  attackDuration: 3
+  projectileSize: 0.95
