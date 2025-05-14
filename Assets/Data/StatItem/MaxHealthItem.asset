@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: MaxHealthItem
   m_EditorClassIdentifier: 
-  ItemName: MaxHealth
-  Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
+  ItemName: "\uC218\uBA85\uBD80\uC801"
+  Description: "\uBB34\uBCD1\uC7A5\uC218\uB97C \uAE30\uC6D0\uD558\uB294 \uBB34\uC18D
+    \uBD80\uC801."
+  Icon: {fileID: 21300000, guid: a9d48a774d5c22147ab09ed08aad99f6, type: 3}
   ProjectileModules: []
   FireModules: []
   StatModules:

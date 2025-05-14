@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: DurationItem
   m_EditorClassIdentifier: 
-  ItemName: Duration
-  Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
+  ItemName: "\uC720\uC131\uC0B4\uC790"
+  Description: "\uC801\uC744 \uAFF0\uB6AB\uB294 \uBC24\uD558\uB298\uC758 \uBCC4 \uADA4\uC801."
+  Icon: {fileID: 21300000, guid: 2be7f2ed2ae02c24794953894a47845a, type: 3}
   ProjectileModules: []
   FireModules: []
   StatModules:

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: AttackRateItem
   m_EditorClassIdentifier: 
-  ItemName: AttackRate
-  Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
+  ItemName: "\uC30D\uBE44\uC5F0"
+  Description: "\uC30D\uC73C\uB85C \uB0A0\uC544\uAC00\uB294 \uC81C\uBE44 \uBD80\uC801.
+    \uBBFC\uCCA9\uD55C \uC190\uB180\uB9BC\uC744 \uBD80\uC5EC\uD55C\uB2E4."
+  Icon: {fileID: 21300000, guid: 3dd42a3a1e8498f428c7a76db7cd1d67, type: 3}
   ProjectileModules: []
   FireModules: []
   StatModules:
