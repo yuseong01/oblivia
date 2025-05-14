@@ -6698,16 +6698,44 @@ MonoBehaviour:
       prefab: {fileID: 4043589511158882836, guid: f63a025a3797941e19f7930c21d70360, type: 3}
   - roomType: 1
     enemies:
-    - type: 10
-      poolKey: Explode
+    - type: 5
+      poolKey: Elite1
+      count: 1
+      prefab: {fileID: 3930795542360209, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
+    - type: 6
+      poolKey: Elite2
+      count: 1
+      prefab: {fileID: 1904378883472212713, guid: 98b8a4dec47d1c64ab55faafc5d22ca2, type: 3}
+    - type: 1
+      poolKey: Flee
+      count: 4
+      prefab: {fileID: 6775095651086822309, guid: 535ad6434fff65840b50616302322541, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 0
+      poolKey: Normal
       count: 3
       prefab: {fileID: 2295998883299947131, guid: a139140a26f8efd4e814039f090287c4, type: 3}
+    - type: 7
+      poolKey: Teleport
+      count: 3
+      prefab: {fileID: 5589099841497872892, guid: a1d592334d9207747ad74298694ee719, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 1
+      poolKey: Flee
+      count: 5
+      prefab: {fileID: 6775095651086822309, guid: 535ad6434fff65840b50616302322541, type: 3}
   - roomType: 1
     enemies:
     - type: 8
       poolKey: Rush
-      count: 3
+      count: 2
       prefab: {fileID: 3929171962915058738, guid: bfdbb40065face7419f66e4e0d0e53da, type: 3}
+    - type: 8
+      poolKey: Rush
+      count: 4
+      prefab: {fileID: 6509994462404431090, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
 --- !u!4 &1730770963
 Transform:
   m_ObjectHideFlags: 0
