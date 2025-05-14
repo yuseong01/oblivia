@@ -13,6 +13,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
     {
         //obj.GetAnimator()?.SetBool("Idle", false);
         //obj.GetAnimator()?.SetBool("Move", true);
+        obj.GetAnimator()?.CrossFade("Move", 0f);
         _moveSpeed = obj.GetSpeed();
     }
 

@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d1961ea30c5e14c93edaa7dbce7b8c, type: 3}
   m_Name: test3
   m_EditorClassIdentifier: 
-  playerName: 
-  characterName: test3
+  characterName: "\uBB34\uB140\uC758 \uD63C"
+  characterId: 3
+  moveSpeed: 0
+  maxHealth: 0
   damage: 30
   attackRate: 30
   attackDelay: 30
   attackSpeed: 30
   attackRange: 30
-  characterId: test3
+  attackCount: 0
+  attackAngle: 0
+  knockbackForce: 0
+  attackDuration: 0
+  projectileSize: 0

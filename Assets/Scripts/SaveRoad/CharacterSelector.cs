@@ -7,7 +7,7 @@ public class CharacterSelector : MonoBehaviour
     public float radius = 300f;
     public float smoothSpeed = 5f;
     public float nonSelectedScale = 0.5f;
-    public float selectedScale = 1.4f;
+    public float selectedScale = 2.0f;
 
     private Vector2[] targetPositions;
 
@@ -64,7 +64,7 @@ public class CharacterSelector : MonoBehaviour
         {
             if (i == currentIndex)
             {
-                targetPositions[i] = new Vector2(0, -50);
+                targetPositions[i] = new Vector2(0, 0);
                 characterTransforms[i].localScale = Vector3.one * selectedScale;
             }
             else

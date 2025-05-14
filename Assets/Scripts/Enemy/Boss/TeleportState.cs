@@ -47,8 +47,17 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
 
         // 순간이동
         yield return new WaitForSeconds(_stayDuration);
-        Vector2 min = obj.GetCurrentRoom().GetMinBounds();
-        Vector2 max = obj.GetCurrentRoom().GetMaxBounds();
+
+        Vector2 min = new Vector2();
+        Vector2 max = new Vector2();
+
+        var room = obj.GetCurrentRoom();
+        if (room != null)
+        {
+            min = room.GetMinBounds();
+            max = room.GetMaxBounds();
+         //   yield return null; ;
+        }
 
         float x = Random.Range(min.x, max.x);
         float y = Random.Range(min.y, max.y);

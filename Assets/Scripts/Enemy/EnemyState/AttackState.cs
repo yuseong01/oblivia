@@ -11,7 +11,8 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
 
     public void Enter(T obj)
     {
-        //obj.GetAnimator()?.SetBool("Move", false);
+       // obj.GetAnimator()?.SetBool("Attack", false);
+        obj.GetAnimator()?.CrossFade("Attack", 0f);
     }
 
     public void Update(T obj)
@@ -39,6 +40,13 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                 }
                 break;
             case EnemyType.Teleport:
+                if (dist > normalRange)
+                {
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                }
+                break;
+            case EnemyType.Rush:
                 if (dist > normalRange)
                 {
                     obj.ChangeState(new MoveState<T>());

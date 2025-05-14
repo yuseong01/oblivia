@@ -8,6 +8,7 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     {
         //obj.GetAnimator()?.SetBool("Move", false);
         //obj.GetAnimator()?.SetBool("Idle", true);
+        obj.GetAnimator()?.CrossFade("Idle", 0f);
     }
 
     public void Update(T obj)
