@@ -20,7 +20,13 @@ public class ExplodeEnemy : BaseEnemy<ExplodeEnemy>, IExplodable, ISpawnable
 
     public float GetSpawnRadius() => _spawnRadius;
 
+    public override void SetCurrentRoom(Room room)
+    {
+        base.SetCurrentRoom(room);
 
+        if (room != null)
+            SetBounds(room.GetMinBounds(), room.GetMaxBounds());
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
 
