@@ -17,8 +17,8 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     [SerializeField] protected float _speed = 3f;
     [SerializeField] protected float _attackPower = 10f;
     [SerializeField] protected Collider2D _innerCollider;
-    private Vector2 _minBounds = new Vector2(-8, -4);
-    private Vector2 _maxBounds = new Vector2(8, 4);
+    public Vector2 _minBounds = new Vector2(-8, -4);
+    public Vector2 _maxBounds = new Vector2(8, 4);
 
     protected IState<T> _currentState;
     private string _poolKey;
@@ -43,9 +43,6 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     {
         _fsm.Update(this as T);
         _player = GameObject.FindWithTag("Player").transform;
-        GetCurrentRoom();
-       _minBounds = _currentRoom.GetMinBounds();
-       _maxBounds = _currentRoom.GetMaxBounds();
     }
 
     // ���� ���� �Լ�

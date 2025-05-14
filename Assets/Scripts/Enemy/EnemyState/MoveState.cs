@@ -13,6 +13,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
     {
         //obj.GetAnimator()?.SetBool("Idle", false);
         //obj.GetAnimator()?.SetBool("Move", true);
+        obj.GetAnimator()?.CrossFade("Move", 0f);
         _moveSpeed = obj.GetSpeed();
     }
 
@@ -25,33 +26,15 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
 
         switch (obj.GetEnemyType())
         {
-            case EnemyType.Normal: 
+            case EnemyType.Teleport:
+                obj.ChangeState(new AttackState<T>());
+                break;
+            default:
                 if (dist <= _arriveDistance)
                 {
                     obj.ChangeState(new AttackState<T>());
                     return;
                 }
-                break;
-            case EnemyType.Ranged:
-                if (dist <= 3f) // 좀 멀어지고 쏘기
-                {
-                    obj.ChangeState(new AttackState<T>());
-                    return;
-                }
-                break;
-            case EnemyType.Elite1:
-            case EnemyType.Elite2:
-                obj.ChangeState(new AttackState<T>());
-                break;
-            case EnemyType.Boss:
-                obj.ChangeState(new AttackState<T>());
-                // 보스 로직
-                break;
-            case EnemyType.Teleport:
-                obj.ChangeState(new AttackState<T>());
-                break;
-            case EnemyType.Rush:
-                obj.ChangeState(new AttackState<T>());
                 break;
         }
         // 플레이어와의 간격 보는 코드

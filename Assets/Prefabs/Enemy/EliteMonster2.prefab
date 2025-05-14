@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5244900995067947216}
   - component: {fileID: 5539806639084666826}
   - component: {fileID: 5867879556523230109}
+  - component: {fileID: 9031788431876257763}
   m_Layer: 6
   m_Name: EliteMonster2
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 150
   m_Sprite: {fileID: 21300000, guid: de8b20c382cd57a47870d21d547bf427, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,8 +107,8 @@ MonoBehaviour:
   _speed: 3
   _attackPower: 10
   _innerCollider: {fileID: 7123225758646307813}
-  _forwardProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
-  _radialProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
+  _forwardProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
+  _radialProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
 --- !u!61 &5867879556523230109
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -153,6 +154,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3125, y: 1.3125}
   m_EdgeRadius: 0
+--- !u!95 &9031788431876257763
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904378883472212713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0abd90014337a442982e1ce76dd0ae7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8524908820578402175
 GameObject:
   m_ObjectHideFlags: 0

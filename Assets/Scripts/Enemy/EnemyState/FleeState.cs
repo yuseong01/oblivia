@@ -15,7 +15,11 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     private float _elapsedTime = 0f;
     private Vector2 _targetPos;
     private bool _hasTarget = false;
-
+    public void SetBounds(Vector2 min, Vector2 max)
+    {
+        _minBounds = min;
+        _maxBounds = max;
+    }
     public void Enter(T obj)
     {
         _elapsedTime = 0f;
@@ -25,12 +29,13 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         _elapsedTime += Time.deltaTime;
         Vector2 enemyPos = obj.GetEnemyPosition().position;
         Vector2 playerPos = obj.GetPlayerPosition().position;
+        var room = obj.GetCurrentRoom();
 
+        if (room != null)
+        {
+            SetBounds(room.GetMinBounds(), room.GetMaxBounds());
+        }
 
-        _minBounds = obj.GetCurrentRoom().GetMinBounds();
-        _maxBounds = obj.GetCurrentRoom().GetMaxBounds();
-
-        // ����� �־������� IdleState�� ���ư�
         if (Vector2.Distance(enemyPos, playerPos) > _fleeDistance + 0.5f)
         {
             obj.ChangeState(new IdleState<T>());
@@ -55,10 +60,14 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
         // ����� �ð�ȭ
         Debug.DrawLine(enemyPos, _targetPos, Color.red);
-        if ((obj is Boss || obj is RangedEnemy || obj is RushEnemy) && _elapsedTime >= _fleeDuration)
+        if ((obj is Boss || obj is RangedEnemy) && _elapsedTime >= _fleeDuration)
         {
             // ���� ������
             obj.ChangeState(new AttackState<T>()); // �ٽ� Rush��!
+        }
+        if(obj is RushEnemy && _elapsedTime >= _fleeDuration)
+        {
+            obj.ChangeState(new IdleState<T>());
         }
     }
 
