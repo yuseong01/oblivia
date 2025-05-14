@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 711140602626588944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.24, z: 0}
+  m_LocalPosition: {x: 0.157, y: -0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70,6 +70,7 @@ Transform:
   m_Children:
   - {fileID: 6584575305209957148}
   - {fileID: 4260355926517145210}
+  - {fileID: 1638289648844176797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1918095477051338096
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a646ed477e2d0cc4098221084f434701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _UIPrefab: {fileID: 1481322033505905593, guid: 42ea55b39180c274d81663978a7cb18e, type: 3}
 --- !u!114 &1609876494361520104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,19 +128,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46badeddd2975b34f9356b8294eac3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 0
-  _health: 0
-  _maxHealth: 0
-  _damage: 0
-  _attackRate: 0
+  _moveSpeed: 5
+  limitHealth: 10
+  _health: 10
+  _maxHealth: 10
+  _damage: 1
+  _attackRate: 1
   _attackDelay: 0
-  _attackSpeed: 0
-  _attackRange: 0
-  _attackCount: 0
-  _attackAngle: 0
-  _knockbackForce: 0
-  _attackDuration: 0
-  _projectileSize: 0
+  _attackSpeed: 5
+  _attackRange: 5
+  _attackCount: 1
+  _attackAngle: 1
+  _knockbackForce: 1
+  _attackDuration: 4
+  _projectileSize: 1
+  _orbitCount: 0
 --- !u!114 &3454359907822906851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,9 +157,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _orbitPrefab: {fileID: 7696673173684025821, guid: 1912f7c4d03220242865888516c646c8, type: 3}
   _orbitPivot: {fileID: 711140602626588944}
-  _objectCount: 0
   _radius: 1
   _rotationSpeed: 50
+  _playerStatHandler: {fileID: 0}
+  _itemEffects: {fileID: 0}
 --- !u!114 &7866061825404859367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +247,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.51221573, y: 0.6341617}
   m_EdgeRadius: 0
+--- !u!1 &4276789666284273397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1638289648844176797}
+  m_Layer: 7
+  m_Name: OrbitPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1638289648844176797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276789666284273397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.009, y: 0.023, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1999162084652056299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5456787113484417702
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,8 +304,8 @@ Transform:
   m_GameObject: {fileID: 5456787113484417702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.1045, z: 0}
+  m_LocalScale: {x: 1, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1999162084652056299}
@@ -316,7 +352,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 13cd5bbcdcf9dc84a9aec362e38f34fe, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.79622644, g: 0.79622644, b: 0.79622644, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
