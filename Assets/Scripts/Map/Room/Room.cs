@@ -304,7 +304,6 @@ public class Room : MonoBehaviour
     private void SpawnEnemy<T>(BaseEnemy<T> enemy, Vector3 spawnPoint) where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>, IPoolable
     {
         if (enemy == null || spawnPoint == null) return;
-
         // 적 위치
         GameObject go = enemy.gameObject;
         go.transform.position = spawnPoint;

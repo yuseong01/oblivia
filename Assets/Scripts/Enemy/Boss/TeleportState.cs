@@ -52,13 +52,15 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
         Vector2 max = new Vector2();
 
         var room = obj.GetCurrentRoom();
+
+
+
         if (room != null)
         {
             min = room.GetMinBounds();
             max = room.GetMaxBounds();
          //   yield return null; ;
         }
-
         float x = Random.Range(min.x, max.x);
         float y = Random.Range(min.y, max.y);
         Vector3 teleportPos = new Vector3(x, y, obj.transform.position.z);

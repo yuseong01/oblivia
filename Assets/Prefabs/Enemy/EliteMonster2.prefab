@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5244900995067947216}
   - component: {fileID: 5539806639084666826}
   - component: {fileID: 5867879556523230109}
+  - component: {fileID: 9031788431876257763}
   m_Layer: 6
   m_Name: EliteMonster2
   m_TagString: Untagged
@@ -153,6 +154,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3125, y: 1.3125}
   m_EdgeRadius: 0
+--- !u!95 &9031788431876257763
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904378883472212713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0abd90014337a442982e1ce76dd0ae7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8524908820578402175
 GameObject:
   m_ObjectHideFlags: 0
