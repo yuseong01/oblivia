@@ -88,7 +88,7 @@ public class Select : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            CharacterManager.Instance.UnlockCharacter("2");
+            CharacterManager.Instance.UnlockCharacter("¾îµÒÀÇ Æ÷Á¹");
 
             UpdateCharacterButtons();
         }
