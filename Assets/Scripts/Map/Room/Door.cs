@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
 {
     public Direction direction;
     public bool isNeighbor = false;
+    public Animator animator;
 
     public Vector2Int currentRoomPos;
     public Vector2Int nextRoomPos;
@@ -16,6 +17,9 @@ public class Door : MonoBehaviour
     public List<RoomSpawn> spawnPoints;
     void Awake() 
     {
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
         SetDir();
         currentRoomPos = GetComponentInParent<Room>().position;
         nextRoomPos = RoomManager.Instance.GetNextRoomPos(direction);
@@ -31,18 +35,24 @@ public class Door : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void DoorOpen() 
+    public void DoorOpen() 
     {
         // 몬스터 모두 처치 시 문 오픈
         // 아마 추후 애니메이션 처리할 듯
-        gameObject.SetActive(true);
+        
+        // 몬스터 모두 처치한 뒤 문 열리는 애니메이션 (IsOpen) 실행
+        animator.SetBool("IsOpen", true);
+        // 문 trigger 모두 설정
+        gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     public void DoorClose() 
     {
         // 방에 들어갔을 때, 문 클로즈
         // 아마 추후 애니메이션 처리할 듯
-        gameObject.SetActive(false);
+        
+        // Player가 Spawn된 뒤 문 trigger 모두 해제
+        gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
     }
 
     // 현재 문이 어느 방향 문인지

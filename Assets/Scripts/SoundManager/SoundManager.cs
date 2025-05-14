@@ -13,6 +13,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private AudioClip hitClip;
     [SerializeField] private AudioClip dieClip;
 
+    public AudioClip DefaultBGMClip => defalutBGMClip;
 
     private void Start()
     {
