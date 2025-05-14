@@ -8,7 +8,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
 {
     private float _moveSpeed;
     private float _arriveDistance = 1f; // 적이 이 거리보다 가까워지면 상태 전환
-
+    private float _distance = 1f;
     public void Enter(T obj)
     {
         //obj.GetAnimator()?.SetBool("Idle", false);
@@ -25,7 +25,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
 
         switch (obj.GetEnemyType())
         {
-            case EnemyType.Normal: // 그냥 플레이어한테 다가감
+            case EnemyType.Normal: 
                 if (dist <= _arriveDistance)
                 {
                     obj.ChangeState(new AttackState<T>());
@@ -33,14 +33,14 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
                 }
                 break;
             case EnemyType.Ranged:
-                if (dist <= 3f) // 사정거리 도달
+                if (dist <= 3f) // 좀 멀어지고 쏘기
                 {
                     obj.ChangeState(new AttackState<T>());
                     return;
                 }
                 break;
             case EnemyType.Elite:
-                if (dist <= _arriveDistance) // 사정거리 도달
+                if (dist <= _arriveDistance) 
                 {
                     obj.ChangeState(new AttackState<T>());
                     return;
@@ -53,12 +53,29 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
             case EnemyType.Teleport:
                 obj.ChangeState(new AttackState<T>());
                 break;
+            case EnemyType.Rush:
+                obj.ChangeState(new AttackState<T>());
+                break;
         }
-        // 플레이어한테 다가가는 코드
-        Vector2 dir = (playerPos - enemyPos).normalized;
-        obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
-        Debug.DrawLine(enemyPos, playerPos, Color.green);
+        // 플레이어와의 간격 보는 코드
+        Vector2 playerDistance = playerPos - enemyPos;
+        float distance = playerDistance.magnitude;
+        if (EnemyType.Minion != obj.GetEnemyType())
+        {
+            // 플레이어한테 다가가는 코드
+            Vector2 dir = (playerPos - enemyPos).normalized;
+            obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            if (distance > _distance)
+            {
+                Vector2 dir = (playerPos - enemyPos).normalized;
+                obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
 
+            }
+        }
+        Debug.DrawLine(enemyPos, playerPos, Color.green);
     }
 
     public void Exit(T obj)

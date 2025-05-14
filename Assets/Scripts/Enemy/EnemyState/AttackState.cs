@@ -110,6 +110,9 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
             case EnemyType.Teleport:
                 obj.ChangeState(new TeleportState<T>());
                 break;
+            case EnemyType.Rush:
+                obj.ChangeState(new RushState<T>());
+                break;
         }
     }
 

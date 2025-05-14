@@ -8,6 +8,10 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     private float _rushDuration = 1f;
     private float _elapsedTime = 0f;
     private Vector3 _rushDirection;
+
+    private Vector2 _minBounds = new Vector2(-8, -4);
+    private Vector2 _maxBounds = new Vector2(8, 4);
+
     public void Enter(T obj)
     {
         _elapsedTime = 0f;
@@ -23,7 +27,10 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         _elapsedTime += Time.deltaTime;
 
         /// 돌진 이동
-        obj.transform.position += _rushDirection * _rushSpeed * Time.deltaTime;
+        Vector3 newPos = obj.transform.position + _rushDirection * _rushSpeed * Time.deltaTime;
+        newPos = ClampToBounds(newPos); // 맵 내인지 체크
+
+        obj.transform.position = newPos;
 
         // 돌진 종료
         if (_elapsedTime >= _rushDuration)
@@ -35,5 +42,12 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     public void Exit(T obj)
     {
 
+    }
+
+    private Vector3 ClampToBounds(Vector3 pos, float margin = 0.3f)
+    {
+        float x = Mathf.Clamp(pos.x, _minBounds.x + margin, _maxBounds.x - margin);
+        float y = Mathf.Clamp(pos.y, _minBounds.y + margin, _maxBounds.y - margin);
+        return new Vector3(x, y, pos.z);
     }
 }

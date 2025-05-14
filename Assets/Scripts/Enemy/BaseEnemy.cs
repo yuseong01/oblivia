@@ -16,6 +16,7 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     [SerializeField] protected EnemyType _type = EnemyType.Normal;
     [SerializeField] protected float _speed = 3f;
     [SerializeField] protected float _attackPower = 10f;
+    [SerializeField] protected Collider2D _innerCollider;
     private string _poolKey;
     private Room _currentRoom;
     private bool _isDead = false;
@@ -104,6 +105,15 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
                 break;
             case EnemyType.Ranged:
                 PoolManager.Instance.Return(_poolKey, this as RangedEnemy);
+                break;
+            case EnemyType.Rush:
+                PoolManager.Instance.Return(_poolKey, this as RushEnemy);
+                break;
+            case EnemyType.Minion:
+                PoolManager.Instance.Return(_poolKey, this as MinionEnemy);
+                break;
+            case EnemyType.Explode:
+                PoolManager.Instance.Return(_poolKey, this as ExplodeEnemy);
                 break;
             default:
                 break;

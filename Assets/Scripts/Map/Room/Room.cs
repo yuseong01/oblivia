@@ -204,6 +204,14 @@ public class Room : MonoBehaviour
                             var teleport = PoolManager.Instance.Get<TeleportEnemy>(poolKey);
                             SpawnEnemy(teleport, spawnPos);
                             break;
+                         case EnemyType.Rush:
+                            var rush = PoolManager.Instance.Get<RushEnemy>(poolKey);
+                            SpawnEnemy(rush, spawnPos);
+                            break;
+                        case EnemyType.Explode:
+                            var explode = PoolManager.Instance.Get<RushEnemy>(poolKey);
+                            SpawnEnemy(explode, spawnPos);
+                            break;
                     }
                 }
         }
