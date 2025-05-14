@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7101366946035166860}
   - component: {fileID: 1236392984599284800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4536551454287270304}
   - component: {fileID: 719315347448221550}
   - component: {fileID: 5623287787597217304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RushEnemy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

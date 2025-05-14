@@ -41,11 +41,7 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
                 break;
             case EnemyType.Elite1:
             case EnemyType.Elite2:
-                if (dist <= _arriveDistance) 
-                {
-                    obj.ChangeState(new AttackState<T>());
-                    return;
-                }
+                obj.ChangeState(new AttackState<T>());
                 break;
             case EnemyType.Boss:
                 obj.ChangeState(new AttackState<T>());

@@ -171,6 +171,7 @@ public class Room : MonoBehaviour
             Debug.Log("enemyList 없음");
             return;
         }
+        _totalEnemyCount = 0;
         Vector3 center = (_minBounds + _maxBounds) / 2f;
         // 그룹별 분리
         var eliteEnemies = _enemyList.Where(e => e.type == EnemyType.Elite1 || e.type == EnemyType.Elite2 || e.type == EnemyType.Boss).ToList();
@@ -190,6 +191,7 @@ public class Room : MonoBehaviour
         int eliteOffsetIndex = 0;
         foreach (var enemy in eliteEnemies)
         {
+            _totalEnemyCount += enemy.count;
             for (int i = 0; i < enemy.count; i++)
             {
                 Vector2 offset = eliteOffsets[eliteOffsetIndex++];
@@ -202,6 +204,7 @@ public class Room : MonoBehaviour
         int normalOffsetIndex = 0;
         foreach (var enemy in normalEnemies)
         {
+            _totalEnemyCount += enemy.count;
             for (int i = 0; i < enemy.count; i++)
             {
                 Vector2 offset = randomizedNormalOffsets[normalOffsetIndex++];
@@ -328,16 +331,12 @@ public class Room : MonoBehaviour
         Room room = gameObject.GetComponent<Room>();
 
         _totalEnemyCount--;
-        Debug.Log("죽었네...");
+        Debug.Log($"{_totalEnemyCount}");
         if (type == RoomType.Boss && _totalEnemyCount == 0)
         {
             Debug.Log("<color=red>메인화면으로</color>");
         }
-        if (_totalEnemyCount > 0)
-        {
-            // 아직 있는 경우
-        }
-        else
+        else if(_totalEnemyCount == 0) 
         {
             // 다 없어진 경우
             //문 열리게끔

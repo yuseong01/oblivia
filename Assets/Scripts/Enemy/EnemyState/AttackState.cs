@@ -45,6 +45,14 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     return;
                 }
                 break;
+            case EnemyType.Elite1:
+            case EnemyType.Elite2:
+                if (dist > rangedRange)
+                {
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                }
+                break;
         }
         // 타이머 체크 및 공격 적용
         if (Time.time - _lastAttackTime < _attackCooldown)
@@ -114,7 +122,7 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     if (obj is IRangedEnemy elite2ranged)
                         DoRangedShoot(obj, elite2ranged);
                 }
-                obj.ChangeState(new RushState<T>());
+                else obj.ChangeState(new RushState<T>());
                 break;
             case EnemyType.Teleport:
                 obj.ChangeState(new TeleportState<T>());
