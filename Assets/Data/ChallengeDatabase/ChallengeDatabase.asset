@@ -25,12 +25,5 @@ MonoBehaviour:
     goal: 1
     currentCount: 0
     isCompleted: 0
-    type: 0
-    rewardCharacterId: 
-  - id: boss_nodamage
-    description: No hit Boss Clear
-    goal: 1
-    currentCount: 0
-    isCompleted: 0
     type: 1
-    rewardCharacterId: test3
+    rewardCharacterId: 2
