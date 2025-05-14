@@ -41,7 +41,7 @@ public class Door : MonoBehaviour
         // 아마 추후 애니메이션 처리할 듯
         
         // 몬스터 모두 처치한 뒤 문 열리는 애니메이션 (IsOpen) 실행
-        animator.SetBool("IsOpen", true);
+        animator.CrossFade("Open", 0f);
         // 문 trigger 모두 설정
         gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
     }

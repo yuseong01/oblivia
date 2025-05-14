@@ -9,6 +9,8 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
     private float _timer;
     private float _dieTime = 1f;
     private string _poolKey;
+    private BaseEnemy<T> _baseEnemy;
+
     public DieState(string poolKey)
     {
         _poolKey = poolKey;
@@ -20,9 +22,14 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
         _timer = 0f;
         //obj.GetAnimator()?.SetTrigger("Die");
         // obj가 스폰되는 애면 죽었을때 스폰시키기 
-        CheckRadius(obj);
-        (obj as BaseEnemy<T>)?.ReturnToPool();
+
+        //_baseEnemy = obj.GetComponent<BaseEnemy<T>>();
         obj.GetAnimator()?.CrossFade("Die", 0f);
+    }
+
+    public void ReturnPool()
+    {
+       // _baseEnemy?.ReturnToPool();
     }
 
     public void Update(T obj)
@@ -32,22 +39,5 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
    public void Exit(T obj) { }
 
    // 죽으면 몬스터 spawn되는 건지 체크
-   public void CheckRadius(T obj)
-   {
-      if (obj is ISpawnable spawnable)
-      {
-          GameObject prefab = spawnable.GetSpawnPrefab();
-          int count = spawnable.GetSpawnCount();
-          float radius = spawnable.GetSpawnRadius();
-          for (int i = 0; i < count; i++)
-          {
-              // 360도 원을 기준으로 배치할 각도 계산
-              float angle = (360f / count) * i * Mathf.Deg2Rad;
-              // 원형 방향 벡터 cos : x/ sin : y
-              Vector3 dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
-              Vector3 spawnPos = obj.transform.position + dir * radius;
-              GameObject.Instantiate(prefab, spawnPos, Quaternion.identity);        
-            }
-      }
-  }
+  
 }
