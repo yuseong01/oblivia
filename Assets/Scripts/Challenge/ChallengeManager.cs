@@ -80,10 +80,7 @@ public class ChallengeManager : MonoBehaviour
 
     // 사용 예시:
     /*
-    if (playerTookNoDamage)
-    {
         ChallengeManager.Instance.CompleteConditionChallenge("boss_nodamage");
-    }
     */
 
     void ShowReward(Challenge challenge)
@@ -92,7 +89,7 @@ public class ChallengeManager : MonoBehaviour
         rewardPanel.SetActive(true);
 
         // 2초 후에 판넬과 텍스트를 비활성화
-        StartCoroutine(HideRewardAfterDelay(2f)); // 2초 뒤에 숨기기
+        StartCoroutine(HideRewardAfterDelay(2f));
     }
 
     IEnumerator HideRewardAfterDelay(float delay)

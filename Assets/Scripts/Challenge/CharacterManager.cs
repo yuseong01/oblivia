@@ -10,7 +10,7 @@ public class CharacterManager : MonoBehaviour
     private string savePath;
 
     // 기본 해금 캐릭터 ID 목록
-    private readonly string[] defaultUnlockedIds = { "백의 죄인", "무녀의 혼" };
+    private readonly string[] defaultUnlockedIds = { "1", "3" };
 
     [System.Serializable]
     private class UnlockSaveData
