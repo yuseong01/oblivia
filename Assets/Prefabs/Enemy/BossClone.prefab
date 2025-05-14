@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7102151827390315306
 Transform:
   m_ObjectHideFlags: 0
@@ -152,8 +152,8 @@ MonoBehaviour:
   _attackPower: 10
   _innerCollider: {fileID: 42977216728507709}
   _cloneBossPrefab: {fileID: 4043589511158882836}
-  _forwardProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
-  _radialProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
+  _forwardProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
+  _radialProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
 --- !u!1 &6699932913629880990
 GameObject:
   m_ObjectHideFlags: 0
