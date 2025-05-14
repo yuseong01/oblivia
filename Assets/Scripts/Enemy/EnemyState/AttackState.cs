@@ -46,13 +46,6 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     return;
                 }
                 break;
-            case EnemyType.Rush:
-                if (dist > normalRange)
-                {
-                    obj.ChangeState(new MoveState<T>());
-                    return;
-                }
-                break;
             case EnemyType.Elite1:
             case EnemyType.Elite2:
                 if (dist > rangedRange)
@@ -117,20 +110,41 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     DoRangedShoot(obj, ranged);
                 break;
             case EnemyType.Elite1:
-                if(obj.GetHealth() < 50)
+                if (obj is IRangedEnemy rangedElite1)
                 {
-                    if (obj is IRangedEnemy elite1ranged)
-                        DoRangedShoot(obj, elite1ranged);
+                    float rand = Random.value; // 0.0 ~ 1.0
+                    if (rand < 0.6f)
+                    {
+                        DoRangedShoot(obj, rangedElite1);// 60% 확률로 광역탄
+                    }
+                    else if (rand < 0.85f)
+                    {
+                        obj.ChangeState(new RushState<T>()); // 25% 확률로 돌진
+                    }
+                    else
+                    {
+                        obj.ChangeState(new TeleportState<T>()); // 15% 확률로 순간이동
+                    }
                 }
-                DoNormalAttack(obj);
                 break;
             case EnemyType.Elite2:
-                if (obj.GetHealth() < 50)
+                if (obj is IRangedEnemy rangedElite2)
                 {
-                    if (obj is IRangedEnemy elite2ranged)
-                        DoRangedShoot(obj, elite2ranged);
+                    float rand = Random.value; // 0.0 ~ 1.0
+
+                    if (rand < 0.6f)
+                    {
+                        DoRangedShoot(obj, rangedElite2);// 60% 확률로 광역탄
+                    }
+                    else if (rand < 0.85f)
+                    {
+                        obj.ChangeState(new FleeState<T>()); // 25% 확률로 돌진
+                    }
+                    else
+                    {
+                        obj.ChangeState(new TeleportState<T>()); // 15% 확률로 순간이동
+                    }
                 }
-                else obj.ChangeState(new RushState<T>());
                 break;
             case EnemyType.Teleport:
                 obj.ChangeState(new TeleportState<T>());
@@ -152,11 +166,6 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
         //obj.GetAnimator()?.SetTrigger("Attack");
         Transform player = obj.GetPlayerPosition();
         float dist = Vector2.Distance(obj.GetEnemyPosition().position, player.position);
-        if (dist <= 1.2f)
-        {
-            // 플레이어 체력에 영향
-            // 요런 느낌으로 TakeDamage(1);
-        }
     }
 
     // 원거리 공격 몬스터

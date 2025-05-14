@@ -12,14 +12,13 @@ GameObject:
   - component: {fileID: 1804889907453959865}
   - component: {fileID: 9016918400058247143}
   - component: {fileID: 1255660186667034479}
-  - component: {fileID: 2650622700414359647}
   m_Layer: 6
   m_Name: BossClone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7102151827390315306
 Transform:
   m_ObjectHideFlags: 0
@@ -153,29 +152,8 @@ MonoBehaviour:
   _attackPower: 10
   _innerCollider: {fileID: 42977216728507709}
   _cloneBossPrefab: {fileID: 4043589511158882836}
-  _forwardProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
-  _radialProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
---- !u!95 &2650622700414359647
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4043589511158882836}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2d5e2732f2ddb9b48a4371bd098fa951, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  _forwardProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
+  _radialProjectilePrefab: {fileID: 5072215996912832189, guid: 711bed32bb9d7324f9d52dc770c06fae, type: 3}
 --- !u!1 &6699932913629880990
 GameObject:
   m_ObjectHideFlags: 0
