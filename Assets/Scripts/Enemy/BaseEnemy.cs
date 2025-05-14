@@ -43,9 +43,6 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     {
         _fsm.Update(this as T);
         _player = GameObject.FindWithTag("Player").transform;
-        GetCurrentRoom();
-       _minBounds = _currentRoom.GetMinBounds();
-       _maxBounds = _currentRoom.GetMaxBounds();
     }
 
     // ���� ���� �Լ�
