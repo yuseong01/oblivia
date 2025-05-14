@@ -46,6 +46,14 @@ public class ChallengeManager : MonoBehaviour
                 {
                     challenge.isCompleted = true;
                     ShowReward(challenge);
+
+                    // 도전과제 완료 시 캐릭터 해금
+                    if (!string.IsNullOrEmpty(challenge.rewardCharacterId))
+                    {
+                        // 캐릭터 해금 요청
+                        CharacterManager.Instance.UnlockCharacter(challenge.rewardCharacterId);
+                    }
+
                 }
 
                 break;
@@ -124,7 +132,8 @@ public class ChallengeManager : MonoBehaviour
                     goal = c.goal,
                     currentCount = 0,
                     isCompleted = false,
-                    type = c.type
+                    type = c.type,
+                    rewardCharacterId = c.rewardCharacterId
                 });
             }
 
