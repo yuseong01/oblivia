@@ -27,7 +27,7 @@ public class UI_ItemDescription : UI_Popup
 
         Get<Image>((int)Imanges.Icon).sprite = Itemdata.Icon;
 
-        Get<TextMeshProUGUI>((int)TMPs.Name).text = Itemdata.name;
+        Get<TextMeshProUGUI>((int)TMPs.Name).text = Itemdata.ItemName;
         Get<TextMeshProUGUI>((int)TMPs.Description).text = Itemdata.Description;
 
         StartCoroutine(EndPopUp());
