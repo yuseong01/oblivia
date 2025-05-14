@@ -22,6 +22,7 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
         // obj가 스폰되는 애면 죽었을때 스폰시키기 
         CheckRadius(obj);
         (obj as BaseEnemy<T>)?.ReturnToPool();
+        obj.GetAnimator()?.CrossFade("Die", 0f);
     }
 
     public void Update(T obj)
