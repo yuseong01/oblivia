@@ -6,20 +6,20 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioSource bgmSource;
     [SerializeField] AudioSource sfxSource;
 
-    [SerializeField] AudioClip defalutBGMClip;
+    [SerializeField] AudioClip defaultBGMClip;
 
     //중복되는 사운드
     [SerializeField] private AudioClip jumpClip;
     [SerializeField] private AudioClip hitClip;
     [SerializeField] private AudioClip dieClip;
 
-    public AudioClip DefaultBGMClip => defalutBGMClip;
+    public AudioClip DefaultBGMClip => defaultBGMClip;
 
     private void Start()
     {
         bgmSource.volume = PlayerPrefs.GetFloat("BGMVolume", 1f);
         sfxSource.volume = PlayerPrefs.GetFloat("SFXVolume", 1f);
-        PlayBGMSource(defalutBGMClip); //배경음 자동실행
+        //PlayBGMSource(defalutBGMClip); //배경음 자동실행
     }
     public void PlayBGMSource(AudioClip audioClip)  //배경음악 교체시
     {
