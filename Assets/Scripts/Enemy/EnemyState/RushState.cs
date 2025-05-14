@@ -11,7 +11,11 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
     private Vector2 _minBounds = new Vector2(-8, -4);
     private Vector2 _maxBounds = new Vector2(8, 4);
-
+    public void SetBounds(Vector2 min, Vector2 max)
+    {
+        _minBounds = min;
+        _maxBounds = max;
+    }
     public void Enter(T obj)
     {
         _elapsedTime = 0f;
@@ -31,13 +35,11 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
 
         var room = obj.GetCurrentRoom();
+
         if (room != null)
         {
-            _minBounds = room.GetMinBounds();
-            _maxBounds = room.GetMaxBounds();
-            return;
+            SetBounds(room.GetMinBounds(), room.GetMaxBounds());
         }
-      
 
 
         newPos = ClampToBounds(newPos); // 맵 내인지 체크

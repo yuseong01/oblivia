@@ -148,7 +148,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _health: 10
   _detectRange: 5
-  _type: 0
+  _type: 5
   _speed: 3
   _attackPower: 10
   _innerCollider: {fileID: 299268701026441029}

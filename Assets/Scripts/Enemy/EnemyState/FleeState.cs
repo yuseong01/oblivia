@@ -15,7 +15,11 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     private float _elapsedTime = 0f;
     private Vector2 _targetPos;
     private bool _hasTarget = false;
-
+    public void SetBounds(Vector2 min, Vector2 max)
+    {
+        _minBounds = min;
+        _maxBounds = max;
+    }
     public void Enter(T obj)
     {
         _elapsedTime = 0f;
@@ -26,15 +30,12 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         Vector2 enemyPos = obj.GetEnemyPosition().position;
         Vector2 playerPos = obj.GetPlayerPosition().position;
         var room = obj.GetCurrentRoom();
-       
+
         if (room != null)
         {
-            _minBounds = room.GetMinBounds();
-            _maxBounds = room.GetMaxBounds();
-            return;
+            SetBounds(room.GetMinBounds(), room.GetMaxBounds());
         }
 
-        // ����� �־������� IdleState�� ���ư�
         if (Vector2.Distance(enemyPos, playerPos) > _fleeDistance + 0.5f)
         {
             obj.ChangeState(new IdleState<T>());
