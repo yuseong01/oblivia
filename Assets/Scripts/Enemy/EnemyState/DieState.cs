@@ -23,13 +23,13 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
         //obj.GetAnimator()?.SetTrigger("Die");
         // obj가 스폰되는 애면 죽었을때 스폰시키기 
 
-        _baseEnemy = obj.GetComponent<BaseEnemy<T>>();
+        //_baseEnemy = obj.GetComponent<BaseEnemy<T>>();
         obj.GetAnimator()?.CrossFade("Die", 0f);
     }
 
     public void ReturnPool()
     {
-        _baseEnemy?.ReturnToPool();
+       // _baseEnemy?.ReturnToPool();
     }
 
     public void Update(T obj)
