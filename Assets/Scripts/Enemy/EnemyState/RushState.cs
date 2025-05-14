@@ -23,7 +23,13 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         // 돌진 방향: 플레이어 향함
         Vector3 toPlayer = obj.GetPlayerPosition().position - obj.transform.position;
         _rushDirection = toPlayer.normalized;
-       
+
+        var sr = (obj as MonoBehaviour).GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.flipX = _rushDirection.x < 0;
+        }
+
     }
 
     public void Update(T obj)

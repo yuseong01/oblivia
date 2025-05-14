@@ -1854,6 +1854,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419384953}
   m_CullTransparentMesh: 1
+--- !u!1 &426283709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5456787113484417702, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+  m_PrefabInstance: {fileID: 975303386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &426283711 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7443350461325651531, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+  m_PrefabInstance: {fileID: 975303386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &426283712
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426283709}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ab5c9cbd2d464cb4a904b0f2ed0e831f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &458973094
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,6 +3561,14 @@ PrefabInstance:
       propertyPath: _attackCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1918095477051338096, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 426283712}
+    - target: {fileID: 1918095477051338096, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 426283711}
     - target: {fileID: 1999162084652056299, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.56
@@ -3581,7 +3620,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5456787113484417702, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 426283712}
   m_SourcePrefab: {fileID: 100100000, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
 --- !u!114 &975303387 stripped
 MonoBehaviour:

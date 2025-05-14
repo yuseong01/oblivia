@@ -17,6 +17,7 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     [SerializeField] protected float _speed = 3f;
     [SerializeField] protected float _attackPower = 10f;
     [SerializeField] protected Collider2D _innerCollider;
+    protected SpriteRenderer _spriteRenderer;
     public Vector2 _minBounds = new Vector2(-8, -4);
     public Vector2 _maxBounds = new Vector2(8, 4);
 
@@ -30,6 +31,7 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     {
         _anim = GetComponent<Animator>();
         _poolKey = _type.ToString();
+        _spriteRenderer= gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -137,4 +139,9 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     }
     public IState<T> CurrentState => _currentState;
     public float GetAttackPower()=> _attackPower;
+
+    public SpriteRenderer GetSpriteRenderer()
+    {
+        return _spriteRenderer;
+    }
 }
