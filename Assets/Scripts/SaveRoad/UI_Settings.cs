@@ -6,7 +6,7 @@ public class UI_Settings : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
-    [SerializeField] private Button closeButton; // Reference to the "X" button
+    [SerializeField] private Button closeButton; 
 
     public bool isOpen => settingsPanel.activeSelf;
 
