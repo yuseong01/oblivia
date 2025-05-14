@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 349939282685335329}
   - component: {fileID: 724855000708195646}
   - component: {fileID: 268511001225674012}
+  - component: {fileID: 1307118812550326402}
   m_Layer: 6
   m_Name: RushEnemy
   m_TagString: Untagged
@@ -150,3 +151,24 @@ MonoBehaviour:
   _speed: 3
   _attackPower: 10
   _innerCollider: {fileID: 0}
+--- !u!95 &1307118812550326402
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929171962915058738}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
