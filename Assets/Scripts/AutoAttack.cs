@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AutoAttack : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class AutoAttack : MonoBehaviour
         isPausedGame = true;
     }
 
+    public void GoMain()
+    {
+        SceneManager.LoadScene("Save"); 
+    }
     public void ResumeGame()
     {
         escMenu.SetActive(false);
