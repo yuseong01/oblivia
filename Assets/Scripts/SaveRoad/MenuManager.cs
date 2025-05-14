@@ -67,7 +67,8 @@ public class MenuManager : MonoBehaviour
         introPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
 
-        //SoundManager.Instance.PlayBGMSource(SoundManager.Instance.DefaultBGMClip);
+        Debug.Log(SoundManager.Instance.DefaultBGMClip);
+        SoundManager.Instance.PlayBGMSource(SoundManager.Instance.DefaultBGMClip);
     }
 
     #endregion
