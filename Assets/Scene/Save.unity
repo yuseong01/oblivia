@@ -647,7 +647,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1305,7 +1305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -600}
+  m_AnchoredPosition: {x: 0, y: -519.62}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &483734257
@@ -1786,7 +1786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 902.42, y: -291.59}
+  m_AnchoredPosition: {x: 830.97, y: -291.59}
   m_SizeDelta: {x: 738.1814, y: 2262.8}
   m_Pivot: {x: 0.5, y: 0.5000002}
 --- !u!114 &663525789
@@ -2523,8 +2523,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0013427734, y: -1153}
-  m_SizeDelta: {x: 1066.7, y: 539.96}
+  m_AnchoredPosition: {x: 0.0013427734, y: -850.51}
+  m_SizeDelta: {x: 1066.7, y: 1145}
   m_Pivot: {x: 0.5, y: 0.5000002}
 --- !u!114 &1151404516
 MonoBehaviour:
@@ -3296,7 +3296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -902.4295, y: -291.58972}
+  m_AnchoredPosition: {x: -830.97, y: -291.59}
   m_SizeDelta: {x: 738.1814, y: 2262.8}
   m_Pivot: {x: 0.5, y: 0.5000002}
 --- !u!114 &1508939886
@@ -3837,8 +3837,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0013427734, y: 569.82}
-  m_SizeDelta: {x: 1066.7, y: 539.96}
+  m_AnchoredPosition: {x: 0.0013427734, y: 549.73}
+  m_SizeDelta: {x: 1066.7, y: 580.15}
   m_Pivot: {x: 0.5, y: 0.5000002}
 --- !u!114 &1696687016
 MonoBehaviour:
