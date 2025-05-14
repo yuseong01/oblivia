@@ -105,6 +105,7 @@ MonoBehaviour:
   _type: 6
   _speed: 3
   _attackPower: 10
+  _innerCollider: {fileID: 1315285023858639042}
 --- !u!61 &-4773530430310618686
 BoxCollider2D:
   m_ObjectHideFlags: 0

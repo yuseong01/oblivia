@@ -34,6 +34,15 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                 case IEnemy.EnemyType.Teleport:
                     obj.ChangeState(new TeleportState<T>());
                     return;
+                case IEnemy.EnemyType.Rush:
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                case IEnemy.EnemyType.Explode:
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                case IEnemy.EnemyType.Minion:
+                    obj.ChangeState(new MoveState<T>()); 
+                    return;
             }
         }
     }
