@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8946947128860070249}
   - component: {fileID: 5244900995067947216}
   - component: {fileID: 5539806639084666826}
-  m_Layer: 0
+  - component: {fileID: 5867879556523230109}
+  m_Layer: 6
   m_Name: EliteMonster2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,6 +108,51 @@ MonoBehaviour:
   _innerCollider: {fileID: 7123225758646307813}
   _forwardProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
   _radialProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
+--- !u!61 &5867879556523230109
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904378883472212713}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.3125, y: 1.3125}
+    newSize: {x: 1.3125, y: 1.3125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3125, y: 1.3125}
+  m_EdgeRadius: 0
 --- !u!1 &8524908820578402175
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3236302636604473909}
   - component: {fileID: 7123225758646307813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

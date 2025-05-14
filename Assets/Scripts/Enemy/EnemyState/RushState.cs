@@ -28,6 +28,18 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
         /// 돌진 이동
         Vector3 newPos = obj.transform.position + _rushDirection * _rushSpeed * Time.deltaTime;
+
+
+        var room = obj.GetCurrentRoom();
+        if (room != null)
+        {
+            _minBounds = room.GetMinBounds();
+            _maxBounds = room.GetMaxBounds();
+            return;
+        }
+      
+
+
         newPos = ClampToBounds(newPos); // 맵 내인지 체크
 
         obj.transform.position = newPos;

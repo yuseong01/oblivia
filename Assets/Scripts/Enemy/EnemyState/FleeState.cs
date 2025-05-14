@@ -20,12 +20,15 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     {
         _elapsedTime = 0f;
     }
-
     public void Update(T obj)
     {
         _elapsedTime += Time.deltaTime;
         Vector2 enemyPos = obj.GetEnemyPosition().position;
         Vector2 playerPos = obj.GetPlayerPosition().position;
+
+
+        _minBounds = obj.GetCurrentRoom().GetMinBounds();
+        _maxBounds = obj.GetCurrentRoom().GetMaxBounds();
 
         // ����� �־������� IdleState�� ���ư�
         if (Vector2.Distance(enemyPos, playerPos) > _fleeDistance + 0.5f)
@@ -72,7 +75,7 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         // ���� ���� �õ�
         for (int i = 0; i < 10; i++)
         {
-            float angle = Random.Range(-90f, 90f); // fleeDir�� �������� ��90�� ȸ��
+            float angle = Random.Range(0f, 360f);
             Vector2 dir = Quaternion.Euler(0, 0, angle) * fleeDir;
             Vector2 destination = enemyPos + dir * _fleeDistance; // ���� ��ǥ ��ġ
 

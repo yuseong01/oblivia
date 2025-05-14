@@ -10,7 +10,6 @@ public class FleeEnemy : BaseEnemy<FleeEnemy>
         // �÷��̾�� ����� ������ �±�
         if (other.CompareTag("PlayerBullet"))
         {
-            Physics2D.IgnoreCollision(_innerCollider, other, true);
             TakeDamage(1); // IEnemy�� ���� �޼���
         }
     }
