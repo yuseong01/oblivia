@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4095230697538528643}
   - component: {fileID: 1515228967705930097}
   - component: {fileID: 8039902138076269242}
+  - component: {fileID: 8166308434060430921}
   m_Layer: 6
   m_Name: MoveEnemy
   m_TagString: Untagged
@@ -151,6 +152,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3125, y: 1.3125}
   m_EdgeRadius: 0
+--- !u!114 &8166308434060430921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901998245674768080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36dc49f98751854b81c0f9b1fff392b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _health: 10
+  _detectRange: 5
+  _type: 0
+  _speed: 3
+  _attackPower: 10
+  _innerCollider: {fileID: 6879337344807127186}
 --- !u!1 &7066691823926245543
 GameObject:
   m_ObjectHideFlags: 0

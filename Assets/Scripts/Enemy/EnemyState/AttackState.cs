@@ -45,6 +45,14 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     return;
                 }
                 break;
+            case EnemyType.Elite1:
+            case EnemyType.Elite2:
+                if (dist > rangedRange)
+                {
+                    obj.ChangeState(new MoveState<T>());
+                    return;
+                }
+                break;
         }
         // 타이머 체크 및 공격 적용
         if (Time.time - _lastAttackTime < _attackCooldown)
@@ -100,12 +108,21 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                 if (obj is IRangedEnemy ranged)
                     DoRangedShoot(obj, ranged);
                 break;
-            case EnemyType.Elite:
+            case EnemyType.Elite1:
                 if(obj.GetHealth() < 50)
                 {
-                    obj.ChangeState(new FleeState<T>());
+                    if (obj is IRangedEnemy elite1ranged)
+                        DoRangedShoot(obj, elite1ranged);
                 }
                 DoNormalAttack(obj);
+                break;
+            case EnemyType.Elite2:
+                if (obj.GetHealth() < 50)
+                {
+                    if (obj is IRangedEnemy elite2ranged)
+                        DoRangedShoot(obj, elite2ranged);
+                }
+                else obj.ChangeState(new RushState<T>());
                 break;
             case EnemyType.Teleport:
                 obj.ChangeState(new TeleportState<T>());

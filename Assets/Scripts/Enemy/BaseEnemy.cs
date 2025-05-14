@@ -17,6 +17,10 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     [SerializeField] protected float _speed = 3f;
     [SerializeField] protected float _attackPower = 10f;
     [SerializeField] protected Collider2D _innerCollider;
+    private Vector2 _minBounds = new Vector2(-8, -4);
+    private Vector2 _maxBounds = new Vector2(8, 4);
+
+    protected IState<T> _currentState;
     private string _poolKey;
     private Room _currentRoom;
     private bool _isDead = false;
@@ -24,14 +28,13 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     // Unity �ʱ�ȭ
     protected virtual void Awake()
     {
-        _player = GameObject.FindWithTag("Player").transform;
-
         _anim = GetComponent<Animator>();
         _poolKey = _type.ToString();
-
     }
+
     private void Start()
     {
+        _player = GameObject.FindWithTag("Player").transform;
         ChangeState(new IdleState<T>());
         // Die 확인용
         //ChangeState(new DieState<T>(_type.ToString()));
@@ -39,12 +42,16 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     protected virtual void Update()
     {
         _fsm.Update(this as T);
+        _player = GameObject.FindWithTag("Player").transform;
+        GetCurrentRoom();
+       _minBounds = _currentRoom.GetMinBounds();
+       _maxBounds = _currentRoom.GetMaxBounds();
     }
 
     // ���� ���� �Լ�
-    public void ChangeState(IState<T> newState)
+    public void ChangeState(IState<T> _currentState)
     {
-        _fsm.ChangeState(newState, this as T);
+        _fsm.ChangeState(_currentState, this as T);
     }
 
     // IEnemy ����
@@ -59,6 +66,7 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     public float GetSpeed() => _speed;
     public void TakeDamage(float amount) // 몬스터가 공격을 받는 거
     {
+        Debug.Log(_health);
         if (_isDead) return;
         _health -= amount;
         if (_health <= 0f)
@@ -69,7 +77,10 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
         }
     }
     public Room GetCurrentRoom() => _currentRoom;
-    public void SetCurrentRoom(Room room) => _currentRoom = room;
+    public virtual void SetCurrentRoom(Room room)
+    {
+        _currentRoom = room;
+    }
     public void OnSpawned()
     {
         // 초기화
@@ -115,9 +126,16 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
             case EnemyType.Explode:
                 PoolManager.Instance.Return(_poolKey, this as ExplodeEnemy);
                 break;
+            case EnemyType.Elite1:
+                PoolManager.Instance.Return(_poolKey, this as ElitEnemy);
+                break;
+            case EnemyType.Elite2:
+                PoolManager.Instance.Return(_poolKey, this as ElitEnemy);
+                break;
             default:
                 break;
         }
     }
+    public IState<T> CurrentState => _currentState;
     public float GetAttackPower()=> _attackPower;
 }

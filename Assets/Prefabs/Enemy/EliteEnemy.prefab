@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8245124196771451609}
   - component: {fileID: 5967357321451013421}
-  - component: {fileID: 474660601703285724}
   - component: {fileID: 7577054858864380725}
+  - component: {fileID: 8888801358620344233}
   m_Layer: 6
   m_Name: EliteEnemy
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 2670bd14c33142e4abf1d934e2e92bab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -87,26 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &474660601703285724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3930795542360209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6238156d361aba14ba3af9ff3b55d471, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _health: 10
-  _detectRange: 5
-  _type: 4
-  _speed: 3
-  _attackPower: 10
-  _innerCollider: {fileID: 299268701026441029}
-  forwardProjectile: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
 --- !u!61 &7577054858864380725
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -152,6 +132,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0010253, y: 1.0073442}
   m_EdgeRadius: 0
+--- !u!114 &8888801358620344233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3930795542360209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34a173b9250eb3499fc9e388a3223a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _health: 10
+  _detectRange: 5
+  _type: 5
+  _speed: 3
+  _attackPower: 10
+  _innerCollider: {fileID: 299268701026441029}
+  _forwardProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
+  _radialProjectilePrefab: {fileID: 8684591616834765395, guid: 8060116df4bdd13459e39c6220b9b630, type: 3}
 --- !u!1 &2794097589955381270
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,8 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                 case IEnemy.EnemyType.Ranged:
                     obj.ChangeState(new MoveState<T>());
                     return;
-                case IEnemy.EnemyType.Elite:
+                case IEnemy.EnemyType.Elite1:
+                case IEnemy.EnemyType.Elite2:
                     obj.ChangeState(new MoveState<T>());
                     return;
                 case IEnemy.EnemyType.Boss:

@@ -7215,10 +7215,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afac43f29d934cc8ba175f07aa49255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rangedPrefab: {fileID: 474660601703285724, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
+  _fleePrefab: {fileID: 8330389334200952258, guid: 535ad6434fff65840b50616302322541, type: 3}
   _movePrefab: {fileID: 1515228967705930097, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
-  _bossPrefab: {fileID: 6357986066415398257, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  _bossPrefab: {fileID: 1255660186667034479, guid: f63a025a3797941e19f7930c21d70360, type: 3}
   _teleportPrefab: {fileID: 8884700069627570088, guid: a1d592334d9207747ad74298694ee719, type: 3}
+  _rushPrefab: {fileID: 268511001225674012, guid: bfdbb40065face7419f66e4e0d0e53da, type: 3}
+  _rush2Prefab: {fileID: 5623287787597217304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+  _explodePrefab: {fileID: 3450123958080846300, guid: a139140a26f8efd4e814039f090287c4, type: 3}
+  _minionPrefab: {fileID: 3523611977730320027, guid: d9259a449cbeb7b4180559883e99873c, type: 3}
+  _elitePrefab: {fileID: 8888801358620344233, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
+  _elite2Prefab: {fileID: 5539806639084666826, guid: 98b8a4dec47d1c64ab55faafc5d22ca2, type: 3}
   _enemyParent: {fileID: 1362004004}
   _bossParent: {fileID: 1362004004}
   _roomSpawn:
@@ -7228,42 +7234,24 @@ MonoBehaviour:
       poolKey: Normal
       count: 0
       prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
-  - roomType: 1
-    enemies:
-    - type: 0
-      poolKey: Normal
-      count: 1
-      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
-  - roomType: 1
-    enemies:
-    - type: 4
-      poolKey: Ranged
-      count: 2
-      prefab: {fileID: 3930795542360209, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
-  - roomType: 1
-    enemies:
-    - type: 0
-      poolKey: Normal
-      count: 3
-      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
-  - roomType: 1
-    enemies:
-    - type: 0
-      poolKey: Normal
-      count: 4
-      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
-  - roomType: 1
-    enemies:
-    - type: 0
-      poolKey: Normal
-      count: 5
-      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
   - roomType: 3
     enemies:
     - type: 2
       poolKey: Boss
       count: 1
       prefab: {fileID: 4043589511158882836, guid: f63a025a3797941e19f7930c21d70360, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 10
+      poolKey: Explode
+      count: 3
+      prefab: {fileID: 2295998883299947131, guid: a139140a26f8efd4e814039f090287c4, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 8
+      poolKey: Rush
+      count: 3
+      prefab: {fileID: 3929171962915058738, guid: bfdbb40065face7419f66e4e0d0e53da, type: 3}
 --- !u!4 &1730770963
 Transform:
   m_ObjectHideFlags: 0

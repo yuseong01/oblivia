@@ -87,8 +87,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8218427308202924220}
   - component: {fileID: 743765027467592641}
-  - component: {fileID: 991438997798825592}
   - component: {fileID: 2414480080274207547}
+  - component: {fileID: 3450123958080846300}
   m_Layer: 6
   m_Name: ExplodeEnemy
   m_TagString: Untagged
@@ -164,28 +164,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &991438997798825592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2295998883299947131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93f1dacb8ed97546a34d00aea82fc09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _health: 10
-  _detectRange: 5
-  _type: 9
-  _speed: 3
-  _attackPower: 10
-  _innerCollider: {fileID: 5054368406666715566}
-  _spawnPrefab: {fileID: 0}
-  _spawnCount: 4
-  _spawnRadius: 0.5
 --- !u!61 &2414480080274207547
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231,3 +209,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3450123958080846300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2295998883299947131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93f1dacb8ed97546a34d00aea82fc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _health: 10
+  _detectRange: 5
+  _type: 10
+  _speed: 3
+  _attackPower: 10
+  _innerCollider: {fileID: 5054368406666715566}
+  _spawnPrefab: {fileID: 3973199383335479890, guid: d9259a449cbeb7b4180559883e99873c, type: 3}
+  _spawnCount: 4
+  _spawnRadius: 1
