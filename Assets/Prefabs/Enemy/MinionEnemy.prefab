@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8300897752577200904}
   - component: {fileID: 3523611977730320027}
   - component: {fileID: 7081500732750750408}
+  - component: {fileID: 1732298596555041625}
   m_Layer: 6
   m_Name: MinionEnemy
   m_TagString: Untagged
@@ -151,6 +152,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &1732298596555041625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3973199383335479890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36dc49f98751854b81c0f9b1fff392b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _health: 10
+  _detectRange: 5
+  _type: 0
+  _speed: 3
+  _attackPower: 10
+  _innerCollider: {fileID: 7298592164924867283}
 --- !u!1 &5818469307626403186
 GameObject:
   m_ObjectHideFlags: 0
