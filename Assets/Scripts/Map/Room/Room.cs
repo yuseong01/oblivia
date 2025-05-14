@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using static IEnemy;
 
@@ -330,10 +331,15 @@ public class Room : MonoBehaviour
         Room room = gameObject.GetComponent<Room>();
 
         _totalEnemyCount--;
+        ChallengeManager.Instance.IncreaseProgress("kill_monster", 1);
+
         Debug.Log($"{_totalEnemyCount}");
         if (type == RoomType.Boss && _totalEnemyCount == 0)
         {
+            ChallengeManager.Instance.IncreaseProgress("1_stage_boss_clear", 1);
             Debug.Log("<color=red>메인화면으로</color>");
+
+            Invoke(nameof(GoToMainSence), 3f);
         }
         else if(_totalEnemyCount == 0) 
         {
@@ -345,6 +351,12 @@ public class Room : MonoBehaviour
             }
 
             Debug.Log("<color=yellow><b>이 방은 끝</b></color>");
+
         }
+    }
+
+    private void GoToMainSence()
+    {
+        SceneManager.LoadScene("Save");
     }
 }

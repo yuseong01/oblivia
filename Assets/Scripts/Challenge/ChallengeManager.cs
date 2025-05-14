@@ -85,8 +85,9 @@ public class ChallengeManager : MonoBehaviour
 
     void ShowReward(Challenge challenge)
     {
-        rewardText.text = $"Mission Complete!\n{challenge.description}";
+        rewardText.text = $"도전 과제 성공!\n{challenge.description}";
         rewardPanel.SetActive(true);
+        Debug.Log("gd");
 
         // 2초 후에 판넬과 텍스트를 비활성화
         StartCoroutine(HideRewardAfterDelay(2f));

@@ -68,9 +68,11 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
         _health -= amount;
         if (_health <= 0f)
         {
+            ChallengeManager.Instance.IncreaseProgress("kill_monsters", 1);
             _isDead = true;
             _currentRoom?.EnemyDied();
             ChangeState(new DieState<T>(_type.ToString()));
+            
         }
     }
     public Room GetCurrentRoom() => _currentRoom;
