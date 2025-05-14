@@ -7,8 +7,13 @@ public class ExplodeEnemy : BaseEnemy<ExplodeEnemy>, IExplodable, ISpawnable
     [SerializeField] private GameObject _spawnPrefab;
     [SerializeField] private int _spawnCount = 4;
     [SerializeField] private float _spawnRadius = 1f;
-    private Vector2 _minBounds = new Vector2(-8, -4);
-    private Vector2 _maxBounds = new Vector2(8, 4);
+    private Vector2 _minBound;
+    private Vector2 _maxBound;
+    public void SetBounds(Vector2 min, Vector2 max)
+    {
+        _minBound = min;
+        _maxBound = max;
+    }
     public int GetSpawnCount() => _spawnCount;
 
     public GameObject GetSpawnPrefab() => _spawnPrefab;
@@ -36,8 +41,10 @@ public class ExplodeEnemy : BaseEnemy<ExplodeEnemy>, IExplodable, ISpawnable
     {
         Vector3 center = transform.position;
         Room room = GetCurrentRoom();
-        _minBounds = GetCurrentRoom().GetMinBounds();
-        _maxBounds = GetCurrentRoom().GetMaxBounds();
+        if (room != null)
+        {
+            SetBounds(room.GetMinBounds(), room.GetMaxBounds());
+        }
         for (int i = 0; i < _spawnCount; i++)
         {
             float angle = (360f / _spawnCount) * i * Mathf.Deg2Rad;
