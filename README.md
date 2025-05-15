@@ -716,7 +716,7 @@ public class Challenge
 
 ## 🙋 개발자 정보
 
- 팀장 - 장유성 (몬스터 생성 로직)
+ 팀장 - 장유성 (Object Pool몬스터 생성 로직, 사운드 로직, 싱글톤 유틸리티 제작)
 - 블로그 - https://dochi-programming.tistory.com
 - 깃헙 - https://github.com/yuseong01
 
