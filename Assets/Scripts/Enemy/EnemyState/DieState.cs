@@ -16,16 +16,11 @@ public class DieState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMach
         _poolKey = poolKey;
     }
 
-
     public void Enter(T obj)
     {
-        _timer = 0f;
-        //obj.GetAnimator()?.SetTrigger("Die");
-        // obj가 스폰되는 애면 죽었을때 스폰시키기 
-
         _baseEnemy = obj.GetComponent<BaseEnemy<T>>();
         obj.GetAnimator()?.CrossFade("Die", 0f);
-    }
+    }       
 
     public void ReturnPool()
     {
