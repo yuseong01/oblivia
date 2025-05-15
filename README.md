@@ -719,15 +719,19 @@ public class Challenge
  팀장 - 장유성 (몬스터 생성 로직)
 - 블로그 - https://dochi-programming.tistory.com
 - 깃헙 - https://github.com/yuseong01
- 팀원 - 김경민 (데이터, UI, 게임 설정 )
+
+팀원 - 김경민 (데이터, UI, 게임 설정 )
 - 블로그 - https://rudals4469.tistory.com/
 - 깃헙 - https://github.com/rudals446
+
  팀원 - 김예지 (몬스터 ai, 몬스터 소환 로직)
 - 블로그 - https://code-piggy.tistory.com/
 - 깃헙 - https://github.com/yejii-gi
+
  팀원 - 설민우 (플레이어 공격 로직, 아이템, 스킬)
 - 블로그 - https://velog.io/@coolblue/posts
 - 깃헙 - https://github.com/coolblue185
+
  팀원 - 한수정 (플레이어 로직, 맵 로직, 인트로 씬)
 - 블로그 - https://hanknag.tistory.com/
 - 깃헙 - https://github.com/UHANKNAG
