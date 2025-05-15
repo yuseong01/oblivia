@@ -13,7 +13,8 @@ public class Projectile : MonoBehaviour
     public  float AttackDuration;
     private PlayerStatHandler _statHandler;
     [SerializeField] private LayerMask _targetLayers;
-    public float HitCooldown = 0.2f; // ���� ���͹�
+    [SerializeField] private LayerMask _wallLayers;
+    public float HitCooldown = 0.2f;
 
     private Dictionary<Collider2D, float> _lastHitTime = new Dictionary<Collider2D, float>();
 
@@ -25,7 +26,6 @@ public class Projectile : MonoBehaviour
         _modules = modules;
         Target = enemyTransform;
         AttackDuration = statHandler.AttackDuration;
-        //źȯ ũ��
         this.transform.localScale = new Vector2(statHandler.ProjectileSize, statHandler.ProjectileSize);
 
         foreach (var mod in modules)
@@ -33,7 +33,6 @@ public class Projectile : MonoBehaviour
             mod.OnFire(this);
         }
 
-        //�׽�Ʈ ���� ���� ����
         Destroy(gameObject, AttackDuration);
     }
 
@@ -49,13 +48,12 @@ public class Projectile : MonoBehaviour
             {
                 var enemy = collision.GetComponent<IEnemy>();
                 enemy?.TakeDamage(_damage);
-                //Debug.Log($"{collision.name}가 {_damage}만큼 맞아서 {enemy.GetHealth()}");
                 _lastHitTime[collision] = Time.time;
 
                 Rigidbody2D rb = collision.attachedRigidbody;
                 if (rb != null)
                 {
-                    Vector2 knockbackDir = transform.up; // źȯ�� ���ƿ� �ݴ� ����
+                    Vector2 knockbackDir = transform.up; 
                     rb.AddForce(knockbackDir * _statHandler.KnockbackForce, ForceMode2D.Impulse);
                 }
 
@@ -63,16 +61,23 @@ public class Projectile : MonoBehaviour
                     Destroy(gameObject);
             }
         }
+        if (((1 << collision.gameObject.layer) & _wallLayers) != 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
     {
+        if(Target == null)
+        {
+            Destroy(gameObject);
+        }
         foreach (var mod in _modules)
         {
             mod.OnUpdate(this);
         }
 
-        // ȸ�� ������ forward ������ �������� �̵�
         transform.position += transform.up * Speed * Time.deltaTime;
     }
 

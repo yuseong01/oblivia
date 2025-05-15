@@ -14,23 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   challenges:
   - id: kill_monster
-    description: Kill 5 monsters
+    description: "\uBAAC\uC2A4\uD130 5\uB9C8\uB9AC \uCC98\uCE58"
     goal: 5
     currentCount: 0
     isCompleted: 0
     type: 0
     rewardCharacterId: 
-  - id: 1 stage boss clear
-    description: 1 Stage Boss Clear
+  - id: 1_stage_boss_clear
+    description: "1stage \uBCF4\uC2A4 \uCC98\uCE58"
     goal: 1
     currentCount: 0
     isCompleted: 0
     type: 0
-    rewardCharacterId: 
-  - id: boss_nodamage
-    description: No hit Boss Clear
-    goal: 1
-    currentCount: 0
-    isCompleted: 0
-    type: 1
-    rewardCharacterId: test3
+    rewardCharacterId: "\uC5B4\uB460\uC758 \uD3EC\uC878"

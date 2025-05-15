@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
+    private float _pauseTime = 2f;
+    private float _timer;
     public void Enter(T obj)
     {
         //obj.GetAnimator()?.SetBool("Move", false);
         //obj.GetAnimator()?.SetBool("Idle", true);
+        obj.GetAnimator()?.CrossFade("Idle", 0f);
     }
 
     public void Update(T obj)
     {
+        _timer += Time.deltaTime;
+
         if (obj.CheckInPlayerInRanged())
         {
             switch (obj.GetEnemyType())
@@ -36,13 +41,16 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                     obj.ChangeState(new TeleportState<T>());
                     return;
                 case IEnemy.EnemyType.Rush:
-                    obj.ChangeState(new MoveState<T>());
+                    obj.ChangeState(new RushState<T>());
                     return;
                 case IEnemy.EnemyType.Explode:
                     obj.ChangeState(new MoveState<T>());
                     return;
                 case IEnemy.EnemyType.Minion:
-                    obj.ChangeState(new MoveState<T>()); 
+                    if (_timer >= _pauseTime)
+                    {
+                        obj.ChangeState(new MoveState<T>());
+                    }
                     return;
             }
         }

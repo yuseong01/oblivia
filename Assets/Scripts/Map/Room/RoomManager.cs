@@ -235,5 +235,12 @@ public class RoomManager : Singleton<RoomManager>
             _ => dir
         };
     }
-
+    public Room GetRoom(Vector2Int pos)
+    {
+        if (roomInstances.TryGetValue(pos, out var room))
+        {
+            return room.GetComponent<Room>();
+        }
+        return null;
+    }
 }

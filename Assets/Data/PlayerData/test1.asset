@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d1961ea30c5e14c93edaa7dbce7b8c, type: 3}
+  m_Name: test1
+  m_EditorClassIdentifier: 
+  characterName: "\uBC31\uC758 \uC8C4\uC778"
+  characterId: "\uBC31\uC758 \uC8C4\uC778"
+  moveSpeed: 5
+  maxHealth: 6
+  damage: 1
+  attackRate: 1
+  attackDelay: 0
+  attackSpeed: 5
+  attackRange: 5
+  attackCount: 1
+  attackAngle: 10
+  knockbackForce: 0.1
+  attackDuration: 3
+  projectileSize: 0.95

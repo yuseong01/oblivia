@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf70f671b8c6d24b98868083a6277cd, type: 3}
   m_Name: SpreadShotItem
   m_EditorClassIdentifier: 
-  ItemName: SpreadShot
-  Icon: {fileID: 21300000, guid: dfc66069628947f4e86b9d57238e4c7e, type: 3}
+  ItemName: "\uC0B0\uD0C4\uD654\uC57D"
+  Description: "\uBC14\uB78C\uACFC \uBD88\uC744 \uC11E\uC740 \uC0B0\uD0C4 \uD3EC\uB300."
+  Icon: {fileID: 21300000, guid: 1a4d8b787f453bf489f49ca5b22095c7, type: 3}
   ProjectileModules: []
   FireModules:
   - {fileID: 11400000, guid: a2ae6d05385b8e540b4249b15faf80af, type: 2}

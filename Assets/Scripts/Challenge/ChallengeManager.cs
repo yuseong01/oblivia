@@ -46,6 +46,14 @@ public class ChallengeManager : MonoBehaviour
                 {
                     challenge.isCompleted = true;
                     ShowReward(challenge);
+
+                    // 도전과제 완료 시 캐릭터 해금
+                    if (!string.IsNullOrEmpty(challenge.rewardCharacterId))
+                    {
+                        // 캐릭터 해금 요청
+                        CharacterManager.Instance.UnlockCharacter(challenge.rewardCharacterId);
+                    }
+
                 }
 
                 break;
@@ -80,19 +88,17 @@ public class ChallengeManager : MonoBehaviour
 
     // 사용 예시:
     /*
-    if (playerTookNoDamage)
-    {
         ChallengeManager.Instance.CompleteConditionChallenge("boss_nodamage");
-    }
     */
 
     void ShowReward(Challenge challenge)
     {
-        rewardText.text = $"Mission Complete!\n{challenge.description}";
+        rewardText.text = $"도전 과제 성공!\n{challenge.description}";
         rewardPanel.SetActive(true);
+        Debug.Log("gd");
 
         // 2초 후에 판넬과 텍스트를 비활성화
-        StartCoroutine(HideRewardAfterDelay(2f)); // 2초 뒤에 숨기기
+        StartCoroutine(HideRewardAfterDelay(2f));
     }
 
     IEnumerator HideRewardAfterDelay(float delay)
@@ -126,7 +132,8 @@ public class ChallengeManager : MonoBehaviour
                     goal = c.goal,
                     currentCount = 0,
                     isCompleted = false,
-                    type = c.type
+                    type = c.type,
+                    rewardCharacterId = c.rewardCharacterId
                 });
             }
 

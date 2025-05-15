@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatHandler : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class PlayerStatHandler : MonoBehaviour
         get => _moveSpeed;
         set => _moveSpeed += value;
     }
-
+    [SerializeField] private float _invincibleDuration = 1.0f; // 무적 시간 (초)
+    private bool _isInvincible = false;
     [Header("<Health>")]
     // 체력, 추후 ResuorceManager로 관리?
     public float limitHealth = 10;
@@ -29,9 +31,29 @@ public class PlayerStatHandler : MonoBehaviour
         get => _health;
         set
         {
-            _health = Mathf.Min(_health + value, MaxHealth);
+            if (value < 0 && _isInvincible) return; // 무적 상태면 데미지 무시
+
+            _health = Mathf.Clamp(_health + value, 0, MaxHealth);
             OnHealthChanged?.Invoke(_health);
+
+            // 데미지를 받은 경우 무적 시간 시작
+            if (value < 0)
+            {
+                StartCoroutine(InvincibleCoroutine());
+            }
+
+            if(_health <= 0)
+            {
+                SceneManager.LoadScene("Save");   
+            }
         }
+    }
+
+    private IEnumerator InvincibleCoroutine()
+    {
+        _isInvincible = true;
+        yield return new WaitForSeconds(_invincibleDuration);
+        _isInvincible = false;
     }
     [SerializeField] private float _maxHealth;
     public float MaxHealth

@@ -81,7 +81,10 @@ public class MenuManager : MonoBehaviour
     IEnumerator SlideToCharacterSelect()
     {
         Vector2 startPos = panelWrapper.anchoredPosition;
-        Vector2 targetPos = startPos + slideOffset;
+
+        // 위로 되돌리기 위해 양수로 이동
+        Vector2 dynamicOffset = new Vector2(0, panelWrapper.rect.height);
+        Vector2 targetPos = startPos + dynamicOffset;
 
         float elapsed = 0f;
         while (elapsed < slideDuration)
@@ -91,7 +94,8 @@ public class MenuManager : MonoBehaviour
             yield return null;
         }
 
-        panelWrapper.anchoredPosition = targetPos; // 위치 보정
+        panelWrapper.anchoredPosition = targetPos;
+   
     }
 
     public void OnBackToMainMenuButton()
@@ -102,7 +106,10 @@ public class MenuManager : MonoBehaviour
     IEnumerator SlideToMainMenu()
     {
         Vector2 startPos = panelWrapper.anchoredPosition;
-        Vector2 targetPos = startPos - slideOffset;
+
+        // 현재 패널의 높이만큼 아래로 슬라이드
+        Vector2 dynamicOffset = new Vector2(0, -panelWrapper.rect.height);
+        Vector2 targetPos = startPos + dynamicOffset;
 
         float elapsed = 0f;
         while (elapsed < slideDuration)
