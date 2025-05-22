@@ -89,7 +89,10 @@ public class MenuManager : Singleton<MenuManager>
     IEnumerator SlideToCharacterSelect()
     {
         Vector2 startPos = panelWrapper.anchoredPosition;
-        Vector2 targetPos = startPos + slideOffset;
+
+        // ���� �ǵ����� ���� ����� �̵�
+        Vector2 dynamicOffset = new Vector2(0, panelWrapper.rect.height);
+        Vector2 targetPos = startPos + dynamicOffset;
 
         float elapsed = 0f;
         while (elapsed < slideDuration)
@@ -110,7 +113,10 @@ public class MenuManager : Singleton<MenuManager>
     private IEnumerator SlideToMainMenu()
     {
         Vector2 startPos = panelWrapper.anchoredPosition;
-        Vector2 targetPos = startPos - slideOffset;
+
+        // ���� �г��� ���̸�ŭ �Ʒ��� �����̵�
+        Vector2 dynamicOffset = new Vector2(0, -panelWrapper.rect.height);
+        Vector2 targetPos = startPos + dynamicOffset;
 
         float elapsed = 0f;
         while (elapsed < slideDuration)

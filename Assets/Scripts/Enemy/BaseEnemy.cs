@@ -59,7 +59,13 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
                 playerStatHandler.Health = -GetAttackPower();
             }
         }
+
+        if (other.CompareTag("PlayerBullet"))
+        {
+            TakeDamage(1); // IEnemy�� ���� �޼���
+        }
     }
+
     public void ChangeState(IState<T> _currentState)
     {
         _fsm.ChangeState(_currentState, this as T);
