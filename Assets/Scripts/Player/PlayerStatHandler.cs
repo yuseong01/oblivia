@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStatHandler : MonoBehaviour
 {
-    // Ã¼·Â º¯°æ½Ã UI º¯°æÀ» À§ÇÑ ÀÌº¥Æ®
+    // Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
     public event Action<float> OnHealthChanged;
     public event Action<float> OnMaxHealthChanged;
     public event Action OnOrbitCountChanged;
@@ -20,10 +20,10 @@ public class PlayerStatHandler : MonoBehaviour
         get => _moveSpeed;
         set => _moveSpeed += value;
     }
-    [SerializeField] private float _invincibleDuration = 1.0f; // ¹«Àû ½Ã°£ (ÃÊ)
+    [SerializeField] private float _invincibleDuration = 1.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½)
     private bool _isInvincible = false;
     [Header("<Health>")]
-    // Ã¼·Â, ÃßÈÄ ResuorceManager·Î °ü¸®?
+    // Ã¼ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ResuorceManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?
     public float limitHealth = 10;
     [SerializeField] private float _health;
     public float Health
@@ -31,12 +31,12 @@ public class PlayerStatHandler : MonoBehaviour
         get => _health;
         set
         {
-            if (value < 0 && _isInvincible) return; // ¹«Àû »óÅÂ¸é µ¥¹ÌÁö ¹«½Ã
+            if (value < 0 && _isInvincible) return; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             _health = Mathf.Clamp(_health + value, 0, MaxHealth);
             OnHealthChanged?.Invoke(_health);
 
-            // µ¥¹ÌÁö¸¦ ¹ÞÀº °æ¿ì ¹«Àû ½Ã°£ ½ÃÀÛ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (value < 0)
             {
                 StartCoroutine(InvincibleCoroutine());
@@ -44,11 +44,19 @@ public class PlayerStatHandler : MonoBehaviour
 
             if(_health <= 0)
             {
-                SceneManager.LoadScene("Save");   
+                StartCoroutine(DelayMainSence());
             }
         }
     }
 
+    private IEnumerator DelayMainSence()
+    {
+        
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Save");
+        MenuManager.Instance.OnBackToMainMenuButton();
+
+    }
     private IEnumerator InvincibleCoroutine()
     {
         _isInvincible = true;
@@ -72,73 +80,73 @@ public class PlayerStatHandler : MonoBehaviour
     }
 
 
-    // °ø°Ý ÁÖ±â °ü·Ã °ø½Ä :   attack Delay = 16 - (rate * 1.3), ÃßÈÄ statHandler¿¡ ³Ö±â
-    // °ø°Ý µ¥¹ÌÁö °ü·Ã °ø½Ä : FinalDamge = 1 + (Damage -1) * 1.2f
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ :   attack Delay = 16 - (rate * 1.3), ï¿½ï¿½ï¿½ï¿½ statHandlerï¿½ï¿½ ï¿½Ö±ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : FinalDamge = 1 + (Damage -1) * 1.2f
     [Header("<Attack>")]
-    // °ø°Ý·Â
+    // ï¿½ï¿½ï¿½Ý·ï¿½
     [SerializeField] private float _damage;
     public float Damage
     {
         get => 1 + (_damage - 1) * 1.2f;
         set => _damage += value;
     }
-    // ¹ß»ç ÁÖ±â
+    // ï¿½ß»ï¿½ ï¿½Ö±ï¿½
     [SerializeField] private float _attackRate;
     public float AttackRate
     {
         get => (Mathf.Max(5, 20 - (_attackRate) * 1.3f) / 60 + _attackDelay);
         set => _attackRate += value;
     }
-    // ¹ß»ç Ãß°¡ µô·¹ÀÌ 
+    // ï¿½ß»ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
     [SerializeField] private float _attackDelay;
     public float AttackDelay
     {
         get => _attackDelay;
         set => _attackDelay += value;
     }
-    //ÅºÈ¯ ¼Óµµ
+    //ÅºÈ¯ ï¿½Óµï¿½
     [SerializeField] private float _attackSpeed;
     public float AttackSpeed
     {
         get => _attackSpeed;
         set => _attackSpeed += value;
     }
-    //°ø°Ý ¹üÀ§
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private float _attackRange;
     public float AttackRange
     {
         get => _attackRange;
         set => _attackRange += value;
     }
-    //°ø°Ý °¹¼ö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private int _attackCount;
     public int AttackCount
     {
         get => _attackCount;
         set => _attackCount += value;
     }
-    //°ø°Ý °¢µµ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private float _attackAngle;
     public float AttackAngle
     {
         get => _attackAngle;
         set => _attackAngle += value;
     }
-    //³Ë¹é ÆÄ¿ö
+    //ï¿½Ë¹ï¿½ ï¿½Ä¿ï¿½
     [SerializeField] private float _knockbackForce;
     public float KnockbackForce
     {
         get => _knockbackForce;
         set => _knockbackForce += value;
     }
-    //°ø°Ý À¯Áö ½Ã°£
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     [SerializeField] private float _attackDuration;
     public float AttackDuration
     {
         get => _attackDuration;
         set => _attackDuration += value;
     }
-    //ÅºÈ¯ Å©±â
+    //ÅºÈ¯ Å©ï¿½ï¿½
     [SerializeField] private float _projectileSize;
     public float ProjectileSize
     {
@@ -146,7 +154,7 @@ public class PlayerStatHandler : MonoBehaviour
         set => _projectileSize += value;
     }
 
-    //ÅºÈ¯ Å©±â
+    //ÅºÈ¯ Å©ï¿½ï¿½
     [SerializeField] private int _orbitCount;
     public int OrbitCount
     {
@@ -158,7 +166,7 @@ public class PlayerStatHandler : MonoBehaviour
         }
     }
 
-    // ±íÀº º¹»ç¸¦ À§ÇÑ Clone ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ç¸¦ ï¿½ï¿½ï¿½ï¿½ Clone ï¿½Þ¼ï¿½ï¿½ï¿½
     public PlayerStatHandler Clone()
     {
         PlayerStatHandler clone = new PlayerStatHandler();

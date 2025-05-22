@@ -15,7 +15,7 @@ MonoBehaviour:
   characterName: "\uBC31\uC758 \uC8C4\uC778"
   characterId: "\uBC31\uC758 \uC8C4\uC778"
   moveSpeed: 5
-  maxHealth: 6
+  maxHealth: 1
   damage: 1
   attackRate: 1
   attackDelay: 0

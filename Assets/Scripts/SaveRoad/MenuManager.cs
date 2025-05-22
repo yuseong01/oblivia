@@ -2,8 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : Singleton<MenuManager>
 {
+    
+    
     [Header("UI Panels")]
     public GameObject introPanel;
     public GameObject mainMenuPanel;
@@ -12,10 +14,16 @@ public class MenuManager : MonoBehaviour
 
     [Header("Slide Settings")]
     public float slideDuration = 1f;
-    public Vector2 slideOffset = new Vector2(0, -800); // ¾Æ·¡·Î ½½¶óÀÌµåÇÒ °Å¸®
+    public Vector2 slideOffset = new Vector2(0, -800);
 
     private Coroutine introCoroutine;
     private bool isIntroPlaying = false;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     private void Start()
     {
@@ -30,23 +38,23 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    #region ÀÎÆ®·Î
+    #region ï¿½ï¿½Æ®ï¿½ï¿½
     IEnumerator PlayIntro()
     {
         isIntroPlaying = true;
         introPanel.SetActive(true);
         mainMenuPanel.SetActive(false);
 
-        // ÀÎÆ®·Î ÀÌ¹ÌÁö Ç¥½Ã ÈÄ 41ÃÊ°£ ´ë±â ÃÑ ÀÎÆ®·Î ½Ã°£Àº 43ÃÊ
+        // ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½ 41ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ 43ï¿½ï¿½
         yield return new WaitForSeconds(2f);
 
-        // ÀÌ¹ÌÁö ºñÈ°¼ºÈ­
+        // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         if (introText != null)
         {
             introText.SetActive(false);
         }
 
-        // 2ÃÊ ´õ ´ë±â ÈÄ ÀÎÆ®·Î Á¾·á
+        // 2ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(41f);
 
         EndIntro();
@@ -91,7 +99,7 @@ public class MenuManager : MonoBehaviour
             yield return null;
         }
 
-        panelWrapper.anchoredPosition = targetPos; // À§Ä¡ º¸Á¤
+        panelWrapper.anchoredPosition = targetPos;
     }
 
     public void OnBackToMainMenuButton()
@@ -99,7 +107,7 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(SlideToMainMenu());
     }
 
-    IEnumerator SlideToMainMenu()
+    private IEnumerator SlideToMainMenu()
     {
         Vector2 startPos = panelWrapper.anchoredPosition;
         Vector2 targetPos = startPos - slideOffset;
