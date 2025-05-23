@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static IEnemy;
 
 public class PoolManager : Singleton<PoolManager>
 {
@@ -32,16 +33,16 @@ public class PoolManager : Singleton<PoolManager>
         base.Awake();
         
         // 1, 적 pool 에 등록 그리고 room에서 get등록 basenemy return 등록 잊지 말자
-        CreatePool<Boss>("Boss", _=_bossPrefab, 10, _bossParent);
-        CreatePool<MoveEnemy>("Normal", _movePrefab, 20, _bossParent);
-        CreatePool<TeleportEnemy>("Teleport", _teleportPrefab, 20, _bossParent);
-        CreatePool<RushEnemy>("Rush", _rushPrefab, 20, _bossParent);
-        CreatePool<RushEnemy>("Rush2", _rush2Prefab, 20, _bossParent);
-        CreatePool<FleeEnemy>("Flee", _fleePrefab, 20, _bossParent);
-        CreatePool<ExplodeEnemy>("Explode", _explodePrefab, 20, _bossParent);
-        CreatePool<MinionEnemy>("Minion", _minionPrefab, 20, _bossParent);
-        CreatePool<ElitEnemy>("Elite1", _elitePrefab, 20, _bossParent);
-        CreatePool<ElitEnemy>("Elite2", _elite2Prefab, 20, _bossParent);
+        CreatePool<Boss>(EnemyType.Boss, _=_bossPrefab, 10, _bossParent);
+        CreatePool<MoveEnemy>(EnemyType.Normal, _movePrefab, 20, _bossParent);
+        CreatePool<TeleportEnemy>(EnemyType.Teleport, _teleportPrefab, 20, _bossParent);
+        CreatePool<RushEnemy>(EnemyType.Rush1, _rushPrefab, 20, _bossParent);
+        CreatePool<RushEnemy>(EnemyType.Rush2, _rush2Prefab, 20, _bossParent);
+        CreatePool<FleeEnemy>(EnemyType.Flee, _fleePrefab, 20, _bossParent);
+        CreatePool<ExplodeEnemy>(EnemyType.Explode, _explodePrefab, 20, _bossParent);
+        CreatePool<MinionEnemy>(EnemyType.Minion, _minionPrefab, 20, _bossParent);
+        CreatePool<ElitEnemy>(EnemyType.Elite1, _elitePrefab, 20, _bossParent);
+        CreatePool<ElitEnemy>(EnemyType.Elite2, _elite2Prefab, 20, _bossParent);
         // 2. 적 정보 매핑 여기까지는 잘되고 room 
         foreach (var config in _roomSpawn)
         {
@@ -62,7 +63,11 @@ public class PoolManager : Singleton<PoolManager>
 
         pools.Add(key, pool);
     }
-
+    public void CreatePool<T>(EnemyType type, T prefab, int size, Transform parent) where T : MonoBehaviour, IPoolable
+    {
+        string key = type.ToString();
+        PoolManager.Instance.CreatePool(key, prefab, size, parent);
+    }
     public T Get<T>(string key) where T : MonoBehaviour, IPoolable
     {
         return ((ObjectPool<T>)pools[key]).Get();

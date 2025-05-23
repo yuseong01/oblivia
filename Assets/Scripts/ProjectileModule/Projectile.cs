@@ -47,16 +47,20 @@ public class Projectile : MonoBehaviour
             if (Time.time - lastTime >= HitCooldown)
             {
                 var enemy = collision.GetComponent<IEnemy>();
-                enemy?.TakeDamage(_damage);
+                
                 _lastHitTime[collision] = Time.time;
 
                 Rigidbody2D rb = collision.attachedRigidbody;
+                Vector2 knockbackDir = Vector2.zero;
                 if (rb != null)
                 {
-                    Vector2 knockbackDir = transform.up; 
+                    knockbackDir = transform.up; 
                     rb.AddForce(knockbackDir * _statHandler.KnockbackForce, ForceMode2D.Impulse);
                 }
-
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(_damage, knockbackDir);
+                }
                 if (!CanPenetrate)
                     Destroy(gameObject);
             }

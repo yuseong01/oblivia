@@ -53,14 +53,7 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
                     return;
                 }
                 break;
-            case EnemyType.Elite1:
-            case EnemyType.Elite2:
-                if (dist > rangedRange)
-                {
-                    obj.ChangeState(new MoveState<T>());
-                    return;
-                }
-                break;
+            
         }
         // Å¸ÀÌ¸Ó Ã¼Å© ¹× °ø°Ý Àû¿ë
         if (Time.time - _lastAttackTime < _attackCooldown)
@@ -141,7 +134,7 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
 
                     if (rand < 0.6f)
                     {
-                        DoRangedShoot(obj, rangedElite2);// 60% È®·ü·Î ±¤¿ªÅº
+                        DoRadialShoot(obj, rangedElite2);// 60% È®·ü·Î ±¤¿ªÅº
                     }
                     else if (rand < 0.85f)
                     {
@@ -156,7 +149,8 @@ public class AttackState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateM
             case EnemyType.Teleport:
                 obj.ChangeState(new TeleportState<T>());
                 break;
-            case EnemyType.Rush:
+            case EnemyType.Rush1:
+            case EnemyType.Rush2:
                 obj.ChangeState(new RushState<T>());
                 break;
         }

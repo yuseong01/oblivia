@@ -43,23 +43,20 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
         }
 
         // 플레이어와의 간격 보는 코드
-        Vector2 playerDistance = playerPos - enemyPos;
-        float distance = playerDistance.magnitude;
-        if (EnemyType.Minion != obj.GetEnemyType())
+        bool isMove = true;
+        if (obj.GetEnemyType() == EnemyType.Minion)
         {
-            // 플레이어한테 다가가는 코드
+            float minionStopDistance = 1.2f; // 이 거리보다 가까우면 멈춤
+            if (dist <= minionStopDistance)
+                isMove = false;
+        }
+
+        if (isMove)
+        {
             Vector2 dir = (playerPos - enemyPos).normalized;
             obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
         }
-        else
-        {
-            if (distance > _distance)
-            {
-                Vector2 dir = (playerPos - enemyPos).normalized;
-                obj.GetEnemyPosition().position = enemyPos + dir * _moveSpeed * Time.deltaTime;
 
-            }
-        }
         Debug.DrawLine(enemyPos, playerPos, Color.green);
     }
 

@@ -7,7 +7,7 @@ using static IEnemy;
 public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
     private float _fleeDistance = 4f; // �÷��̾ �� �Ÿ����� ������ ���� ����
-    private float _moveSpeed = 3f;
+    private float _moveSpeed = 5f;
     private float _minFleeDistance = 0.2f; // �ǹ� �ְ� �����ƴٰ� ������ �ּ� �Ÿ�
     private Vector2 _minBounds = new Vector2(-8, -4); // �� �ּ� ��ǥ
     private Vector2 _maxBounds = new Vector2(8, 4); // �� �ִ� ��ǥ

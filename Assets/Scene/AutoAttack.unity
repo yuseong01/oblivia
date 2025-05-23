@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &27813274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 732988036421975083, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
+  m_PrefabInstance: {fileID: 975303386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &53169451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,11 +2028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609876494361520104, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: _health
-      value: 6
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1609876494361520104, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: _maxHealth
-      value: 6
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1609876494361520104, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: _moveSpeed
@@ -2039,7 +2044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609876494361520104, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: limitHealth
-      value: 10
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1609876494361520104, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
       propertyPath: _attackAngle
@@ -2127,7 +2132,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1609876494361520104, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
   m_PrefabInstance: {fileID: 975303386}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 27813274}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46badeddd2975b34f9356b8294eac3b1, type: 3}
@@ -2138,7 +2143,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7866061825404859367, guid: c8d4226ec9c569349b49c25317253c77, type: 3}
   m_PrefabInstance: {fileID: 975303386}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 27813274}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0641ec3c9213fef429562357d74e14e7, type: 3}
@@ -3500,6 +3505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1488521708}
   - component: {fileID: 1488521707}
+  - component: {fileID: 1488521709}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -3534,6 +3540,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1488521709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488521706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1d9cece6fe5d94bb97767f726dad0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 27813274}
 --- !u!1 &1494240578
 GameObject:
   m_ObjectHideFlags: 0
@@ -4081,52 +4100,68 @@ MonoBehaviour:
   _roomSpawn:
   - roomType: 0
     enemies:
-    - type: 0
-      poolKey: Normal
+    - type: 11
       count: 0
+      prefab: {fileID: 2295998883299947131, guid: a139140a26f8efd4e814039f090287c4, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 7
+      count: 3
+      prefab: {fileID: 5589099841497872892, guid: a1d592334d9207747ad74298694ee719, type: 3}
+    - type: 0
+      count: 3
       prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 5
+      count: 1
+      prefab: {fileID: 3930795542360209, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
+    - type: 6
+      count: 1
+      prefab: {fileID: 1904378883472212713, guid: 98b8a4dec47d1c64ab55faafc5d22ca2, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 1
+      count: 3
+      prefab: {fileID: 6775095651086822309, guid: 535ad6434fff65840b50616302322541, type: 3}
+    - type: 5
+      count: 1
+      prefab: {fileID: 3930795542360209, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
   - roomType: 3
     enemies:
     - type: 2
-      poolKey: Boss
       count: 1
       prefab: {fileID: 4043589511158882836, guid: f63a025a3797941e19f7930c21d70360, type: 3}
   - roomType: 1
     enemies:
+    - type: 8
+      count: 2
+      prefab: {fileID: 3929171962915058738, guid: bfdbb40065face7419f66e4e0d0e53da, type: 3}
+    - type: 9
+      count: 2
+      prefab: {fileID: 6509994462404431090, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+  - roomType: 1
+    enemies:
+    - type: 8
+      count: 2
+      prefab: {fileID: 3929171962915058738, guid: bfdbb40065face7419f66e4e0d0e53da, type: 3}
+    - type: 9
+      count: 2
+      prefab: {fileID: 6509994462404431090, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
     - type: 5
-      poolKey: Elite1
       count: 1
       prefab: {fileID: 3930795542360209, guid: bae7b2ae9b40c7e4e83300db37f08fb7, type: 3}
     - type: 6
-      poolKey: Elite2
       count: 1
       prefab: {fileID: 1904378883472212713, guid: 98b8a4dec47d1c64ab55faafc5d22ca2, type: 3}
-    - type: 1
-      poolKey: Flee
-      count: 4
-      prefab: {fileID: 6775095651086822309, guid: 535ad6434fff65840b50616302322541, type: 3}
   - roomType: 1
     enemies:
     - type: 0
-      poolKey: Normal
-      count: 3
-      prefab: {fileID: 2295998883299947131, guid: a139140a26f8efd4e814039f090287c4, type: 3}
-  - roomType: 1
-    enemies:
-    - type: 1
-      poolKey: Flee
-      count: 5
-      prefab: {fileID: 6775095651086822309, guid: 535ad6434fff65840b50616302322541, type: 3}
-  - roomType: 1
-    enemies:
-    - type: 8
-      poolKey: Rush
       count: 2
-      prefab: {fileID: 3929171962915058738, guid: bfdbb40065face7419f66e4e0d0e53da, type: 3}
-    - type: 8
-      poolKey: Rush
-      count: 4
-      prefab: {fileID: 6509994462404431090, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      prefab: {fileID: 5901998245674768080, guid: f75bf937610cb034b9e70187d4e82cf1, type: 3}
+    - type: 7
+      count: 2
+      prefab: {fileID: 5589099841497872892, guid: a1d592334d9207747ad74298694ee719, type: 3}
 --- !u!4 &1730770963
 Transform:
   m_ObjectHideFlags: 0
@@ -4618,6 +4653,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938576983}
   m_CullTransparentMesh: 1
+--- !u!1001 &1988155394
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536551454287270304, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509994462404431090, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
+      propertyPath: m_Name
+      value: RushEnemy2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 43f7cb60751762046aa34a5fff8f10cf, type: 3}
 --- !u!1 &1992477159
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,3 +5234,4 @@ SceneRoots:
   - {fileID: 1481858782}
   - {fileID: 797799018}
   - {fileID: 633998936}
+  - {fileID: 1988155394}

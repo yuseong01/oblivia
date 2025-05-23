@@ -32,7 +32,7 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                     return;
                 case IEnemy.EnemyType.Elite1:
                 case IEnemy.EnemyType.Elite2:
-                    obj.ChangeState(new MoveState<T>());
+                    obj.ChangeState(new AttackState<T>());
                     return;
                 case IEnemy.EnemyType.Boss:
                     obj.ChangeState(new AttackState<T>());
@@ -40,7 +40,8 @@ public class IdleState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                 case IEnemy.EnemyType.Teleport:
                     obj.ChangeState(new TeleportState<T>());
                     return;
-                case IEnemy.EnemyType.Rush:
+                case IEnemy.EnemyType.Rush1:
+                case IEnemy.EnemyType.Rush2:
                     obj.ChangeState(new RushState<T>());
                     return;
                 case IEnemy.EnemyType.Explode:

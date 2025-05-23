@@ -38,7 +38,7 @@ public class Room : MonoBehaviour
     [SerializeField] private GameObject[] _items;
 
     private bool _isEnemiesSpawn = false; // 중복을 막자
-    private int _totalEnemyCount = 0; // 전체 몹 갯수
+    public int _totalEnemyCount = 0; // 전체 몹 갯수
     public int TotalEnemyCount => _totalEnemyCount;
     int spawnCount = 0;
     public Vector2 GetMinBounds() => _minBounds;
@@ -200,7 +200,7 @@ public class Room : MonoBehaviour
             {
                 Vector2 offset = eliteOffsets[eliteOffsetIndex++];
                 Vector3 spawnPos = center + (Vector3)(offset * 1.5f);
-                SpawnEnemyByType(enemy.type, enemy.poolKey, spawnPos);
+                SpawnEnemyByType(enemy.type, enemy.type.ToString(), spawnPos);
             }
         }
 
@@ -211,9 +211,10 @@ public class Room : MonoBehaviour
             _totalEnemyCount += enemy.count;
             for (int i = 0; i < enemy.count; i++)
             {
+                //Debug.Log($"<color=red>{enemy.count}</color>");
                 Vector2 offset = randomizedNormalOffsets[normalOffsetIndex++];
                 Vector3 spawnPos = center + (Vector3)(offset * 1.5f);
-                SpawnEnemyByType(enemy.type, enemy.poolKey, spawnPos);
+                SpawnEnemyByType(enemy.type, enemy.type.ToString(), spawnPos);
             }
         }
     }
@@ -237,7 +238,8 @@ public class Room : MonoBehaviour
             case EnemyType.Teleport:
                 SpawnEnemy(PoolManager.Instance.Get<TeleportEnemy>(poolKey), spawnPos);
                 break;
-            case EnemyType.Rush:
+            case EnemyType.Rush1:
+            case EnemyType.Rush2:
                 SpawnEnemy(PoolManager.Instance.Get<RushEnemy>(poolKey), spawnPos);
                 break;
             case EnemyType.Explode:
@@ -246,6 +248,9 @@ public class Room : MonoBehaviour
             case EnemyType.Elite1:
             case EnemyType.Elite2:
                 SpawnEnemy(PoolManager.Instance.Get<ElitEnemy>(poolKey), spawnPos);
+                break;
+            case EnemyType.Minion:
+                SpawnEnemy(PoolManager.Instance.Get<MinionEnemy>(poolKey), spawnPos);
                 break;
         }
     }
@@ -340,7 +345,6 @@ public class Room : MonoBehaviour
         if (type == RoomType.Boss && _totalEnemyCount == 0)
         {
             ChallengeManager.Instance.IncreaseProgress("1_stage_boss_clear", 1);
-            Debug.Log("<color=red>메인화면으로</color>");
 
             Invoke(nameof(GoToMainSence), 3f);
         }
@@ -353,7 +357,6 @@ public class Room : MonoBehaviour
                 d.DoorOpen();
             }
 
-            Debug.Log("<color=yellow><b>이 방은 끝</b></color>");
             // null이 아닌 아이템만 필터링
             var availableItems = new List<GameObject>();
             foreach (var item in _items)
