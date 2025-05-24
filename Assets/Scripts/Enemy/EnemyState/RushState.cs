@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
-    private float _rushSpeed = 3f;
+    private float _rushSpeed = 5f;
+    private float _acceleration = 30f;
     private float _rushDuration = 1f;
     private float _elapsedTime = 0f;
+    private float _maxSpeed = 12f;
     private Vector3 _rushDirection;
-
     private Vector2 _minBounds = new Vector2(-8, -4);
     private Vector2 _maxBounds = new Vector2(8, 4);
+    private float _currentSpeed;
     public void SetBounds(Vector2 min, Vector2 max)
     {
         _minBounds = min;
@@ -19,6 +21,7 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     public void Enter(T obj)
     {
         _elapsedTime = 0f;
+        _currentSpeed = 0f;
         obj.GetAnimator()?.CrossFade("Attack", 0f);
 
         // 돌진 방향: 플레이어 향함
@@ -37,22 +40,19 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
     {
         _elapsedTime += Time.deltaTime;
 
-        /// 돌진 이동
-        Vector3 newPos = obj.transform.position + _rushDirection * _rushSpeed * Time.deltaTime;
+        // 속도 증가 → 러쉬 느낌 강화
+        _currentSpeed = Mathf.Min(_currentSpeed + _acceleration * Time.deltaTime, _maxSpeed);
 
+        Vector3 newPos = obj.transform.position + _rushDirection * _currentSpeed * Time.deltaTime;
 
         var room = obj.GetCurrentRoom();
-
         if (room != null)
         {
             SetBounds(room.GetMinBounds(), room.GetMaxBounds());
         }
 
-
-        newPos = ClampToBounds(newPos); // 맵 내인지 체크
-
+        newPos = ClampToBounds(newPos);
         obj.transform.position = newPos;
-
         // 돌진 종료
         if (_elapsedTime >= _rushDuration)
         {

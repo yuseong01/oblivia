@@ -16,7 +16,8 @@ public interface IEnemy
         Elite1,
         Elite2,
         Teleport,
-        Rush,
+        Rush1,
+        Rush2,
         Minion,
         Explode,
     }
@@ -30,7 +31,7 @@ public interface IEnemy
     float GetHealth();
     float SetSpeed(float amount);
     float GetSpeed();
-    void TakeDamage(float amount);
+    void TakeDamage(float amount, Vector2 hitDirection);
     Room GetCurrentRoom();
     void SetCurrentRoom(Room room);
     float GetAttackPower();
