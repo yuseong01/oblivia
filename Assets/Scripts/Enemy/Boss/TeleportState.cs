@@ -9,7 +9,8 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
     private float _moveDuration = 0.3f;
     private float _stayDuration = 0.2f;
     private Coroutine _teleportRoutine;
-
+    Vector2 min = new Vector2(-8,-4);
+    Vector2 max = new Vector2(8, 4);
     public void Enter(T obj)
     {
         obj.StartCoroutine(TeleportRoutine(obj));
@@ -45,25 +46,22 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
         }
         trans.position = downPos;
 
-        // 순간이동
+        // 순간이동 대기
         yield return new WaitForSeconds(_stayDuration);
 
-        Vector2 min = new Vector2();
-        Vector2 max = new Vector2();
+        BoundsUtil.UpdateBoundsFromRoom(obj, ref min, ref max);
 
-        var room = obj.GetCurrentRoom();
-
-
-
-        if (room != null)
+        // 랜덤 위치 생성 (x 또는 y가 0이면 예외 처리)
+        Vector3 teleportPos;
+        int attempts = 0;
+        do
         {
-            min = room.GetMinBounds();
-            max = room.GetMaxBounds();
-         //   yield return null; ;
+            float x = Random.Range(min.x, max.x);
+            float y = Random.Range(min.y, max.y);
+            teleportPos = new Vector3(x, y, obj.transform.position.z);
+            attempts++;
         }
-        float x = Random.Range(min.x, max.x);
-        float y = Random.Range(min.y, max.y);
-        Vector3 teleportPos = new Vector3(x, y, obj.transform.position.z);
+        while ((Mathf.Abs(teleportPos.x) < 0.5f || Mathf.Abs(teleportPos.y) < 0.5f) && attempts < 10);
 
         trans.position = teleportPos;
 
@@ -79,10 +77,10 @@ public class TeleportState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStat
         trans.position = upPos;
 
         // 다음 상태
-        if(obj.GetEnemyType() == EnemyType.Teleport)
+        if (obj.GetEnemyType() == EnemyType.Teleport)
             obj.ChangeState(new IdleState<T>());
-        else obj.ChangeState(new AttackState<T>());
-        
+        else
+            obj.ChangeState(new AttackState<T>());
 
     }
 }

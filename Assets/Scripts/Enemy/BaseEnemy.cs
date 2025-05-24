@@ -35,14 +35,15 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     private Room _currentRoom;
     private bool _isDead = false;
     protected Animator _anim;
-    private bool _isHit;
-    // Unity �ʱ�ȭ
+    private EnemyHitEffect _hitEffect;
+    private bool _isStop= false;
     protected virtual void Awake()
     {
         Debug.Log(_type);
         _anim = GetComponent<Animator>();
         _poolKey = _type.ToString();
         _spriteRenderer= gameObject.GetComponent<SpriteRenderer>();
+        _hitEffect = GetComponent<EnemyHitEffect>();
     }
 
     private void Start()
@@ -52,11 +53,15 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     }
     protected virtual void Update()
     {
+        if (_isStop) return;
         HandleKnockback();
-        if (!_isKnockback) // 넉백 중일 땐 FSM 중단
+        if (!_isKnockback) 
             _fsm.Update(this as T);
     }
-
+    public void SetStop(bool stop)
+    {
+        _isStop = stop;
+    }
     private void HandleKnockback()
     {
         if (!_isKnockback) return;
@@ -119,15 +124,13 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     public float GetSpeed() => _speed;
     public void TakeDamage(float amount, Vector2 hitDirection) // 몬스터가 공격을 받는 거
     {
-
-        //Debug.Log(_health);
         if (_isDead) return;
         _health -= amount;
         //ChangeState(new KnockbackState<T>());
-        Knockback(hitDirection);
-        // 피격 효과
-        StartCoroutine(HitColor());
-       
+       // Knockback(hitDirection);
+        if (_hitEffect != null)
+            _hitEffect.PlayEffect();
+
         if (_health <= 0f)
         {
             Debug.Log("죽음");
@@ -140,7 +143,6 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
         _isDead = true;
         ChallengeManager.Instance.IncreaseProgress("kill_monsters", 1);
         _currentRoom?.EnemyDied();
-        //ReturnToPool();
         ChangeState(new DieState<T>(GetEnemyType().ToString(), _type));
         Invoke("ReturnToPool",1f);
     }
@@ -205,19 +207,6 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
             default:
                 break;
         }
-    }
-
-    private IEnumerator HitColor()
-    {
-        if (_isHit) yield break;
-        _isHit = true;
-        Color originalColor = _spriteRenderer.color;
-        _spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.3f);
-        _spriteRenderer.color = Color.white;
-        yield return new WaitForSeconds(0.3f);
-        _spriteRenderer.color = originalColor;
-        _isHit = false;
     }
     public IState<T> CurrentState => _currentState;
     public float GetAttackPower()=> _attackPower;

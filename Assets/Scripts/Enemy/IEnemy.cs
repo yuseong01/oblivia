@@ -35,4 +35,5 @@ public interface IEnemy
     Room GetCurrentRoom();
     void SetCurrentRoom(Room room);
     float GetAttackPower();
+    void SetStop(bool isStop);
 }

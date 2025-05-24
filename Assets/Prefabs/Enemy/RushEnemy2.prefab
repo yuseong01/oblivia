@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5623287787597217304}
   - component: {fileID: 8311846347543406395}
   - component: {fileID: 5334393335016372687}
+  - component: {fileID: 9069705606798043703}
   m_Layer: 6
   m_Name: RushEnemy2
   m_TagString: Untagged
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _health: 10
-  _detectRange: 10
+  _detectRange: 3
   _type: 9
   _speed: 3
   _attackPower: 1
@@ -174,3 +175,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9069705606798043703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509994462404431090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a724af0b388fc243a07b7572f0455ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

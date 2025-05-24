@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7081500732750750408}
   - component: {fileID: 2987875099564991924}
   - component: {fileID: 8804882454422530843}
+  - component: {fileID: 858572244460122738}
   m_Layer: 6
   m_Name: MinionEnemy
   m_TagString: Untagged
@@ -102,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _health: 10
-  _detectRange: 5
+  _detectRange: 3
   _type: 10
   _speed: 3
   _attackPower: 1
@@ -204,3 +205,15 @@ MonoBehaviour:
   orbitSpeed: 180
   followSpeed: 1
   player: {fileID: 0}
+--- !u!114 &858572244460122738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3973199383335479890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a724af0b388fc243a07b7572f0455ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
