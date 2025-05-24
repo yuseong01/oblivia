@@ -19,12 +19,12 @@ public static class AttackDescison<T> where T : MonoBehaviour, IEnemy, IStateMac
                 {
                     if (rand < 0.6f) { behavior = new RadialAttack(); return true; }
                     if (rand < 0.85f) { behavior = new RushAttack(); return true; }
-                    behavior = new FleeAttack(); return true;
+                    behavior = new LaserAttack(LaserPatternType.Radial); return true;
                 }
                 else
                 {
                     if (rand < 0.3f) { behavior = new RangedAttack(); return true; }
-                    if (rand < 0.7f) { behavior = new FleeAttack(); return true; }
+                    if (rand < 0.7f) { behavior = new LaserAttack(LaserPatternType.Cross); return true; }
                     behavior = new RushAttack(); return true;
                 }
             case EnemyType.Elite1: //
