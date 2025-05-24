@@ -27,6 +27,9 @@ public class MoveState<T> : IState<T>  where T : MonoBehaviour, IEnemy, IStateMa
             case EnemyType.Teleport:
                 obj.ChangeState(new AttackState<T>());
                 break;
+            case EnemyType.Rush1:
+            case EnemyType.Rush2:
+                obj.ChangeState(new RushState<T>()); break;
             default:
                 if (dist <= _arriveDistance)
                 {

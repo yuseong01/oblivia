@@ -53,16 +53,6 @@ public class RushState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
         newPos = ClampToBounds(newPos);
         obj.transform.position = newPos;
-
-        // 충돌 감지 (optional)
-        if (Physics2D.Raycast(obj.transform.position, _rushDirection, 0.5f, LayerMask.GetMask("Wall", "Player")))
-        {
-
-            Debug.Log("충돌감지");
-            obj.ChangeState(new FleeState<T>());
-            return;
-        }
-        Debug.DrawRay(obj.transform.position, _rushDirection * 1.5f, Color.red, 0.2f);
         // 돌진 종료
         if (_elapsedTime >= _rushDuration)
         {

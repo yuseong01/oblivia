@@ -73,7 +73,7 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
         }
         if(obj is RushEnemy && _elapsedTime >= _fleeDuration)
         {
-            obj.ChangeState(new IdleState<T>());
+            obj.ChangeState(new RushState<T>());
         }
     }
 

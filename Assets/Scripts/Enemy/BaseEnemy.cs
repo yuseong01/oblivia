@@ -18,6 +18,14 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     [SerializeField] protected float _speed = 3f;
     [SerializeField] protected float _attackPower = 10f;
     [SerializeField] protected Collider2D _innerCollider;
+
+    [Header("Knockback")]
+    private Vector2 _knockbackVelocity;
+    private float _knockbackTimer;
+    private float _knockbackDuration = 1f;
+    private float _knockbackDrag = 20f;
+    private bool _isKnockback;
+
     protected SpriteRenderer _spriteRenderer;
     public Vector2 _minBounds = new Vector2(-8, -4);
     public Vector2 _maxBounds = new Vector2(8, 4);
@@ -44,7 +52,24 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     }
     protected virtual void Update()
     {
-        _fsm.Update(this as T);
+        HandleKnockback();
+        if (!_isKnockback) // 넉백 중일 땐 FSM 중단
+            _fsm.Update(this as T);
+    }
+
+    private void HandleKnockback()
+    {
+        if (!_isKnockback) return;
+
+        _knockbackTimer += Time.deltaTime;
+        _knockbackVelocity = Vector2.Lerp(_knockbackVelocity, Vector2.zero, _knockbackDrag * Time.deltaTime);
+        transform.position += (Vector3)(_knockbackVelocity * Time.deltaTime);
+
+        if (_knockbackTimer >= _knockbackDuration)
+        {
+            _isKnockback = false;
+            _knockbackVelocity = Vector2.zero;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -98,7 +123,8 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
         //Debug.Log(_health);
         if (_isDead) return;
         _health -= amount;
-        ChangeState(new KnockbackState<T>());
+        //ChangeState(new KnockbackState<T>());
+        Knockback(hitDirection);
         // 피격 효과
         StartCoroutine(HitColor());
        
@@ -186,10 +212,10 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
         if (_isHit) yield break;
         _isHit = true;
         Color originalColor = _spriteRenderer.color;
-        _spriteRenderer.color = new Color(1f, 0f, 0f, 0.6f);
-        yield return new WaitForSeconds(0.1f);
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.3f);
         _spriteRenderer.color = Color.white;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         _spriteRenderer.color = originalColor;
         _isHit = false;
     }
@@ -199,5 +225,14 @@ public class BaseEnemy<T> : MonoBehaviour,IPoolable, IEnemy, IStateMachineOwner<
     public SpriteRenderer GetSpriteRenderer()
     {
         return _spriteRenderer;
+    }
+
+    public void Knockback(Vector2 direction, float power = 15f, float duration = 0.1f, float drag = 20f)
+    {
+        _knockbackVelocity = direction.normalized * power;
+        _knockbackTimer = 0f;
+        _knockbackDuration = duration;
+        _knockbackDrag = drag;
+        _isKnockback = true;
     }
 }
