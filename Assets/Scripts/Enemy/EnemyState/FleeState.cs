@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMachineOwner<T>
 {
-    private float _fleeDistance = 4f; 
+    private float _fleeDistance = 4f;
     private float _moveSpeed = 5f;
-    private float _minFleeDistance = 0.2f; 
+    private float _minFleeDistance = 0.2f;
     private Vector2 _minBounds = new Vector2(-8, -4);
     private Vector2 _maxBounds = new Vector2(8, 4);
     private float _fleeDuration = 2f;
@@ -76,13 +76,13 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
 
     private void SetFleeTarget(T enemy, Vector2 enemyPos, Vector2 playerPos)
     {
-        Vector2 fleeDir = (enemyPos - playerPos).normalized; 
+        Vector2 fleeDir = (enemyPos - playerPos).normalized;
 
         for (int i = 0; i < 10; i++)
         {
             float angle = Random.Range(0f, 360f);
             Vector2 dir = Quaternion.Euler(0, 0, angle) * fleeDir;
-            Vector2 destination = enemyPos + dir * _fleeDistance; 
+            Vector2 destination = enemyPos + dir * _fleeDistance;
 
             if (IsValidTarget(destination, enemyPos, playerPos))
             {
@@ -91,9 +91,9 @@ public class FleeState<T> : IState<T> where T : MonoBehaviour, IEnemy, IStateMac
                 return;
             }
         }
- 
+
         Vector2 fallback = enemyPos + ((fleeDir * 0.6f) + (-enemyPos.normalized) * 0.4f).normalized * (_fleeDistance * 0.5f);
-        _targetPos = BoundsUtil.ClampToBounds(fallback,_minBounds,_maxBounds);
+        _targetPos = BoundsUtil.ClampToBounds(fallback, _minBounds, _maxBounds);
         _hasTarget = true;
     }
 
